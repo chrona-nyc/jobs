@@ -516,6 +516,262 @@ canvas#canvas {
   border-color: #d8d5ce;
 }
 
+/* ── Cross-tab stats ─────────────────────────── */
+
+.crosstab {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.crosstab-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+.crosstab-label {
+  width: 72px;
+  color: var(--text2);
+  flex-shrink: 0;
+  text-align: right;
+}
+.crosstab-bar-bg {
+  flex: 1;
+  height: 14px;
+  background: #f0eee8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.crosstab-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.crosstab-val {
+  width: 28px;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 11px;
+}
+.stat-highlight {
+  text-align: center;
+  padding: 14px 0 4px;
+}
+.stat-highlight .stat-big {
+  font-size: 28px;
+}
+.stat-highlight .stat-label {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+/* ── AI-Resilient Careers ────────────────────── */
+
+.resilient-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px 14px;
+  background: #f7f6f2;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+.resilient-toggle:hover { background: #f0eee8; }
+.resilient-toggle h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.resilient-toggle .toggle-sub {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 2px;
+}
+.resilient-chevron {
+  font-size: 14px;
+  color: var(--text3);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+.resilient-chevron.open { transform: rotate(180deg); }
+.resilient-list {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.resilient-list.open { max-height: 600px; }
+.resilient-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0eee8;
+  cursor: pointer;
+  transition: background 0.1s;
+  border-radius: 6px;
+  margin: 0 -4px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.resilient-card:hover { background: #f7f6f2; }
+.resilient-card:last-child { border-bottom: none; }
+.rc-rank {
+  width: 20px;
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  flex-shrink: 0;
+}
+.rc-info { flex: 1; min-width: 0; }
+.rc-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rc-meta {
+  font-size: 10px;
+  color: var(--text2);
+  margin-top: 1px;
+}
+.rc-growth {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(91, 165, 140);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ── Sources Modal ───────────────────────────── */
+
+.sources-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text2);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.sources-btn:hover { background: #f7f6f2; border-color: #d8d5ce; color: var(--text); }
+#sources-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  backdrop-filter: blur(4px);
+}
+#sources-modal.open { opacity: 1; pointer-events: auto; }
+.modal-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 520px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+  transform: translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#sources-modal.open .modal-card { transform: translateY(0); }
+.modal-card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.modal-card h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+.modal-card p, .modal-card li {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+.modal-card ul {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+.modal-card li { margin-bottom: 4px; }
+.modal-card a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.modal-card a:hover { text-decoration: underline; }
+.modal-close {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--text3);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  margin: -8px -8px 0 0;
+}
+.modal-close:hover { color: var(--text); }
+
+/* ── Prepare Section ─────────────────────────── */
+
+.dp-prepare {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f7f6f2;
+  border-radius: 10px;
+}
+.dp-prepare-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.dp-prepare ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dp-prepare li {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+.dp-prepare li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  color: var(--text3);
+}
+
 /* Scrollbar */
 #sidebar::-webkit-scrollbar,
 #detail-panel::-webkit-scrollbar,
@@ -540,8 +796,8 @@ canvas#canvas {
 <div id="sidebar">
   <div>
     <h1><span class="ai">AI</span> & Work</h1>
-    <div class="subtitle">How artificial intelligence is reshaping 342 occupations across the American workforce.</div>
-    <div class="attribution">Data: <a href="https://www.bls.gov/ooh/">Bureau of Labor Statistics</a> &middot; <a href="https://github.com/joshkale/jobs">GitHub</a><br><a href="https://chrona.nyc">chrona.nyc</a></div>
+    <div class="subtitle">342 occupations · area&nbsp;=&nbsp;employment · color&nbsp;=&nbsp;AI exposure</div>
+    <div class="attribution">Data: <a href="https://www.bls.gov/ooh/">Bureau of Labor Statistics</a>, scored by Gemini Flash<br><a href="https://github.com/chrona-nyc/jobs">GitHub</a> &middot; <a href="https://chrona.nyc">chrona.nyc</a></div>
   </div>
 
   <div id="search-wrap">
@@ -558,7 +814,7 @@ canvas#canvas {
     <div class="stat-section">
       <h3>Avg. Impact</h3>
       <div class="stat-big" id="statAvgExposure">&mdash;</div>
-      <div class="stat-label">weighted by employment</div>
+      <div class="stat-label">job-weighted, 0–10 scale</div>
     </div>
   </div>
 
@@ -573,11 +829,36 @@ canvas#canvas {
     <div class="tier-bar" id="tierBar"></div>
   </div>
 
+  <div class="stat-section">
+    <h3>Impact by pay</h3>
+    <div class="crosstab" id="crosstabPay"></div>
+  </div>
+
+  <div class="stat-section">
+    <h3>Impact by education</h3>
+    <div class="crosstab" id="crosstabEdu"></div>
+  </div>
+
+  <div class="stat-highlight" id="wagesExposed"></div>
+
   <div class="gradient-legend">
     <span>Low impact</span>
     <canvas id="gradientLegend" width="90" height="8"></canvas>
     <span>High impact</span>
   </div>
+
+  <div>
+    <div class="resilient-toggle" id="resilientToggle">
+      <div>
+        <h3>AI-Resilient Careers</h3>
+        <div class="toggle-sub">High growth, low AI impact</div>
+      </div>
+      <span class="resilient-chevron" id="resilientChevron">&#9662;</span>
+    </div>
+    <div class="resilient-list" id="resilientList"></div>
+  </div>
+
+  <button class="sources-btn" id="sourcesBtn">&#9432; Sources &amp; methodology</button>
 </div>
 
 <div id="detail-panel">
@@ -591,6 +872,29 @@ canvas#canvas {
   <div class="dp-rationale" id="dpRationale"></div>
   <div id="dpPaths"></div>
   <div class="dp-footer" id="dpFooter"></div>
+</div>
+
+<div id="sources-modal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <h2>Sources &amp; Methodology</h2>
+    <h3>Data</h3>
+    <p>Occupation data (employment, wages, education, growth outlook) comes from the <a href="https://www.bls.gov/ooh/" target="_blank">Bureau of Labor Statistics Occupational Outlook Handbook</a> (2024 edition), covering 342 occupations representing 160M+ American workers.</p>
+    <h3>AI Impact Scoring</h3>
+    <p>Each occupation is scored 0&ndash;10 for AI exposure using a large language model (Gemini 2.0 Flash via OpenRouter). The model analyzes each job's core tasks, work environment, and required skills to estimate how much current and near-term AI capabilities overlap with the work.</p>
+    <ul>
+      <li><strong>0&ndash;2 (Low):</strong> Physical, hands-on, or deeply interpersonal work</li>
+      <li><strong>3&ndash;5 (Moderate):</strong> Mix of AI-augmentable and distinctly human tasks</li>
+      <li><strong>6&ndash;7 (High):</strong> Primarily digital work with significant AI overlap</li>
+      <li><strong>8&ndash;10 (Very high):</strong> Core tasks can already be assisted by AI</li>
+    </ul>
+    <h3>Career Adjacency</h3>
+    <p>"Paths Forward" suggestions use BLS <a href="https://www.bls.gov/ooh/" target="_blank">Similar Occupations</a> data (expert-curated relationships between jobs), weighted by education match, pay similarity, and growth outlook.</p>
+    <h3>Limitations</h3>
+    <p>AI impact scores reflect a single model's assessment and should be treated as directional estimates, not precise predictions. AI capabilities are evolving rapidly &mdash; scores may shift as the technology matures. Growth projections are BLS 10-year estimates (2023&ndash;2033).</p>
+    <h3>Open Source</h3>
+    <p>Full pipeline (scraping, parsing, scoring, visualization) is open source: <a href="https://github.com/chrona-nyc/jobs" target="_blank">github.com/chrona-nyc/jobs</a></p>
+  </div>
 </div>
 
 <canvas id="canvas"></canvas>
@@ -1119,6 +1423,15 @@ function showDetail(job) {
     pathsHTML = `<div class="dp-safe-msg">This role has low AI impact. The work is grounded in skills that complement rather than compete with artificial intelligence.</div>`;
   }
 
+  // Prepare tips
+  const tips = prepareTips(score);
+  if (tips.length > 0) {
+    pathsHTML += `<div class="dp-prepare">
+      <div class="dp-prepare-title">How to prepare</div>
+      <ul>${tips.map(t => `<li>${t}</li>`).join("")}</ul>
+    </div>`;
+  }
+
   document.getElementById("dpPaths").innerHTML = pathsHTML;
 
   document.getElementById("dpFooter").innerHTML = `
@@ -1200,6 +1513,69 @@ function computeStats() {
   document.querySelectorAll('.tier-row').forEach(el => {
     el.addEventListener('click', () => setTierFilter(parseInt(el.dataset.tier)));
   });
+
+  // Exposure by pay bracket
+  const payBrackets = [
+    { label: "<$35K", min: 0, max: 35000 },
+    { label: "$35–50K", min: 35000, max: 50000 },
+    { label: "$50–75K", min: 50000, max: 75000 },
+    { label: "$75–100K", min: 75000, max: 100000 },
+    { label: "$100K+", min: 100000, max: Infinity },
+  ];
+  const payRows = payBrackets.map(b => {
+    let wS = 0, wC = 0;
+    for (const d of data) {
+      if (d.pay != null && d.exposure != null && d.jobs && d.pay >= b.min && d.pay < b.max) {
+        wS += d.exposure * d.jobs;
+        wC += d.jobs;
+      }
+    }
+    return { label: b.label, avg: wC > 0 ? wS / wC : 0 };
+  });
+  document.getElementById("crosstabPay").innerHTML = payRows.map(r =>
+    `<div class="crosstab-row">
+      <span class="crosstab-label">${r.label}</span>
+      <div class="crosstab-bar-bg"><div class="crosstab-bar" style="width:${r.avg * 10}%;background:${exposureCSS(r.avg, 0.8)}"></div></div>
+      <span class="crosstab-val">${r.avg.toFixed(1)}</span>
+    </div>`
+  ).join("");
+
+  // Exposure by education
+  const eduBrackets = [
+    { label: "No degree/HS", matches: ["No formal educational credential", "High school diploma or equivalent"] },
+    { label: "Postsec/Assoc", matches: ["Postsecondary nondegree award", "Some college, no degree", "Associate's degree"] },
+    { label: "Bachelor's", matches: ["Bachelor's degree"] },
+    { label: "Master's", matches: ["Master's degree"] },
+    { label: "Doctoral/Prof", matches: ["Doctoral or professional degree"] },
+  ];
+  const eduRows = eduBrackets.map(b => {
+    let wS = 0, wC = 0;
+    for (const d of data) {
+      if (d.exposure != null && d.jobs && b.matches.includes(d.education)) {
+        wS += d.exposure * d.jobs;
+        wC += d.jobs;
+      }
+    }
+    return { label: b.label, avg: wC > 0 ? wS / wC : 0 };
+  });
+  document.getElementById("crosstabEdu").innerHTML = eduRows.map(r =>
+    `<div class="crosstab-row">
+      <span class="crosstab-label">${r.label}</span>
+      <div class="crosstab-bar-bg"><div class="crosstab-bar" style="width:${r.avg * 10}%;background:${exposureCSS(r.avg, 0.8)}"></div></div>
+      <span class="crosstab-val">${r.avg.toFixed(1)}</span>
+    </div>`
+  ).join("");
+
+  // Wages exposed
+  let wagesExposed = 0;
+  for (const d of data) {
+    if (d.exposure != null && d.exposure >= 7 && d.pay && d.jobs) {
+      wagesExposed += d.pay * d.jobs;
+    }
+  }
+  document.getElementById("wagesExposed").innerHTML =
+    `<div class="stat-big" style="color:${exposureCSS(8, 1)}">$${(wagesExposed / 1e12).toFixed(1)}T</div>` +
+    `<div class="stat-label">annual wages in high-exposure jobs (7+)</div>`;
 }
 
 // ── Tier filter & animation ────────────────────────────────────────────
@@ -1385,6 +1761,87 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+// ── AI-Resilient Careers ────────────────────────────────────────────────
+
+function buildResilientList() {
+  const sweet = data
+    .filter(d => d.outlook != null && d.outlook >= 8 && d.exposure != null && d.exposure <= 4 && d.jobs)
+    .sort((a, b) => b.outlook - a.outlook);
+
+  const list = document.getElementById("resilientList");
+  list.innerHTML = sweet.slice(0, 12).map((d, i) => `
+    <div class="resilient-card" data-slug="${d.slug}">
+      <span class="rc-rank">${i + 1}</span>
+      <div class="rc-info">
+        <div class="rc-title" title="${d.title}">${d.title}</div>
+        <div class="rc-meta">${d.exposure}/10 impact · ${fmtPay(d.pay)} · ${fmtNum(d.jobs)} jobs</div>
+      </div>
+      <span class="rc-growth">+${d.outlook}%</span>
+    </div>
+  `).join("");
+
+  list.querySelectorAll(".resilient-card").forEach(card => {
+    card.addEventListener("click", () => selectJob(card.dataset.slug));
+  });
+}
+
+document.getElementById("resilientToggle").addEventListener("click", () => {
+  const list = document.getElementById("resilientList");
+  const chevron = document.getElementById("resilientChevron");
+  list.classList.toggle("open");
+  chevron.classList.toggle("open");
+});
+
+// ── Sources Modal ──────────────────────────────────────────────────────
+
+document.getElementById("sourcesBtn").addEventListener("click", () => {
+  document.getElementById("sources-modal").classList.add("open");
+});
+document.getElementById("modalClose").addEventListener("click", () => {
+  document.getElementById("sources-modal").classList.remove("open");
+});
+document.getElementById("sources-modal").addEventListener("click", (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") document.getElementById("sources-modal").classList.remove("open");
+});
+
+// ── Prepare Tips ───────────────────────────────────────────────────────
+
+function prepareTips(score) {
+  if (score == null) return [];
+  if (score <= 2) return [
+    "Your field's hands-on nature is a strong advantage — keep deepening craft skills",
+    "Learn to use AI tools for scheduling, documentation, and admin tasks to save time",
+    "Consider certifications that formalize your expertise and widen opportunities"
+  ];
+  if (score <= 4) return [
+    "Start experimenting with AI tools relevant to your field — even 30 minutes a week",
+    "Focus on skills AI struggles with: complex judgment, relationship building, physical precision",
+    "Stay current with industry trends — attend conferences or follow trade publications"
+  ];
+  if (score <= 6) return [
+    "Become the person who knows how to use AI in your workplace — early adopters gain influence",
+    "Build skills in areas AI augments rather than replaces: strategy, client relationships, creative direction",
+    "Learn prompt engineering and AI workflow design — these are valuable transitional skills",
+    "Consider adjacent roles that combine your domain knowledge with lower-exposure work"
+  ];
+  if (score <= 8) return [
+    "Urgently learn AI tools in your domain — they're already reshaping the work",
+    "Shift toward higher-judgment aspects of your role: complex analysis, stakeholder management, novel problem-solving",
+    "Consider upskilling into AI-adjacent roles: AI training, quality review, human-in-the-loop oversight",
+    "Build a portfolio that demonstrates uniquely human contributions: creativity, empathy, ethical judgment"
+  ];
+  return [
+    "AI capabilities in your field are advancing rapidly — treat learning AI tools as a top priority",
+    "Position yourself as an AI orchestrator: someone who directs and quality-checks AI output",
+    "Explore career pivots that leverage your domain expertise in lower-exposure contexts",
+    "Develop skills in AI governance, ethics, or training — your field knowledge is valuable for building better AI",
+    "Network actively — relationships and reputation become more important as routine work gets automated"
+  ];
+}
+
 // ── Init ───────────────────────────────────────────────────────────────
 
 function resize() { dpr = window.devicePixelRatio || 1; layout(); draw(); }
@@ -1403,6 +1860,7 @@ fetch("data.json")
   .then(d => {
     data = d;
     computeStats();
+    buildResilientList();
     drawLegend();
     resize();
     const p = new URLSearchParams(window.location.search);
