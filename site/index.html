@@ -36,12 +36,12 @@ body {
   width: var(--sidebar-w);
   background: var(--sidebar-bg);
   border-right: 1px solid var(--sidebar-border);
-  padding: 28px 24px;
+  padding: 20px 20px;
   z-index: 10;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 #sidebar h1 {
@@ -78,7 +78,7 @@ body {
 .stat-section {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 .stat-section h3 {
   font-size: 10px;
@@ -88,7 +88,7 @@ body {
   color: var(--text3);
 }
 .stat-big {
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -108,17 +108,17 @@ body {
 .tier-bar {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 2px;
 }
 .tier-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text);
   cursor: pointer;
-  border-radius: 6px;
-  padding: 5px 8px;
+  border-radius: 5px;
+  padding: 4px 8px;
   margin: 0 -8px;
   transition: background 0.15s;
   user-select: none;
@@ -149,36 +149,6 @@ body {
   font-size: 10px;
 }
 
-.histogram {
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 44px;
-}
-.histogram .bar {
-  flex: 1;
-  border-radius: 2px 2px 0 0;
-  min-height: 2px;
-}
-.hist-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 9px;
-  color: var(--text3);
-  margin-top: 3px;
-}
-
-.gradient-legend {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: var(--text2);
-}
-.gradient-legend canvas {
-  border-radius: 3px;
-}
-
 /* ── Search ──────────────────────────────────── */
 
 #search-wrap {
@@ -186,12 +156,12 @@ body {
 }
 #search-input {
   width: 100%;
-  padding: 10px 36px 10px 14px;
+  padding: 8px 32px 8px 12px;
   background: #fff;
   border: 1px solid var(--sidebar-border);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   outline: none;
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -521,23 +491,23 @@ canvas#canvas {
 .crosstab {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 .crosstab-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
+  gap: 6px;
+  font-size: 10px;
 }
 .crosstab-label {
-  width: 72px;
+  width: 66px;
   color: var(--text2);
   flex-shrink: 0;
   text-align: right;
 }
 .crosstab-bar-bg {
   flex: 1;
-  height: 14px;
+  height: 12px;
   background: #f0eee8;
   border-radius: 3px;
   overflow: hidden;
@@ -548,25 +518,11 @@ canvas#canvas {
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .crosstab-val {
-  width: 28px;
+  width: 24px;
   font-weight: 600;
   color: var(--text);
-  font-size: 11px;
+  font-size: 10px;
 }
-.stat-highlight {
-  text-align: center;
-  padding: 14px 0 4px;
-}
-.stat-highlight .stat-big {
-  font-size: 28px;
-}
-.stat-highlight .stat-label {
-  font-size: 11px;
-  color: var(--text2);
-  margin-top: 3px;
-  line-height: 1.4;
-}
-
 /* ── AI-Resilient Careers ────────────────────── */
 
 .resilient-toggle {
@@ -575,22 +531,22 @@ canvas#canvas {
   justify-content: space-between;
   cursor: pointer;
   user-select: none;
-  padding: 10px 14px;
+  padding: 8px 12px;
   background: #f7f6f2;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: background 0.15s;
 }
 .resilient-toggle:hover { background: #f0eee8; }
 .resilient-toggle h3 {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: -0.01em;
 }
 .resilient-toggle .toggle-sub {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text2);
-  margin-top: 2px;
+  margin-top: 1px;
 }
 .resilient-chevron {
   font-size: 14px;
@@ -654,19 +610,18 @@ canvas#canvas {
 .sources-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   background: none;
-  border: 1px solid var(--sidebar-border);
-  border-radius: 8px;
-  padding: 7px 12px;
-  font-size: 11px;
+  border: none;
+  padding: 0;
+  font-size: 10px;
   font-weight: 500;
-  color: var(--text2);
+  color: var(--text3);
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition: color 0.15s;
 }
-.sources-btn:hover { background: #f7f6f2; border-color: #d8d5ce; color: var(--text); }
+.sources-btn:hover { color: var(--text2); }
 #sources-modal {
   position: fixed;
   inset: 0;
@@ -796,8 +751,8 @@ canvas#canvas {
 <div id="sidebar">
   <div>
     <h1><span class="ai">AI</span> & Work</h1>
-    <div class="subtitle">342 occupations · area&nbsp;=&nbsp;employment · color&nbsp;=&nbsp;AI exposure</div>
-    <div class="attribution">Data: <a href="https://www.bls.gov/ooh/">Bureau of Labor Statistics</a>, scored by Gemini Flash<br><a href="https://github.com/chrona-nyc/jobs">GitHub</a> &middot; <a href="https://chrona.nyc">chrona.nyc</a></div>
+    <div class="subtitle">How AI is reshaping the American workforce</div>
+    <div class="attribution"><a href="#" id="openSourcesLink">Bureau of Labor Statistics data</a> · scored by Gemini + Sonnet ensemble</div>
   </div>
 
   <div id="search-wrap">
@@ -818,10 +773,17 @@ canvas#canvas {
     </div>
   </div>
 
-  <div class="stat-section">
-    <h3>Distribution</h3>
-    <div class="histogram" id="histogram"></div>
-    <div class="hist-labels"><span>Low</span><span>High</span></div>
+  <div class="stat-row">
+    <div class="stat-section">
+      <h3>High-exposure workers</h3>
+      <div class="stat-big" id="statExposedWorkers">&mdash;</div>
+      <div class="stat-label">in jobs scoring 7+</div>
+    </div>
+    <div class="stat-section">
+      <h3>Wages at stake</h3>
+      <div class="stat-big" id="statExposedWages">&mdash;</div>
+      <div class="stat-label">annual, in those jobs</div>
+    </div>
   </div>
 
   <div class="stat-section">
@@ -839,14 +801,6 @@ canvas#canvas {
     <div class="crosstab" id="crosstabEdu"></div>
   </div>
 
-  <div class="stat-highlight" id="wagesExposed"></div>
-
-  <div class="gradient-legend">
-    <span>Low impact</span>
-    <canvas id="gradientLegend" width="90" height="8"></canvas>
-    <span>High impact</span>
-  </div>
-
   <div>
     <div class="resilient-toggle" id="resilientToggle">
       <div>
@@ -858,7 +812,10 @@ canvas#canvas {
     <div class="resilient-list" id="resilientList"></div>
   </div>
 
-  <button class="sources-btn" id="sourcesBtn">&#9432; Sources &amp; methodology</button>
+  <div style="flex:1"></div>
+  <div style="text-align:center;padding-bottom:4px;">
+    <a class="sources-btn" href="https://chrona.nyc" target="_blank">created by chrona.nyc</a>
+  </div>
 </div>
 
 <div id="detail-panel">
@@ -881,7 +838,7 @@ canvas#canvas {
     <h3>Data</h3>
     <p>Occupation data (employment, wages, education, growth outlook) comes from the <a href="https://www.bls.gov/ooh/" target="_blank">Bureau of Labor Statistics Occupational Outlook Handbook</a> (2024 edition), covering 342 occupations representing 160M+ American workers.</p>
     <h3>AI Impact Scoring</h3>
-    <p>Each occupation is scored 0&ndash;10 for AI exposure using a large language model (Gemini 2.0 Flash via OpenRouter). The model analyzes each job's core tasks, work environment, and required skills to estimate how much current and near-term AI capabilities overlap with the work.</p>
+    <p>Each occupation is scored 0&ndash;10 for AI exposure by two independent LLMs &mdash; Gemini 3 Flash and Claude Sonnet 4.6 &mdash; then averaged. Both models analyze each job's core tasks, work environment, and required skills against the same calibrated rubric. The two models agreed within &plusmn;1 point on 91% of occupations.</p>
     <ul>
       <li><strong>0&ndash;2 (Low):</strong> Physical, hands-on, or deeply interpersonal work</li>
       <li><strong>3&ndash;5 (Moderate):</strong> Mix of AI-augmentable and distinctly human tasks</li>
@@ -890,10 +847,22 @@ canvas#canvas {
     </ul>
     <h3>Career Adjacency</h3>
     <p>"Paths Forward" suggestions use BLS <a href="https://www.bls.gov/ooh/" target="_blank">Similar Occupations</a> data (expert-curated relationships between jobs), weighted by education match, pay similarity, and growth outlook.</p>
+    <h3>Model Agreement</h3>
+    <p>The two models agreed within &plusmn;1 point on 91% of occupations. Where they disagree, Sonnet tends to score knowledge work lower, giving more weight to human judgment and physical presence. Gemini leans toward "if it's digital, it's exposed."</p>
+    <p style="margin-top:6px"><strong>Biggest disagreements:</strong></p>
+    <ul>
+      <li>Sports officials: Sonnet&nbsp;2, Gemini&nbsp;5 &mdash; how digital is refereeing?</li>
+      <li>Aerospace engineers: Sonnet&nbsp;6, Gemini&nbsp;8 &mdash; hardware vs. design software</li>
+      <li>Air traffic controllers: Sonnet&nbsp;5, Gemini&nbsp;7 &mdash; real-time safety judgment</li>
+      <li>Actors: Sonnet&nbsp;5, Gemini&nbsp;7 &mdash; physical performance vs. digital media</li>
+    </ul>
+    <h3>Scoring Prompt</h3>
+    <p>Both models receive the same calibrated rubric with anchor examples at each level. The full prompt and scoring pipeline are in the <a href="https://github.com/chrona-nyc/jobs/blob/master/score.py" target="_blank">source code</a>.</p>
     <h3>Limitations</h3>
     <p>AI impact scores reflect a single model's assessment and should be treated as directional estimates, not precise predictions. AI capabilities are evolving rapidly &mdash; scores may shift as the technology matures. Growth projections are BLS 10-year estimates (2023&ndash;2033).</p>
-    <h3>Open Source</h3>
-    <p>Full pipeline (scraping, parsing, scoring, visualization) is open source: <a href="https://github.com/chrona-nyc/jobs" target="_blank">github.com/chrona-nyc/jobs</a></p>
+    <h3>Credits</h3>
+    <p>Originally created by <a href="https://karpathy.ai/" target="_blank">Andrej Karpathy</a>. Extended by <a href="https://chrona.nyc" target="_blank">Chrona</a> with career path analysis, interactive filtering, and additional analytics.</p>
+    <p style="margin-top:8px">Source code: <a href="https://github.com/chrona-nyc/jobs" target="_blank">github.com/chrona-nyc/jobs</a></p>
   </div>
 </div>
 
@@ -1283,28 +1252,39 @@ function findPaths(job) {
   if (job.exposure == null || job.exposure < 4) return [];
 
   const similarSet = new Set(job.similar || []);
+  const aiPathSlugs = new Set((job.ai_paths || []).map(p => p.slug));
+  const aiReasons = {};
+  for (const p of (job.ai_paths || [])) aiReasons[p.slug] = p.reason;
 
+  // Consider: BLS-similar, same category, or AI-suggested paths
   const candidates = data.filter(d =>
     d.slug !== job.slug &&
     d.exposure != null &&
     d.exposure <= job.exposure - 2 &&
-    d.jobs != null && d.jobs > 0
+    d.jobs != null && d.jobs > 0 &&
+    (similarSet.has(d.slug) || d.category === job.category || aiPathSlugs.has(d.slug))
   );
 
   for (const c of candidates) {
     let score = 0;
+    const isBLS = similarSet.has(c.slug);
+    const isAI = aiPathSlugs.has(c.slug);
 
-    // Tier 1: BLS says these are similar occupations
-    if (similarSet.has(c.slug)) score += 15;
-
-    // Bidirectional similarity bonus
+    // BLS-similar: strongest signal
+    if (isBLS) score += 20;
     const cSimilar = new Set(c.similar || []);
-    if (similarSet.has(c.slug) && cSimilar.has(job.slug)) score += 5;
+    if (isBLS && cSimilar.has(job.slug)) score += 5;
 
-    // Tier 2: Same BLS category
-    if (c.category === job.category) score += 8;
+    // AI-generated path: strong signal with reason
+    if (isAI) score += 16;
 
-    // Tier 3: Education, pay, outlook
+    // Same category: weak signal alone
+    if (c.category === job.category) score += 3;
+
+    // Reward bigger exposure drops
+    score += (job.exposure - c.exposure) * 0.5;
+
+    // Education and pay proximity
     const jobEdu = eduLevel(job.education);
     const cEdu = eduLevel(c.education);
     if (jobEdu >= 0 && cEdu >= 0) {
@@ -1312,7 +1292,6 @@ function findPaths(job) {
       if (diff === 0) score += 3;
       else if (diff === 1) score += 2;
     }
-
     if (c.pay && job.pay) {
       const ratio = c.pay / job.pay;
       if (ratio >= 0.8 && ratio <= 1.3) score += 3;
@@ -1320,17 +1299,16 @@ function findPaths(job) {
       if (ratio > 1.05) score += 1;
     }
 
-    score += (job.exposure - c.exposure) * 0.3;
-
     if (c.jobs >= 500000) score += 2;
     else if (c.jobs >= 100000) score += 1;
-
     if (c.outlook != null && c.outlook > 5) score += 1;
 
     c._pathScore = score;
+    c._aiReason = aiReasons[c.slug] || null;
   }
 
   return candidates
+    .filter(c => similarSet.has(c.slug) || aiPathSlugs.has(c.slug) || c._pathScore >= 10)
     .sort((a, b) => b._pathScore - a._pathScore)
     .slice(0, 5);
 }
@@ -1405,9 +1383,10 @@ function showDetail(job) {
       const payStr = payDiff != null ? (payDiff >= 0 ? "+" + payDiff : payDiff) + "% pay" : "";
 
       let tag = "";
-      if (similarSet.has(p.slug)) tag = "Related role";
+      if (p._aiReason) tag = p._aiReason;
+      else if (similarSet.has(p.slug)) tag = "Related role";
       else if (p.category === job.category) tag = "Same field";
-      else tag = "Similar profile";
+      else tag = "Skills transfer";
 
       pathsHTML += `
         <div class="escape-card" data-slug="${p.slug}">
@@ -1421,6 +1400,8 @@ function showDetail(job) {
     }
   } else if (score != null && score < 4) {
     pathsHTML = `<div class="dp-safe-msg">This role has low AI impact. The work is grounded in skills that complement rather than compete with artificial intelligence.</div>`;
+  } else if (paths.length === 0 && score != null && score >= 4) {
+    pathsHTML = `<div class="dp-safe-msg">Most related roles have similar AI exposure. The strongest move may be to go deeper — become the expert who directs AI tools in your field rather than competes with them.</div>`;
   }
 
   // Prepare tips
@@ -1469,11 +1450,6 @@ function computeStats() {
   }
   const wAvg = wCount > 0 ? wSum / wCount : 0;
 
-  const histogram = new Array(11).fill(0);
-  for (const d of data) {
-    if (d.exposure != null && d.jobs) histogram[d.exposure] += d.jobs;
-  }
-
   const tiers = [
     { name: "Low", range: [0, 2], color: exposureCSS(1, 1) },
     { name: "Moderate", range: [3, 5], color: exposureCSS(4, 1) },
@@ -1495,11 +1471,16 @@ function computeStats() {
   document.getElementById("statAvgExposure").innerHTML =
     `<span style="color:${exposureCSS(wAvg, 1)}">${wAvg.toFixed(1)}</span><span style="font-size:14px;color:var(--text3);font-weight:400">/10</span>`;
 
-  const maxH = Math.max(...histogram);
-  document.getElementById("histogram").innerHTML = histogram.map((count, i) => {
-    const h = maxH > 0 ? (count / maxH * 100) : 0;
-    return `<div class="bar" style="height:${Math.max(3, h)}%;background:${exposureCSS(i, 0.75)}" title="${i}: ${fmtNum(count)} jobs"></div>`;
-  }).join("");
+  // High-exposure impact stats
+  let exposedWorkers = 0, exposedWages = 0;
+  for (const d of data) {
+    if (d.exposure != null && d.exposure >= 7 && d.jobs) {
+      exposedWorkers += d.jobs;
+      if (d.pay) exposedWages += d.pay * d.jobs;
+    }
+  }
+  document.getElementById("statExposedWorkers").textContent = (exposedWorkers / 1e6).toFixed(0) + "M";
+  document.getElementById("statExposedWages").textContent = "$" + (exposedWages / 1e12).toFixed(1) + "T";
 
   document.getElementById("tierBar").innerHTML = tiers.map((t, i) =>
     `<div class="tier-row" data-tier="${i}">
@@ -1566,16 +1547,6 @@ function computeStats() {
     </div>`
   ).join("");
 
-  // Wages exposed
-  let wagesExposed = 0;
-  for (const d of data) {
-    if (d.exposure != null && d.exposure >= 7 && d.pay && d.jobs) {
-      wagesExposed += d.pay * d.jobs;
-    }
-  }
-  document.getElementById("wagesExposed").innerHTML =
-    `<div class="stat-big" style="color:${exposureCSS(8, 1)}">$${(wagesExposed / 1e12).toFixed(1)}T</div>` +
-    `<div class="stat-label">annual wages in high-exposure jobs (7+)</div>`;
 }
 
 // ── Tier filter & animation ────────────────────────────────────────────
@@ -1794,7 +1765,8 @@ document.getElementById("resilientToggle").addEventListener("click", () => {
 
 // ── Sources Modal ──────────────────────────────────────────────────────
 
-document.getElementById("sourcesBtn").addEventListener("click", () => {
+document.getElementById("openSourcesLink").addEventListener("click", (e) => {
+  e.preventDefault();
   document.getElementById("sources-modal").classList.add("open");
 });
 document.getElementById("modalClose").addEventListener("click", () => {
@@ -1846,22 +1818,12 @@ function prepareTips(score) {
 
 function resize() { dpr = window.devicePixelRatio || 1; layout(); draw(); }
 
-function drawLegend() {
-  const c = document.getElementById("gradientLegend");
-  const g = c.getContext("2d");
-  for (let x = 0; x < 90; x++) {
-    g.fillStyle = exposureCSS((x / 89) * 10, 1);
-    g.fillRect(x, 0, 1, 8);
-  }
-}
-
 fetch("data.json")
   .then(r => r.json())
   .then(d => {
     data = d;
     computeStats();
     buildResilientList();
-    drawLegend();
     resize();
     const p = new URLSearchParams(window.location.search);
     const job = p.get("job");

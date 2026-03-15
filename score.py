@@ -3,12 +3,12 @@ Score each occupation's AI exposure using an LLM via OpenRouter.
 
 Reads Markdown descriptions from pages/, sends each to an LLM with a scoring
 rubric, and collects structured scores. Results are cached incrementally to
-scores.json so the script can be resumed if interrupted.
+scores_<model_tag>.json so the script can be resumed if interrupted.
 
 Usage:
-    uv run python score.py
-    uv run python score.py --model google/gemini-3-flash-preview
-    uv run python score.py --start 0 --end 10   # test on first 10
+    python3 score.py --model google/gemini-3-flash-preview
+    python3 score.py --model anthropic/claude-sonnet-4.6
+    python3 score.py --start 0 --end 10   # test on first 10
 """
 
 import argparse
@@ -21,7 +21,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DEFAULT_MODEL = "google/gemini-3-flash-preview"
-OUTPUT_FILE = "scores.json"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 SYSTEM_PROMPT = """\
@@ -85,6 +84,14 @@ Respond with ONLY a JSON object in this exact format, no other text:
 """
 
 
+def model_tag(model_id):
+    """Turn 'google/gemini-3-flash-preview' into 'gemini-3-flash'."""
+    name = model_id.split("/")[-1]
+    for suffix in ["-preview", "-001"]:
+        name = name.replace(suffix, "")
+    return name
+
+
 def score_occupation(client, text, model):
     """Send one occupation to the LLM and parse the structured response."""
     response = client.post(
@@ -100,7 +107,7 @@ def score_occupation(client, text, model):
             ],
             "temperature": 0.2,
         },
-        timeout=60,
+        timeout=120,
     )
     response.raise_for_status()
     content = response.json()["choices"][0]["message"]["content"]
@@ -126,6 +133,9 @@ def main():
                         help="Re-score even if already cached")
     args = parser.parse_args()
 
+    tag = model_tag(args.model)
+    output_file = f"scores_{tag}.json"
+
     with open("occupations.json") as f:
         occupations = json.load(f)
 
@@ -133,12 +143,13 @@ def main():
 
     # Load existing scores
     scores = {}
-    if os.path.exists(OUTPUT_FILE) and not args.force:
-        with open(OUTPUT_FILE) as f:
+    if os.path.exists(output_file) and not args.force:
+        with open(output_file) as f:
             for entry in json.load(f):
                 scores[entry["slug"]] = entry
 
     print(f"Scoring {len(subset)} occupations with {args.model}")
+    print(f"Output: {output_file}")
     print(f"Already cached: {len(scores)}")
 
     errors = []
@@ -173,7 +184,7 @@ def main():
             errors.append(slug)
 
         # Save after each one (incremental checkpoint)
-        with open(OUTPUT_FILE, "w") as f:
+        with open(output_file, "w") as f:
             json.dump(list(scores.values()), f, indent=2)
 
         if i < len(subset) - 1:
