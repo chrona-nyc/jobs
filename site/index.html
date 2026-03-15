@@ -3,53 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Exposure of the US Job Market</title>
+<title>AI & Work — Chrona</title>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0a0a0f;
-  --bg2: #12121a;
-  --fg: #e0e0e8;
-  --fg2: #888894;
-  --sidebar-w: 220px;
+  --bg: #1C1917;
+  --sidebar-bg: #FAFAF8;
+  --sidebar-border: #E8E5DF;
+  --text: #1a1a1a;
+  --text2: #8b8680;
+  --text3: #b5b0a8;
+  --accent: #0198ff;
+  --panel-bg: #FAFAF8;
+  --sidebar-w: 280px;
 }
 
 body {
   background: var(--bg);
-  color: var(--fg);
+  color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   overflow: hidden;
   height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
+
+/* ── Sidebar ─────────────────────────────────── */
 
 #sidebar {
   position: fixed;
   top: 0; left: 0; bottom: 0;
   width: var(--sidebar-w);
-  background: var(--bg2);
-  border-right: 1px solid rgba(255,255,255,0.06);
-  padding: 20px 18px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  padding: 28px 24px;
   z-index: 10;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 #sidebar h1 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text);
 }
+#sidebar h1 .ai { color: var(--accent); }
 #sidebar .subtitle {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+#sidebar .attribution {
   font-size: 11px;
-  color: var(--fg2);
+  color: var(--text3);
   margin-top: 4px;
   line-height: 1.4;
 }
-#sidebar .subtitle a { color: var(--fg2); }
+#sidebar .attribution a {
+  color: var(--text3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--sidebar-border);
+  transition: color 0.15s, border-color 0.15s;
+}
+#sidebar .attribution a:hover {
+  color: var(--text2);
+  border-color: var(--text2);
+}
 
 .stat-section {
   display: flex;
@@ -61,30 +85,46 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--fg2);
+  color: var(--text3);
 }
 .stat-big {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1;
+  color: var(--text);
 }
 .stat-label {
   font-size: 11px;
-  color: var(--fg2);
+  color: var(--text2);
 }
+
+.stat-row {
+  display: flex;
+  gap: 24px;
+}
+.stat-row .stat-section { flex: 1; }
 
 .tier-bar {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 .tier-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11px;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 5px 8px;
+  margin: 0 -8px;
+  transition: background 0.15s;
+  user-select: none;
 }
+.tier-row:hover { background: #f0eee8; }
+.tier-row.active { background: #eceae4; }
 .tier-color {
   width: 10px;
   height: 10px;
@@ -93,16 +133,19 @@ body {
 }
 .tier-name {
   flex: 1;
-  color: var(--fg2);
+  color: var(--text2);
+  font-size: 11px;
 }
 .tier-jobs {
   text-align: right;
   white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
 }
 .tier-pct {
   text-align: right;
   width: 32px;
-  color: var(--fg2);
+  color: var(--text3);
   font-size: 10px;
 }
 
@@ -110,69 +153,112 @@ body {
   display: flex;
   align-items: flex-end;
   gap: 2px;
-  height: 48px;
+  height: 44px;
 }
 .histogram .bar {
   flex: 1;
-  border-radius: 1px 1px 0 0;
-  min-height: 1px;
-  position: relative;
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
 }
 .hist-labels {
   display: flex;
   justify-content: space-between;
   font-size: 9px;
-  color: var(--fg2);
-  margin-top: 2px;
-}
-
-.hbar-chart {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.hbar-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-}
-.hbar-label {
-  width: 68px;
-  flex-shrink: 0;
-  color: var(--fg2);
-  font-size: 10px;
-  text-align: right;
-}
-.hbar-track {
-  flex: 1;
-  height: 10px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.hbar-fill {
-  height: 100%;
-  border-radius: 2px;
-}
-.hbar-val {
-  width: 22px;
-  flex-shrink: 0;
-  font-size: 10px;
-  color: var(--fg);
-  text-align: right;
+  color: var(--text3);
+  margin-top: 3px;
 }
 
 .gradient-legend {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  color: var(--fg2);
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text2);
 }
 .gradient-legend canvas {
-  border-radius: 2px;
+  border-radius: 3px;
 }
+
+/* ── Search ──────────────────────────────────── */
+
+#search-wrap {
+  position: relative;
+}
+#search-input {
+  width: 100%;
+  padding: 10px 36px 10px 14px;
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(1, 152, 255, 0.1);
+}
+#search-input::placeholder { color: var(--text3); }
+#search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+  line-height: 1;
+}
+#search-clear:hover { color: var(--text2); }
+#search-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 30;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+#search-results.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.search-result {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  border-bottom: 1px solid #f0eee8;
+  transition: background 0.1s;
+}
+.search-result:last-child { border-bottom: none; }
+.search-result:hover, .search-result.active { background: #f7f6f2; }
+.search-result .sr-title { flex: 1; color: var(--text); }
+.search-result .sr-title b { font-weight: 600; }
+.search-result .sr-score {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Canvas ──────────────────────────────────── */
 
 canvas#canvas {
   display: block;
@@ -182,47 +268,270 @@ canvas#canvas {
   cursor: default;
 }
 
+/* ── Tooltip ─────────────────────────────────── */
+
 #tooltip {
   position: fixed;
   pointer-events: none;
-  background: var(--bg2);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
-  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 10px;
+  padding: 14px 16px;
   font-size: 13px;
   line-height: 1.5;
-  max-width: 340px;
+  max-width: 320px;
   opacity: 0;
   transition: opacity 0.12s;
   z-index: 20;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  color: var(--text);
 }
 #tooltip.visible { opacity: 1; }
 #tooltip .tt-title {
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 6px;
-  color: #fff;
+  color: var(--text);
 }
-#tooltip .tt-exposure {
-  font-size: 12px;
-  margin-bottom: 8px;
-}
+#tooltip .tt-exposure { font-size: 12px; margin-bottom: 8px; }
 #tooltip .tt-stats {
   display: grid;
   grid-template-columns: auto auto;
-  gap: 2px 12px;
+  gap: 2px 14px;
   font-size: 12px;
 }
-#tooltip .tt-stats .label { color: var(--fg2); }
-#tooltip .tt-stats .value { color: var(--fg); text-align: right; }
+#tooltip .tt-stats .label { color: var(--text2); }
+#tooltip .tt-stats .value { color: var(--text); text-align: right; font-weight: 500; }
 #tooltip .tt-rationale {
   font-size: 11px;
-  color: var(--fg2);
+  color: var(--text2);
   margin-top: 8px;
-  line-height: 1.4;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  line-height: 1.45;
+  border-top: 1px solid #f0eee8;
   padding-top: 8px;
+}
+
+/* ── Detail Panel ────────────────────────────── */
+
+#detail-panel {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 380px;
+  max-height: calc(100vh - 32px);
+  background: var(--panel-bg);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 14px;
+  padding: 24px;
+  z-index: 25;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  opacity: 0;
+  transform: translateX(16px);
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#detail-panel.open {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+.dp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.dp-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  flex: 1;
+  margin-right: 12px;
+}
+.dp-close {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+.dp-close:hover { color: var(--text); }
+.dp-exposure-wrap { margin-bottom: 20px; }
+.dp-exposure-score {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.dp-exposure-label {
+  font-size: 13px;
+  color: var(--text2);
+  margin-left: 4px;
+}
+.dp-exposure-bar {
+  height: 5px;
+  background: #f0eee8;
+  border-radius: 3px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.dp-exposure-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dp-context {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background: #f7f6f2;
+  border-radius: 10px;
+}
+.dp-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.dp-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text3);
+  margin-bottom: 3px;
+}
+.dp-stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+.dp-rationale {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+  padding: 16px 0;
+  border-top: 1px solid #f0eee8;
+  font-style: italic;
+}
+.dp-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text3);
+  margin: 20px 0 8px;
+}
+.dp-section-desc {
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.escape-card {
+  background: #fff;
+  border: 1px solid #f0eee8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.escape-card:hover {
+  border-color: #d8d5ce;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.escape-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.escape-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.escape-score {
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+.escape-meta {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+.escape-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text2);
+  background: #f0eee8;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-top: 6px;
+}
+.dp-safe-msg {
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 14px 16px;
+  background: #f7f6f2;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+.dp-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0eee8;
+}
+.dp-btn {
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+  display: inline-block;
+}
+.dp-btn:hover {
+  background: #f7f6f2;
+  border-color: #d8d5ce;
+}
+
+/* Scrollbar */
+#sidebar::-webkit-scrollbar,
+#detail-panel::-webkit-scrollbar,
+#search-results::-webkit-scrollbar {
+  width: 6px;
+}
+#sidebar::-webkit-scrollbar-track,
+#detail-panel::-webkit-scrollbar-track,
+#search-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+#sidebar::-webkit-scrollbar-thumb,
+#detail-panel::-webkit-scrollbar-thumb,
+#search-results::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px;
 }
 </style>
 </head>
@@ -230,53 +539,58 @@ canvas#canvas {
 
 <div id="sidebar">
   <div>
-    <h1>AI Exposure of the US Job Market</h1>
-    <div class="subtitle">342 occupations &middot; area = employment &middot; color = AI exposure<br>Data from <a href="https://www.bls.gov/ooh/">BLS</a>, scored by Gemini Flash<br><a href="https://github.com/karpathy/jobs">GitHub</a></div>
+    <h1><span class="ai">AI</span> & Work</h1>
+    <div class="subtitle">How artificial intelligence is reshaping 342 occupations across the American workforce.</div>
+    <div class="attribution">Data: <a href="https://www.bls.gov/ooh/">Bureau of Labor Statistics</a> &middot; <a href="https://github.com/joshkale/jobs">GitHub</a><br><a href="https://chrona.nyc">chrona.nyc</a></div>
+  </div>
+
+  <div id="search-wrap">
+    <input type="text" id="search-input" placeholder="What do you do?" autocomplete="off" spellcheck="false">
+    <button id="search-clear">&times;</button>
+    <div id="search-results"></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-section">
+      <h3>Workers</h3>
+      <div class="stat-big" id="statTotalJobs">&mdash;</div>
+    </div>
+    <div class="stat-section">
+      <h3>Avg. Impact</h3>
+      <div class="stat-big" id="statAvgExposure">&mdash;</div>
+      <div class="stat-label">weighted by employment</div>
+    </div>
   </div>
 
   <div class="stat-section">
-    <h3>Total jobs</h3>
-    <div class="stat-big" id="statTotalJobs">—</div>
-  </div>
-
-  <div class="stat-section">
-    <h3>Weighted avg. exposure</h3>
-    <div class="stat-big" id="statAvgExposure">—</div>
-    <div class="stat-label">job-weighted, 0–10 scale</div>
-  </div>
-
-  <div class="stat-section">
-    <h3>Jobs by exposure (weighted by employment)</h3>
+    <h3>Distribution</h3>
     <div class="histogram" id="histogram"></div>
-    <div class="hist-labels"><span>0</span><span>5</span><span>10</span></div>
+    <div class="hist-labels"><span>Low</span><span>High</span></div>
   </div>
 
   <div class="stat-section">
-    <h3>Breakdown</h3>
+    <h3>By impact level</h3>
     <div class="tier-bar" id="tierBar"></div>
   </div>
 
-  <div class="stat-section">
-    <h3>Exposure by pay</h3>
-    <div class="hbar-chart" id="payChart"></div>
-  </div>
-
-  <div class="stat-section">
-    <h3>Exposure by education</h3>
-    <div class="hbar-chart" id="eduChart"></div>
-  </div>
-
-  <div class="stat-section">
-    <h3>Wages exposed</h3>
-    <div class="stat-big" id="statWages">—</div>
-    <div class="stat-label" id="statWagesDesc">annual wages in high-exposure jobs (7+)</div>
-  </div>
-
   <div class="gradient-legend">
-    <span>Low</span>
-    <canvas id="gradientLegend" width="80" height="8"></canvas>
-    <span>High</span>
+    <span>Low impact</span>
+    <canvas id="gradientLegend" width="90" height="8"></canvas>
+    <span>High impact</span>
   </div>
+</div>
+
+<div id="detail-panel">
+  <div class="dp-header">
+    <div class="dp-title" id="dpTitle"></div>
+    <button class="dp-close" id="dpClose">&times;</button>
+  </div>
+  <div class="dp-exposure-wrap" id="dpExposure"></div>
+  <div class="dp-context" id="dpContext"></div>
+  <div class="dp-stats" id="dpStats"></div>
+  <div class="dp-rationale" id="dpRationale"></div>
+  <div id="dpPaths"></div>
+  <div class="dp-footer" id="dpFooter"></div>
 </div>
 
 <canvas id="canvas"></canvas>
@@ -290,39 +604,38 @@ canvas#canvas {
 
 <script>
 
-// ── Exposure color scale ───────────────────────────────────────────────
+// ── Color scale: sage → gold → terracotta ──────────────────────────────
 
 function exposureColor(score) {
-  if (score == null) return [128, 128, 128];
+  if (score == null) return [150, 147, 140];
   const t = Math.max(0, Math.min(10, score)) / 10;
   let r, g, b;
-  if (t < 0.5) {
-    const s = t / 0.5;
-    r = Math.round(50 + s * 180);
-    g = Math.round(160 - s * 10);
-    b = Math.round(50 - s * 20);
+  if (t <= 0.5) {
+    const s = t * 2;
+    r = Math.round(91 + s * (196 - 91));
+    g = Math.round(165 + s * (170 - 165));
+    b = Math.round(140 + s * (90 - 140));
   } else {
-    const s = (t - 0.5) / 0.5;
-    r = Math.round(230 + s * 25);
-    g = Math.round(150 - s * 110);
-    b = Math.round(30 - s * 10);
+    const s = (t - 0.5) * 2;
+    r = Math.round(196 + s * (217 - 196));
+    g = Math.round(170 + s * (119 - 170));
+    b = Math.round(90 + s * (87 - 90));
   }
   return [r, g, b];
 }
 
-function exposureColorCSS(score, alpha) {
+function exposureCSS(score, alpha) {
   const [r, g, b] = exposureColor(score);
-  return `rgba(${r},${g},${b},${alpha})`;
+  return alpha < 1 ? `rgba(${r},${g},${b},${alpha})` : `rgb(${r},${g},${b})`;
 }
 
-// ── Squarified treemap layout ──────────────────────────────────────────
+// ── Squarified treemap ─────────────────────────────────────────────────
 
 function squarify(items, x, y, w, h) {
   if (items.length === 0) return [];
   if (items.length === 1) {
     return [{ ...items[0], rx: x, ry: y, rw: w, rh: h }];
   }
-
   const total = items.reduce((s, d) => s + d.value, 0);
   if (total === 0) return [];
 
@@ -365,17 +678,10 @@ function squarify(items, x, y, w, h) {
       offset += itemLength;
     }
 
-    if (vertical) {
-      cx += rowThickness;
-      cw -= rowThickness;
-    } else {
-      cy += rowThickness;
-      ch -= rowThickness;
-    }
-
+    if (vertical) { cx += rowThickness; cw -= rowThickness; }
+    else { cy += rowThickness; ch -= rowThickness; }
     remaining = remaining.slice(row.length);
   }
-
   return results;
 }
 
@@ -397,17 +703,29 @@ function worstAspect(row, rowSum, side, totalArea, availableExtent) {
 let data = [];
 let rects = [];
 let hovered = null;
+let selected = null;
+let activeTier = null;
+let anim = null;
+const ANIM_MS = 450;
+
+const TIERS = [
+  { name: "Low", range: [0, 2] },
+  { name: "Moderate", range: [3, 5] },
+  { name: "High", range: [6, 7] },
+  { name: "Very high", range: [8, 10] },
+];
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let dpr = window.devicePixelRatio || 1;
 
-const MARGIN = 12;
-const GAP = 1.5;
+const MARGIN = 10;
+const GAP = 2;
+const RADIUS = 2;
 
 function layout() {
   const sidebarW = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-w'));
-  const w = (window.innerWidth - sidebarW);
+  const w = window.innerWidth - sidebarW;
   const h = window.innerHeight;
 
   canvas.width = w * dpr;
@@ -415,16 +733,14 @@ function layout() {
   canvas.style.width = w + "px";
   canvas.style.height = h + "px";
 
-  const tx = MARGIN;
-  const ty = MARGIN;
-  const tw = w - MARGIN * 2;
-  const th = h - MARGIN * 2;
+  const filtered = activeTier != null
+    ? data.filter(d => d.exposure != null && d.exposure >= TIERS[activeTier].range[0] && d.exposure <= TIERS[activeTier].range[1])
+    : data;
 
   const byCategory = {};
-  for (const d of data) {
-    const cat = d.category;
-    if (!byCategory[cat]) byCategory[cat] = [];
-    byCategory[cat].push(d);
+  for (const d of filtered) {
+    if (!byCategory[d.category]) byCategory[d.category] = [];
+    byCategory[d.category].push(d);
   }
 
   const categories = Object.keys(byCategory).map(cat => ({
@@ -433,73 +749,125 @@ function layout() {
     value: byCategory[cat].reduce((s, d) => s + (d.jobs || 1), 0),
   })).sort((a, b) => b.value - a.value);
 
-  const catRects = squarify(categories, tx, ty, tw, th);
+  const catRects = squarify(categories, MARGIN, MARGIN, w - MARGIN * 2, h - MARGIN * 2);
 
   rects = [];
   for (const cr of catRects) {
-    const innerGap = GAP;
     const items = cr.items.map(d => ({ ...d, value: d.jobs || 1 }));
-    const innerRects = squarify(items,
-      cr.rx + innerGap, cr.ry + innerGap,
-      cr.rw - innerGap * 2, cr.rh - innerGap * 2
+    const inner = squarify(items,
+      cr.rx + GAP, cr.ry + GAP,
+      cr.rw - GAP * 2, cr.rh - GAP * 2
     );
-    for (const ir of innerRects) {
-      rects.push(ir);
-    }
+    for (const ir of inner) rects.push(ir);
   }
 }
 
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
 function draw() {
-  const w = canvas.width;
-  const h = canvas.height;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.fillStyle = "#0a0a0f";
-  ctx.fillRect(0, 0, w / dpr, h / dpr);
+  const w = canvas.width / dpr;
+  const h = canvas.height / dpr;
+  ctx.fillStyle = "#1C1917";
+  ctx.fillRect(0, 0, w, h);
 
   for (const r of rects) {
     const isHovered = r === hovered;
+    const isSelected = r === selected;
+    const isDimmed = selected && !isSelected && !isHovered;
 
+    let bx = r.rx, by = r.ry, bw = r.rw, bh = r.rh;
+    if (anim) {
+      const t = easeOut(Math.min(1, (performance.now() - anim.start) / ANIM_MS));
+      const from = anim.from[r.slug];
+      if (from) {
+        bx = from.rx + (r.rx - from.rx) * t;
+        by = from.ry + (r.ry - from.ry) * t;
+        bw = from.rw + (r.rw - from.rw) * t;
+        bh = from.rh + (r.rh - from.rh) * t;
+      } else {
+        bw = r.rw * t; bh = r.rh * t;
+        bx = r.rx + (r.rw - bw) / 2;
+        by = r.ry + (r.rh - bh) / 2;
+      }
+    }
     const g = GAP / 2;
-    const rx = r.rx + g;
-    const ry = r.ry + g;
-    const rw = r.rw - g * 2;
-    const rh = r.rh - g * 2;
-
+    const rx = bx + g;
+    const ry = by + g;
+    const rw = bw - g * 2;
+    const rh = bh - g * 2;
     if (rw <= 0 || rh <= 0) continue;
 
-    const fillAlpha = isHovered ? 0.8 : 0.5;
-    ctx.fillStyle = exposureColorCSS(r.exposure, fillAlpha);
-    ctx.fillRect(rx, ry, rw, rh);
+    const alpha = isDimmed ? 0.18 : (isHovered || isSelected) ? 0.88 : 0.62;
+    ctx.fillStyle = exposureCSS(r.exposure, alpha);
+    roundRect(rx, ry, rw, rh, RADIUS);
+    ctx.fill();
 
-    if (isHovered) {
-      ctx.strokeStyle = "#fff";
-      ctx.lineWidth = 2;
-      ctx.strokeRect(rx, ry, rw, rh);
+    if (isSelected) {
+      ctx.strokeStyle = "rgba(255,255,255,0.9)";
+      ctx.lineWidth = 2.5;
+      roundRect(rx, ry, rw, rh, RADIUS);
+      ctx.stroke();
+    } else if (isHovered && !selected) {
+      ctx.strokeStyle = "rgba(255,255,255,0.5)";
+      ctx.lineWidth = 1.5;
+      roundRect(rx, ry, rw, rh, RADIUS);
+      ctx.stroke();
     }
 
-    const minW = 50;
-    const minH = 18;
-    if (rw > minW && rh > minH) {
+    const textAlpha = isDimmed ? 0.25 : (isHovered || isSelected) ? 1 : 0.88;
+    if (rw > 48 && rh > 16) {
       ctx.save();
       ctx.beginPath();
-      ctx.rect(rx + 4, ry + 2, rw - 8, rh - 4);
+      ctx.rect(rx + 5, ry + 3, rw - 10, rh - 6);
       ctx.clip();
 
       const fontSize = Math.min(13, Math.max(9, Math.min(rw / 10, rh / 3)));
       ctx.font = `500 ${fontSize}px -apple-system, system-ui, sans-serif`;
-      ctx.fillStyle = isHovered ? "#fff" : "rgba(255,255,255,0.85)";
+      ctx.fillStyle = `rgba(255,255,255,${textAlpha})`;
+      ctx.shadowColor = "rgba(0,0,0,0.35)";
+      ctx.shadowBlur = 2;
       ctx.textBaseline = "top";
-      ctx.fillText(r.title, rx + 5, ry + 4);
+      ctx.fillText(r.title, rx + 6, ry + 5);
 
-      if (rh > 34 && rw > 60) {
+      if (rh > 32 && rw > 56) {
         const info = (r.exposure != null ? r.exposure + "/10" : "") +
-                     (r.jobs ? " \u00b7 " + formatNumber(r.jobs) + " jobs" : "");
+                     (r.jobs ? " \u00b7 " + fmtNum(r.jobs) + " jobs" : "");
         ctx.font = `400 ${Math.max(8, fontSize - 2)}px -apple-system, system-ui, sans-serif`;
-        ctx.fillStyle = "rgba(255,255,255,0.5)";
-        ctx.fillText(info, rx + 5, ry + 4 + fontSize + 2);
+        ctx.fillStyle = `rgba(255,255,255,${isDimmed ? 0.12 : 0.45})`;
+        ctx.fillText(info, rx + 6, ry + 5 + fontSize + 3);
       }
-
       ctx.restore();
+    }
+  }
+
+  // Draw exiting rects (filtered out, shrinking away)
+  if (anim && anim.exiting.length > 0) {
+    const t = easeOut(Math.min(1, (performance.now() - anim.start) / ANIM_MS));
+    for (const ex of anim.exiting) {
+      const scale = 1 - t;
+      const fadeAlpha = 0.55 * scale;
+      if (fadeAlpha < 0.01) continue;
+      const cx = ex.rx + ex.rw / 2, cy = ex.ry + ex.rh / 2;
+      const ew = ex.rw * scale, eh = ex.rh * scale;
+      const erx = cx - ew / 2 + GAP / 2, ery = cy - eh / 2 + GAP / 2;
+      const erw = ew - GAP, erh = eh - GAP;
+      if (erw <= 0 || erh <= 0) continue;
+      ctx.fillStyle = exposureCSS(ex.exposure, fadeAlpha);
+      roundRect(erx, ery, erw, erh, RADIUS);
+      ctx.fill();
     }
   }
 }
@@ -510,59 +878,56 @@ function hitTest(mx, my) {
   const cy = my;
   for (let i = rects.length - 1; i >= 0; i--) {
     const r = rects[i];
-    if (cx >= r.rx && cx < r.rx + r.rw && cy >= r.ry && cy < r.ry + r.rh) {
-      return r;
-    }
+    if (cx >= r.rx && cx < r.rx + r.rw && cy >= r.ry && cy < r.ry + r.rh) return r;
   }
   return null;
 }
 
-function formatNumber(n) {
+// ── Formatting ─────────────────────────────────────────────────────────
+
+function fmtNum(n) {
   if (n == null) return "\u2014";
   if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
-  if (n >= 1000) return Math.round(n / 1000) + "K";
+  if (n >= 1000) return Math.round(n / 1000).toLocaleString() + "K";
   return n.toLocaleString();
 }
 
-function formatPay(n) {
+function fmtPay(n) {
   if (n == null) return "\u2014";
   return "$" + n.toLocaleString();
 }
 
+// ── Tooltip ────────────────────────────────────────────────────────────
+
 function showTooltip(d, mx, my) {
   const tt = document.getElementById("tooltip");
-
   tt.querySelector(".tt-title").textContent = d.title;
 
-  const score = d.exposure != null ? d.exposure : null;
+  const score = d.exposure;
   if (score != null) {
-    const barWidth = score * 10;
-    const color = exposureColorCSS(score, 1);
+    const color = exposureCSS(score, 1);
     tt.querySelector(".tt-exposure").innerHTML =
-      `<span style="color:${color};font-weight:600;">AI Exposure: ${score}/10</span>` +
-      `<div style="margin-top:3px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;">` +
-      `<div style="height:100%;width:${barWidth}%;background:${color};border-radius:2px;"></div></div>`;
+      `<span style="color:${color};font-weight:600;">AI Impact: ${score}/10</span>` +
+      `<div style="margin-top:4px;height:4px;background:#f0eee8;border-radius:2px;">` +
+      `<div style="height:100%;width:${score * 10}%;background:${color};border-radius:2px;"></div></div>`;
   } else {
     tt.querySelector(".tt-exposure").innerHTML = "";
   }
 
   tt.querySelector(".tt-stats").innerHTML = `
-    <span class="label">Median pay</span><span class="value">${formatPay(d.pay)}</span>
-    <span class="label">Jobs (2024)</span><span class="value">${formatNumber(d.jobs)}</span>
+    <span class="label">Median pay</span><span class="value">${fmtPay(d.pay)}</span>
+    <span class="label">Jobs (2024)</span><span class="value">${fmtNum(d.jobs)}</span>
     <span class="label">Outlook</span><span class="value">${d.outlook != null ? d.outlook + '%' : '\u2014'} ${d.outlook_desc ? '(' + d.outlook_desc + ')' : ''}</span>
     <span class="label">Education</span><span class="value">${d.education || '\u2014'}</span>
   `;
 
-  tt.querySelector(".tt-rationale").textContent =
-    d.exposure_rationale || "";
+  tt.querySelector(".tt-rationale").textContent = d.exposure_rationale || "";
 
   const pad = 16;
-  let tx = mx + pad;
-  let ty = my - pad;
-  if (tx + 340 > window.innerWidth) tx = mx - 340 - pad;
+  let tx = mx + pad, ty = my - pad;
+  if (tx + 320 > window.innerWidth) tx = mx - 320 - pad;
   if (ty < 10) ty = my + pad;
   if (ty + 200 > window.innerHeight) ty = my - 200;
-
   tt.style.left = tx + "px";
   tt.style.top = ty + "px";
   tt.classList.add("visible");
@@ -572,36 +937,235 @@ function hideTooltip() {
   document.getElementById("tooltip").classList.remove("visible");
 }
 
+// ── Search & Selection ─────────────────────────────────────────────────
+
+const EDU_ORDER = [
+  "No formal educational credential",
+  "High school diploma or equivalent",
+  "Postsecondary nondegree award",
+  "Some college, no degree",
+  "Associate's degree",
+  "Bachelor's degree",
+  "Master's degree",
+  "Doctoral or professional degree"
+];
+
+function eduLevel(edu) {
+  const idx = EDU_ORDER.indexOf(edu);
+  return idx >= 0 ? idx : -1;
+}
+
+function fuzzySearch(query) {
+  if (!query || query.length < 2) return [];
+  const q = query.toLowerCase();
+  const results = [];
+  for (const d of data) {
+    const title = d.title.toLowerCase();
+    let score = 0;
+    if (title === q) score = 100;
+    else if (title.startsWith(q)) score = 80;
+    else {
+      const words = q.split(/\s+/).filter(w => w.length > 0);
+      const matches = words.filter(w => title.includes(w)).length;
+      if (matches === words.length) score = 60;
+      else if (matches > 0) score = 20 + (matches / words.length) * 30;
+    }
+    if (score > 0) results.push({ ...d, _s: score });
+  }
+  return results.sort((a, b) => b._s - a._s).slice(0, 10);
+}
+
+function findPaths(job) {
+  if (job.exposure == null || job.exposure < 4) return [];
+
+  const similarSet = new Set(job.similar || []);
+
+  const candidates = data.filter(d =>
+    d.slug !== job.slug &&
+    d.exposure != null &&
+    d.exposure <= job.exposure - 2 &&
+    d.jobs != null && d.jobs > 0
+  );
+
+  for (const c of candidates) {
+    let score = 0;
+
+    // Tier 1: BLS says these are similar occupations
+    if (similarSet.has(c.slug)) score += 15;
+
+    // Bidirectional similarity bonus
+    const cSimilar = new Set(c.similar || []);
+    if (similarSet.has(c.slug) && cSimilar.has(job.slug)) score += 5;
+
+    // Tier 2: Same BLS category
+    if (c.category === job.category) score += 8;
+
+    // Tier 3: Education, pay, outlook
+    const jobEdu = eduLevel(job.education);
+    const cEdu = eduLevel(c.education);
+    if (jobEdu >= 0 && cEdu >= 0) {
+      const diff = Math.abs(jobEdu - cEdu);
+      if (diff === 0) score += 3;
+      else if (diff === 1) score += 2;
+    }
+
+    if (c.pay && job.pay) {
+      const ratio = c.pay / job.pay;
+      if (ratio >= 0.8 && ratio <= 1.3) score += 3;
+      else if (ratio >= 0.6 && ratio <= 1.6) score += 1;
+      if (ratio > 1.05) score += 1;
+    }
+
+    score += (job.exposure - c.exposure) * 0.3;
+
+    if (c.jobs >= 500000) score += 2;
+    else if (c.jobs >= 100000) score += 1;
+
+    if (c.outlook != null && c.outlook > 5) score += 1;
+
+    c._pathScore = score;
+  }
+
+  return candidates
+    .sort((a, b) => b._pathScore - a._pathScore)
+    .slice(0, 5);
+}
+
+function contextMessage(score) {
+  if (score <= 2) return "This role has low AI impact. The work involves physical, interpersonal, or hands-on skills that complement rather than compete with AI.";
+  if (score <= 4) return "This role has moderate AI impact. Some tasks are being enhanced by AI tools, while the core work remains distinctly human.";
+  if (score <= 6) return "This role is being meaningfully shaped by AI. Workers who embrace AI tools in this field gain significant advantages.";
+  if (score <= 8) return "This role is evolving quickly with AI. Much of the work is digital, and AI capabilities in this domain are advancing rapidly.";
+  return "This role is at the frontier of AI transformation. The work is primarily digital, and AI can already assist with most core tasks.";
+}
+
+function selectJob(slug) {
+  const job = data.find(d => d.slug === slug);
+  if (!job) return;
+  selected = rects.find(r => r.slug === slug) || null;
+  showDetail(job);
+  draw();
+  const url = new URL(window.location);
+  url.searchParams.set("job", slug);
+  history.replaceState(null, "", url);
+}
+
+function clearSelection() {
+  selected = null;
+  document.getElementById("detail-panel").classList.remove("open");
+  draw();
+  const url = new URL(window.location);
+  url.searchParams.delete("job");
+  history.replaceState(null, "", url);
+}
+
+function showDetail(job) {
+  const panel = document.getElementById("detail-panel");
+  document.getElementById("dpTitle").textContent = job.title;
+
+  const score = job.exposure;
+  const color = score != null ? exposureCSS(score, 1) : "var(--text2)";
+
+  document.getElementById("dpExposure").innerHTML = score != null
+    ? `<span class="dp-exposure-score" style="color:${color}">${score}/10</span>` +
+      `<span class="dp-exposure-label">AI Impact</span>` +
+      `<div class="dp-exposure-bar"><div class="dp-exposure-fill" style="width:${score * 10}%;background:${color}"></div></div>`
+    : "";
+
+  document.getElementById("dpContext").textContent = score != null ? contextMessage(score) : "";
+
+  document.getElementById("dpStats").innerHTML = `
+    <div><div class="dp-stat-label">Median Pay</div><div class="dp-stat-value">${fmtPay(job.pay)}</div></div>
+    <div><div class="dp-stat-label">Jobs (2024)</div><div class="dp-stat-value">${fmtNum(job.jobs)}</div></div>
+    <div><div class="dp-stat-label">Growth Outlook</div><div class="dp-stat-value">${job.outlook != null ? job.outlook + '%' : '\u2014'}${job.outlook_desc ? ' <span style="font-size:11px;color:var(--text2);font-weight:400">(' + job.outlook_desc + ')</span>' : ''}</div></div>
+    <div><div class="dp-stat-label">Education</div><div class="dp-stat-value" style="font-size:13px">${job.education || '\u2014'}</div></div>
+  `;
+
+  const rationale = job.exposure_rationale;
+  const rationaleEl = document.getElementById("dpRationale");
+  rationaleEl.textContent = rationale || "";
+  rationaleEl.style.display = rationale ? "block" : "none";
+
+  // Paths Forward
+  const paths = findPaths(job);
+  const similarSet = new Set(job.similar || []);
+  let pathsHTML = "";
+
+  if (paths.length > 0) {
+    pathsHTML = `<div class="dp-section-title">Paths Forward</div>`;
+    pathsHTML += `<div class="dp-section-desc">Related roles where your skills transfer, with lower AI impact.</div>`;
+
+    for (const p of paths) {
+      const pColor = exposureCSS(p.exposure, 1);
+      const payDiff = (p.pay && job.pay) ? Math.round((p.pay - job.pay) / job.pay * 100) : null;
+      const payStr = payDiff != null ? (payDiff >= 0 ? "+" + payDiff : payDiff) + "% pay" : "";
+
+      let tag = "";
+      if (similarSet.has(p.slug)) tag = "Related role";
+      else if (p.category === job.category) tag = "Same field";
+      else tag = "Similar profile";
+
+      pathsHTML += `
+        <div class="escape-card" data-slug="${p.slug}">
+          <div class="escape-header">
+            <span class="escape-title">${p.title}</span>
+            <span class="escape-score" style="color:${pColor}">${p.exposure}/10</span>
+          </div>
+          <div class="escape-meta">${fmtPay(p.pay)}${payStr ? ' &middot; ' + payStr : ''} &middot; ${fmtNum(p.jobs)} jobs${p.outlook ? ' &middot; ' + p.outlook + '% growth' : ''}</div>
+          <span class="escape-tag">${tag}</span>
+        </div>`;
+    }
+  } else if (score != null && score < 4) {
+    pathsHTML = `<div class="dp-safe-msg">This role has low AI impact. The work is grounded in skills that complement rather than compete with artificial intelligence.</div>`;
+  }
+
+  document.getElementById("dpPaths").innerHTML = pathsHTML;
+
+  document.getElementById("dpFooter").innerHTML = `
+    <button class="dp-btn" id="shareBtn">Copy link</button>
+    ${job.url ? '<a class="dp-btn" href="' + job.url + '" target="_blank">BLS page &rarr;</a>' : ''}
+  `;
+
+  panel.classList.add("open");
+
+  panel.querySelectorAll(".escape-card").forEach(card => {
+    card.addEventListener("click", () => selectJob(card.dataset.slug));
+  });
+
+  document.getElementById("shareBtn").addEventListener("click", () => {
+    const u = new URL(window.location);
+    u.searchParams.set("job", job.slug);
+    navigator.clipboard.writeText(u.toString()).then(() => {
+      document.getElementById("shareBtn").textContent = "Copied!";
+      setTimeout(() => { document.getElementById("shareBtn").textContent = "Copy link"; }, 2000);
+    });
+  });
+}
+
 // ── Sidebar stats ──────────────────────────────────────────────────────
 
 function computeStats() {
   const totalJobs = data.reduce((s, d) => s + (d.jobs || 0), 0);
 
-  // Job-weighted average exposure
-  let weightedSum = 0, weightedCount = 0;
+  let wSum = 0, wCount = 0;
   for (const d of data) {
     if (d.exposure != null && d.jobs) {
-      weightedSum += d.exposure * d.jobs;
-      weightedCount += d.jobs;
+      wSum += d.exposure * d.jobs;
+      wCount += d.jobs;
     }
   }
-  const weightedAvg = weightedCount > 0 ? weightedSum / weightedCount : 0;
+  const wAvg = wCount > 0 ? wSum / wCount : 0;
 
-  // Histogram: jobs per exposure score 0-10
   const histogram = new Array(11).fill(0);
   for (const d of data) {
-    if (d.exposure != null && d.jobs) {
-      histogram[d.exposure] += d.jobs;
-    }
+    if (d.exposure != null && d.jobs) histogram[d.exposure] += d.jobs;
   }
 
-  // Tiers
   const tiers = [
-    { name: "Minimal", range: [0, 1], color: exposureColorCSS(0.5, 1) },
-    { name: "Low", range: [2, 3], color: exposureColorCSS(2.5, 1) },
-    { name: "Moderate", range: [4, 5], color: exposureColorCSS(4.5, 1) },
-    { name: "High", range: [6, 7], color: exposureColorCSS(6.5, 1) },
-    { name: "Very high", range: [8, 10], color: exposureColorCSS(9, 1) },
+    { name: "Low", range: [0, 2], color: exposureCSS(1, 1) },
+    { name: "Moderate", range: [3, 5], color: exposureCSS(4, 1) },
+    { name: "High", range: [6, 7], color: exposureCSS(6.5, 1) },
+    { name: "Very high", range: [8, 10], color: exposureCSS(9, 1) },
   ];
   for (const tier of tiers) {
     tier.jobs = 0;
@@ -614,106 +1178,92 @@ function computeStats() {
     tier.pct = totalJobs > 0 ? (tier.jobs / totalJobs * 100) : 0;
   }
 
-  // Wages exposed (jobs with exposure >= 7, weighted by pay)
-  let wagesExposed = 0;
-  for (const d of data) {
-    if (d.exposure != null && d.exposure >= 7 && d.jobs && d.pay) {
-      wagesExposed += d.jobs * d.pay;
-    }
-  }
-
-  // Render
-  document.getElementById("statTotalJobs").textContent =
-    (totalJobs / 1e6).toFixed(0) + "M";
+  document.getElementById("statTotalJobs").textContent = (totalJobs / 1e6).toFixed(0) + "M";
   document.getElementById("statAvgExposure").innerHTML =
-    `<span style="color:${exposureColorCSS(weightedAvg, 1)}">${weightedAvg.toFixed(1)}</span>`;
+    `<span style="color:${exposureCSS(wAvg, 1)}">${wAvg.toFixed(1)}</span><span style="font-size:14px;color:var(--text3);font-weight:400">/10</span>`;
 
-  // Histogram
-  const maxHist = Math.max(...histogram);
-  const histEl = document.getElementById("histogram");
-  histEl.innerHTML = histogram.map((count, i) => {
-    const h = maxHist > 0 ? (count / maxHist * 100) : 0;
-    return `<div class="bar" style="height:${Math.max(2, h)}%;background:${exposureColorCSS(i, 0.7)}" title="${i}: ${formatNumber(count)} jobs"></div>`;
+  const maxH = Math.max(...histogram);
+  document.getElementById("histogram").innerHTML = histogram.map((count, i) => {
+    const h = maxH > 0 ? (count / maxH * 100) : 0;
+    return `<div class="bar" style="height:${Math.max(3, h)}%;background:${exposureCSS(i, 0.75)}" title="${i}: ${fmtNum(count)} jobs"></div>`;
   }).join("");
 
-  // Tier breakdown
-  const tierEl = document.getElementById("tierBar");
-  tierEl.innerHTML = tiers.map(t =>
-    `<div class="tier-row">
+  document.getElementById("tierBar").innerHTML = tiers.map((t, i) =>
+    `<div class="tier-row" data-tier="${i}">
       <div class="tier-color" style="background:${t.color}"></div>
-      <span class="tier-name">${t.name} (${t.range[0]}-${t.range[1]})</span>
-      <span class="tier-jobs">${formatNumber(t.jobs)}</span>
+      <span class="tier-name">${t.name} (${t.range[0]}\u2013${t.range[1]})</span>
+      <span class="tier-jobs">${fmtNum(t.jobs)}</span>
       <span class="tier-pct">${t.pct.toFixed(0)}%</span>
     </div>`
   ).join("");
 
-  // Exposure by pay band
-  const payBands = [
-    { label: "<$35K", min: 0, max: 35000 },
-    { label: "$35–50K", min: 35000, max: 50000 },
-    { label: "$50–75K", min: 50000, max: 75000 },
-    { label: "$75–100K", min: 75000, max: 100000 },
-    { label: "$100K+", min: 100000, max: Infinity },
-  ];
-  const payChartEl = document.getElementById("payChart");
-  payChartEl.innerHTML = payBands.map(band => {
-    let wSum = 0, wCount = 0;
-    for (const d of data) {
-      if (d.exposure != null && d.jobs && d.pay != null &&
-          d.pay >= band.min && d.pay < band.max) {
-        wSum += d.exposure * d.jobs;
-        wCount += d.jobs;
-      }
-    }
-    const avg = wCount > 0 ? wSum / wCount : 0;
-    const pct = avg / 10 * 100;
-    return `<div class="hbar-row">
-      <span class="hbar-label">${band.label}</span>
-      <div class="hbar-track"><div class="hbar-fill" style="width:${pct}%;background:${exposureColorCSS(avg, 0.8)}"></div></div>
-      <span class="hbar-val">${avg.toFixed(1)}</span>
-    </div>`;
-  }).join("");
+  document.querySelectorAll('.tier-row').forEach(el => {
+    el.addEventListener('click', () => setTierFilter(parseInt(el.dataset.tier)));
+  });
+}
 
-  // Exposure by education
-  const eduGroups = [
-    { label: "No degree/HS", match: ["No formal educational credential", "High school diploma or equivalent"] },
-    { label: "Postsec/Assoc", match: ["Postsecondary nondegree award", "Some college, no degree", "Associate's degree"] },
-    { label: "Bachelor's", match: ["Bachelor's degree"] },
-    { label: "Master's", match: ["Master's degree"] },
-    { label: "Doctoral/Prof", match: ["Doctoral or professional degree"] },
-  ];
-  const eduChartEl = document.getElementById("eduChart");
-  eduChartEl.innerHTML = eduGroups.map(grp => {
-    let wSum = 0, wCount = 0;
-    for (const d of data) {
-      if (d.exposure != null && d.jobs && grp.match.includes(d.education)) {
-        wSum += d.exposure * d.jobs;
-        wCount += d.jobs;
-      }
-    }
-    const avg = wCount > 0 ? wSum / wCount : 0;
-    const pct = avg / 10 * 100;
-    return `<div class="hbar-row">
-      <span class="hbar-label">${grp.label}</span>
-      <div class="hbar-track"><div class="hbar-fill" style="width:${pct}%;background:${exposureColorCSS(avg, 0.8)}"></div></div>
-      <span class="hbar-val">${avg.toFixed(1)}</span>
-    </div>`;
-  }).join("");
+// ── Tier filter & animation ────────────────────────────────────────────
 
-  // Wages
-  const trillions = wagesExposed / 1e12;
-  document.getElementById("statWages").textContent =
-    "$" + trillions.toFixed(1) + "T";
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+function setTierFilter(idx) {
+  const fromMap = {};
+  for (const r of rects) fromMap[r.slug] = { rx: r.rx, ry: r.ry, rw: r.rw, rh: r.rh };
+  const oldSlugs = rects.map(r => r.slug);
+
+  activeTier = activeTier === idx ? null : idx;
+
+  // Clear selection if the selected job is being filtered out
+  if (selected && activeTier != null) {
+    const tier = TIERS[activeTier];
+    if (selected.exposure == null || selected.exposure < tier.range[0] || selected.exposure > tier.range[1]) {
+      selected = null;
+      document.getElementById("detail-panel").classList.remove("open");
+    }
+  }
+
+  layout();
+
+  // Re-map selected to new rect object
+  if (selected) {
+    const slug = selected.slug;
+    selected = rects.find(r => r.slug === slug) || null;
+  }
+
+  // Determine exiting rects for fade-out
+  const newSlugs = new Set(rects.map(r => r.slug));
+  const exiting = [];
+  for (const slug of oldSlugs) {
+    if (!newSlugs.has(slug) && fromMap[slug]) {
+      const d = data.find(d => d.slug === slug);
+      if (d) exiting.push({ ...fromMap[slug], exposure: d.exposure, slug });
+    }
+  }
+
+  anim = { from: fromMap, exiting, start: performance.now() };
+  requestAnimationFrame(runAnim);
+  updateTierHighlight();
+}
+
+function runAnim() {
+  if (!anim) return;
+  const t = (performance.now() - anim.start) / ANIM_MS;
+  draw();
+  if (t < 1) requestAnimationFrame(runAnim);
+  else { anim = null; draw(); }
+}
+
+function updateTierHighlight() {
+  document.querySelectorAll('.tier-row').forEach((el, i) => {
+    el.classList.toggle('active', activeTier === i);
+  });
 }
 
 // ── Events ─────────────────────────────────────────────────────────────
 
 canvas.addEventListener("mousemove", (e) => {
   const hit = hitTest(e.clientX, e.clientY);
-  if (hit !== hovered) {
-    hovered = hit;
-    draw();
-  }
+  if (hit !== hovered) { hovered = hit; draw(); }
   if (hovered) {
     showTooltip(hovered, e.clientX, e.clientY);
     canvas.style.cursor = "pointer";
@@ -725,9 +1275,8 @@ canvas.addEventListener("mousemove", (e) => {
 
 canvas.addEventListener("click", (e) => {
   const hit = hitTest(e.clientX, e.clientY);
-  if (hit && hit.url) {
-    window.open(hit.url, "_blank");
-  }
+  if (hit) selectJob(hit.slug);
+  else clearSelection();
 });
 
 canvas.addEventListener("mouseleave", () => {
@@ -736,33 +1285,129 @@ canvas.addEventListener("mouseleave", () => {
   draw();
 });
 
-function resize() {
-  dpr = window.devicePixelRatio || 1;
-  layout();
-  draw();
+// ── Search ─────────────────────────────────────────────────────────────
+
+const searchInput = document.getElementById("search-input");
+const searchResultsEl = document.getElementById("search-results");
+const searchClear = document.getElementById("search-clear");
+let searchIdx = -1;
+
+searchInput.addEventListener("input", () => {
+  const q = searchInput.value.trim();
+  searchClear.style.display = q.length > 0 ? "block" : "none";
+  searchIdx = -1;
+  const results = fuzzySearch(q);
+  if (results.length === 0) { searchResultsEl.classList.remove("open"); return; }
+  renderSearch(results);
+  searchResultsEl.classList.add("open");
+});
+
+searchInput.addEventListener("keydown", (e) => {
+  const items = searchResultsEl.querySelectorAll(".search-result");
+  if (e.key === "ArrowDown") { e.preventDefault(); searchIdx = Math.min(searchIdx + 1, items.length - 1); hlSearch(items); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); searchIdx = Math.max(searchIdx - 1, 0); hlSearch(items); }
+  else if (e.key === "Enter" && searchIdx >= 0 && items[searchIdx]) {
+    e.preventDefault();
+    selectJob(items[searchIdx].dataset.slug);
+    searchInput.value = "";
+    searchClear.style.display = "none";
+    searchResultsEl.classList.remove("open");
+    searchInput.blur();
+  } else if (e.key === "Escape") {
+    searchInput.value = "";
+    searchClear.style.display = "none";
+    searchResultsEl.classList.remove("open");
+    searchInput.blur();
+  }
+});
+
+searchClear.addEventListener("click", () => {
+  searchInput.value = "";
+  searchClear.style.display = "none";
+  searchResultsEl.classList.remove("open");
+  searchInput.focus();
+});
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#search-wrap")) searchResultsEl.classList.remove("open");
+});
+
+document.getElementById("dpClose").addEventListener("click", clearSelection);
+
+function renderSearch(results) {
+  searchResultsEl.innerHTML = results.map((r, i) => {
+    const color = exposureCSS(r.exposure, 1);
+    return `<div class="search-result" data-slug="${r.slug}" data-idx="${i}">
+      <span class="sr-title">${hlMatch(r.title, searchInput.value)}</span>
+      <span class="sr-score" style="color:${color}">${r.exposure != null ? r.exposure + '/10' : ''}</span>
+    </div>`;
+  }).join("");
+
+  searchResultsEl.querySelectorAll(".search-result").forEach(el => {
+    el.addEventListener("click", () => {
+      selectJob(el.dataset.slug);
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      searchResultsEl.classList.remove("open");
+    });
+    el.addEventListener("mouseenter", () => {
+      searchIdx = parseInt(el.dataset.idx);
+      hlSearch(searchResultsEl.querySelectorAll(".search-result"));
+    });
+  });
 }
 
-// ── Legend gradient ────────────────────────────────────────────────────
+function hlSearch(items) {
+  items.forEach((el, i) => el.classList.toggle("active", i === searchIdx));
+}
 
-function drawGradientLegend() {
+function hlMatch(title, query) {
+  if (!query) return title;
+  const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+  let r = title;
+  for (const w of words) {
+    const i = r.toLowerCase().indexOf(w);
+    if (i >= 0) r = r.slice(0, i) + '<b>' + r.slice(i, i + w.length) + '</b>' + r.slice(i + w.length);
+  }
+  return r;
+}
+
+// ── Keyboard ───────────────────────────────────────────────────────────
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "/" && document.activeElement !== searchInput) {
+    e.preventDefault();
+    searchInput.focus();
+  }
+  if (e.key === "Escape" && document.activeElement !== searchInput) {
+    if (selected) clearSelection();
+    else if (activeTier != null) setTierFilter(activeTier);
+  }
+});
+
+// ── Init ───────────────────────────────────────────────────────────────
+
+function resize() { dpr = window.devicePixelRatio || 1; layout(); draw(); }
+
+function drawLegend() {
   const c = document.getElementById("gradientLegend");
-  const gctx = c.getContext("2d");
-  for (let x = 0; x < 80; x++) {
-    const score = (x / 79) * 10;
-    gctx.fillStyle = exposureColorCSS(score, 1);
-    gctx.fillRect(x, 0, 1, 8);
+  const g = c.getContext("2d");
+  for (let x = 0; x < 90; x++) {
+    g.fillStyle = exposureCSS((x / 89) * 10, 1);
+    g.fillRect(x, 0, 1, 8);
   }
 }
-
-// ── Load ───────────────────────────────────────────────────────────────
 
 fetch("data.json")
   .then(r => r.json())
   .then(d => {
     data = d;
     computeStats();
-    drawGradientLegend();
+    drawLegend();
     resize();
+    const p = new URLSearchParams(window.location.search);
+    const job = p.get("job");
+    if (job) selectJob(job);
   });
 
 window.addEventListener("resize", resize);
