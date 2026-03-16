@@ -1062,5 +1062,2386 @@
       "slug": "community-health-workers",
       "reason": "Serving as a trusted point of contact for community members."
     }
+  ],
+  "bookkeeping-accounting-and-auditing-clerks": [
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Uses financial reporting and budget management for properties."
+    },
+    {
+      "slug": "material-recording-clerks",
+      "reason": "Transfers meticulous record-keeping and inventory tracking abilities."
+    },
+    {
+      "slug": "tellers",
+      "reason": "Leverages cash handling, balancing, and customer transaction skills."
+    },
+    {
+      "slug": "tutors",
+      "reason": "Uses subject expertise to teach math or business."
+    },
+    {
+      "slug": "lodging-managers",
+      "reason": "Applies administrative oversight and financial record-keeping experience."
+    },
+    {
+      "slug": "construction-and-building-inspectors",
+      "reason": "Utilizes attention to detail and regulatory compliance checking."
+    }
+  ],
+  "desktop-publishers": [
+    {
+      "slug": "broadcast-and-sound-engineering-technicians",
+      "reason": "Transitioning from print production to digital media technical operations."
+    },
+    {
+      "slug": "photographers",
+      "reason": "Applying visual composition and digital image editing expertise."
+    },
+    {
+      "slug": "floral-designers",
+      "reason": "Creative application of color theory and aesthetic arrangement."
+    },
+    {
+      "slug": "library-technicians-and-assistants",
+      "reason": "Managing information organization and document archival systems."
+    },
+    {
+      "slug": "set-and-exhibit-designers",
+      "reason": "Scaling 2D layout skills into 3D environmental spaces."
+    }
+  ],
+  "writers-and-authors": [
+    {
+      "slug": "producers-and-directors",
+      "reason": "Storytelling, narrative structure, and creative vision transfer directly."
+    },
+    {
+      "slug": "training-and-development-specialists",
+      "reason": "Creating educational content and explaining complex ideas clearly."
+    },
+    {
+      "slug": "arbitrators-mediators-and-conciliators",
+      "reason": "Critical analysis, neutral perspective, and precise language usage."
+    },
+    {
+      "slug": "fundraisers",
+      "reason": "Persuasive writing and compelling storytelling to engage donors."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Subject matter expertise and ability to communicate concepts."
+    },
+    {
+      "slug": "project-management-specialists",
+      "reason": "Managing deadlines, research, and complex document workflows."
+    },
+    {
+      "slug": "curators-museum-technicians-and-conservators",
+      "reason": "Researching history and crafting narratives for public exhibits."
+    },
+    {
+      "slug": "high-school-teachers",
+      "reason": "Deep knowledge of literature, composition, and communication skills."
+    }
+  ],
+  "actuaries": [
+    {
+      "slug": "insurance-sales-agents",
+      "reason": "Leveraging deep knowledge of risk products to advise clients."
+    },
+    {
+      "slug": "personal-financial-advisors",
+      "reason": "Translating complex probability and financial data into personal investment strategies."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Teaching advanced mathematics, statistics, or actuarial science to students."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Applying cost estimation, risk mitigation, and project scheduling skills."
+    },
+    {
+      "slug": "industrial-engineers",
+      "reason": "Using statistical analysis to optimize complex systems and processes."
+    }
+  ],
+  "bill-and-account-collectors": [
+    {
+      "slug": "police-fire-and-ambulance-dispatchers",
+      "reason": "Uses communication skills to handle high-stress, urgent situations."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Transfers interpersonal negotiation skills to community outreach roles."
+    },
+    {
+      "slug": "correctional-officers",
+      "reason": "Applies conflict resolution and rule enforcement in person."
+    },
+    {
+      "slug": "lodging-managers",
+      "reason": "Leverages financial tracking and customer service for operations."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Utilizes payment collection and administrative oversight experience."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Connects clients to resources using strong interviewing skills."
+    },
+    {
+      "slug": "private-detectives-and-investigators",
+      "reason": "Applies skip-tracing and information-gathering skills to investigations."
+    },
+    {
+      "slug": "gaming-services-occupations",
+      "reason": "Transfers cash handling and strict regulatory compliance skills."
+    }
+  ],
+  "computer-and-information-research-scientists": [
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Expertise in advanced computing enables teaching at university levels."
+    },
+    {
+      "slug": "computer-and-information-systems-managers",
+      "reason": "Technical depth translates well into overseeing complex IT projects."
+    },
+    {
+      "slug": "architectural-and-engineering-managers",
+      "reason": "Research and problem-solving skills apply to managing engineering teams."
+    },
+    {
+      "slug": "natural-sciences-managers",
+      "reason": "Scientific methodology and data analysis transfer to laboratory leadership."
+    },
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Analytical skills help optimize healthcare systems and data workflows."
+    },
+    {
+      "slug": "forensic-science-technicians",
+      "reason": "Precision in data investigation aids in digital forensic analysis."
+    },
+    {
+      "slug": "urban-and-regional-planners",
+      "reason": "Computational modeling skills assist in complex urban growth simulations."
+    },
+    {
+      "slug": "industrial-production-managers",
+      "reason": "Algorithmic thinking improves efficiency in large-scale manufacturing processes."
+    }
+  ],
+  "computer-support-specialists": [
+    {
+      "slug": "telecommunications-equipment-installers-and-repairers-except-line-installers",
+      "reason": "Applies hardware troubleshooting and networking knowledge to physical infrastructure."
+    },
+    {
+      "slug": "broadcast-and-sound-engineering-technicians",
+      "reason": "Transfers technical support and electronic equipment maintenance skills."
+    },
+    {
+      "slug": "medical-equipment-repairers",
+      "reason": "Uses diagnostic and technical troubleshooting skills on specialized hardware."
+    },
+    {
+      "slug": "police-fire-and-ambulance-dispatchers",
+      "reason": "Leverages high-pressure communication and computer-based ticketing experience."
+    },
+    {
+      "slug": "electrical-and-electronics-installers-and-repairers",
+      "reason": "Pivots from software/PC repair to broader electronic systems."
+    },
+    {
+      "slug": "tutors",
+      "reason": "Utilizes experience explaining complex technical concepts to non-technical users."
+    },
+    {
+      "slug": "aircraft-and-avionics-equipment-mechanics-and-technicians",
+      "reason": "Applies rigorous technical documentation and systems diagnostic abilities."
+    }
+  ],
+  "computer-systems-analysts": [
+    {
+      "slug": "computer-and-information-systems-managers",
+      "reason": "Leverages technical expertise to oversee IT strategy and teams."
+    },
+    {
+      "slug": "industrial-engineers",
+      "reason": "Applies systems analysis to optimize complex physical processes."
+    },
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Uses analytical skills to manage healthcare information systems."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Transfers deep technical knowledge to educate future IT professionals."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Applies project lifecycle planning and resource coordination skills."
+    },
+    {
+      "slug": "sales-engineers",
+      "reason": "Explains complex technical systems to meet client business needs."
+    },
+    {
+      "slug": "emergency-management-directors",
+      "reason": "Utilizes logical contingency planning and systems-level risk assessment."
+    },
+    {
+      "slug": "training-and-development-specialists",
+      "reason": "Translates technical workflows into effective organizational learning programs."
+    }
+  ],
+  "database-administrators": [
+    {
+      "slug": "computer-and-information-systems-managers",
+      "reason": "Technical leadership and oversight of organizational data strategy."
+    },
+    {
+      "slug": "logisticians",
+      "reason": "Applying database logic to optimize complex supply chain flows."
+    },
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Managing healthcare data systems and ensuring regulatory compliance."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Teaching database theory and information technology to students."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Using organizational skills to manage complex, multi-phase technical projects."
+    },
+    {
+      "slug": "forensic-science-technicians",
+      "reason": "Applying meticulous data collection and analytical verification skills."
+    }
+  ],
+  "economists": [
+    {
+      "slug": "urban-and-regional-planners",
+      "reason": "Applying economic data to community development and land use."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Expert knowledge transfer to students in a classroom setting."
+    },
+    {
+      "slug": "appraisers-and-assessors-of-real-estate",
+      "reason": "Applying market trend analysis to determine property valuations."
+    },
+    {
+      "slug": "arbitrators-mediators-and-conciliators",
+      "reason": "Using logical reasoning and economic principles to resolve disputes."
+    },
+    {
+      "slug": "environmental-scientists-and-specialists",
+      "reason": "Analyzing the economic impact of environmental policies and regulations."
+    },
+    {
+      "slug": "top-executives",
+      "reason": "Directing organizational strategy based on broad market and fiscal analysis."
+    }
+  ],
+  "financial-analysts": [
+    {
+      "slug": "construction-managers",
+      "reason": "Utilizes budgeting, cost estimation, and project oversight skills."
+    },
+    {
+      "slug": "personal-financial-advisors",
+      "reason": "Translates market analysis into personalized client investment strategies."
+    },
+    {
+      "slug": "logisticians",
+      "reason": "Leverages data-driven optimization and complex supply chain analysis."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Shares advanced finance and economic theory with students."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Applies financial planning and asset valuation to real estate."
+    },
+    {
+      "slug": "emergency-management-directors",
+      "reason": "Applies risk assessment and resource allocation under pressure."
+    }
+  ],
+  "financial-clerks": [
+    {
+      "slug": "police-fire-and-ambulance-dispatchers",
+      "reason": "Uses data entry precision and communication in high-pressure environments."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Leverages financial record-keeping and administrative oversight experience."
+    },
+    {
+      "slug": "postal-service-workers",
+      "reason": "Transfers attention to detail and systematic processing of records."
+    },
+    {
+      "slug": "lodging-managers",
+      "reason": "Combines financial oversight with customer service and administrative management."
+    },
+    {
+      "slug": "quality-control-inspectors",
+      "reason": "Applies meticulous auditing and verification skills to physical products."
+    },
+    {
+      "slug": "pharmacy-technicians",
+      "reason": "Utilizes record-keeping accuracy and transaction processing in healthcare."
+    }
+  ],
+  "financial-examiners": [
+    {
+      "slug": "construction-managers",
+      "reason": "Applying regulatory oversight and budget monitoring to project sites."
+    },
+    {
+      "slug": "arbitrators-mediators-and-conciliators",
+      "reason": "Using legal knowledge and objectivity to resolve financial disputes."
+    },
+    {
+      "slug": "appraisers-and-assessors-of-real-estate",
+      "reason": "Transferring valuation skills and compliance auditing to property."
+    },
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Managing facility operations through strict regulatory and financial standards."
+    },
+    {
+      "slug": "private-detectives-and-investigators",
+      "reason": "Applying investigative techniques to verify facts and financial records."
+    },
+    {
+      "slug": "emergency-management-directors",
+      "reason": "Coordinating complex responses using risk assessment and planning skills."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Teaching finance or business law based on professional expertise."
+    },
+    {
+      "slug": "probation-officers-and-correctional-treatment-specialists",
+      "reason": "Utilizing case management and compliance monitoring for individuals."
+    }
+  ],
+  "general-office-clerks": [
+    {
+      "slug": "police-fire-and-ambulance-dispatchers",
+      "reason": "Uses clerical multi-tasking and communication skills for emergency coordination."
+    },
+    {
+      "slug": "postal-service-workers",
+      "reason": "Transfers organizational skills and attention to detail to logistics."
+    },
+    {
+      "slug": "receptionists",
+      "reason": "Direct transfer of interpersonal communication and scheduling abilities."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Leverages administrative oversight and record-keeping for property operations."
+    },
+    {
+      "slug": "flight-attendants",
+      "reason": "Applies customer service and documentation skills in travel settings."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Uses office management skills to support community program administration."
+    },
+    {
+      "slug": "lodging-managers",
+      "reason": "Applies organizational and front-office experience to hospitality management."
+    },
+    {
+      "slug": "medical-assistants",
+      "reason": "Combines administrative proficiency with basic clinical support tasks."
+    }
+  ],
+  "graphic-designers": [
+    {
+      "slug": "interior-designers",
+      "reason": "Transfers spatial awareness, color theory, and client visualization skills."
+    },
+    {
+      "slug": "set-and-exhibit-designers",
+      "reason": "Applies visual storytelling and layout skills to physical environments."
+    },
+    {
+      "slug": "fashion-designers",
+      "reason": "Utilizes aesthetic eye, sketching ability, and trend analysis."
+    },
+    {
+      "slug": "photographers",
+      "reason": "Leverages composition, lighting, and digital image editing expertise."
+    },
+    {
+      "slug": "producers-and-directors",
+      "reason": "Uses visual conceptualization and creative project management skills."
+    },
+    {
+      "slug": "architects",
+      "reason": "Applies technical drawing, design principles, and software proficiency."
+    },
+    {
+      "slug": "advertising-sales-agents",
+      "reason": "Uses knowledge of visual marketing to sell media space."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Shares expert design knowledge through curriculum and instruction."
+    }
+  ],
+  "health-information-technologists-and-medical-registrars": [
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Uses healthcare data expertise to manage clinical operations and departments."
+    },
+    {
+      "slug": "clinical-laboratory-technologists-and-technicians",
+      "reason": "Transfers medical terminology knowledge and technical data accuracy skills."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Applies regulatory compliance and detailed record-keeping to workplace safety."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Leverages healthcare system knowledge to assist patient navigation and reporting."
+    },
+    {
+      "slug": "medical-equipment-repairers",
+      "reason": "Pivots from healthcare data systems to maintaining clinical hardware."
+    },
+    {
+      "slug": "funeral-service-occupations",
+      "reason": "Utilizes meticulous record-keeping and legal documentation skills in healthcare."
+    },
+    {
+      "slug": "surgical-technologists",
+      "reason": "Applies medical procedural knowledge to direct clinical support roles."
+    }
+  ],
+  "information-security-analysts": [
+    {
+      "slug": "computer-and-information-systems-managers",
+      "reason": "Leverages technical security expertise for high-level IT leadership."
+    },
+    {
+      "slug": "private-detectives-and-investigators",
+      "reason": "Applies digital forensics and investigative logic to physical cases."
+    },
+    {
+      "slug": "emergency-management-directors",
+      "reason": "Transfers disaster recovery and risk mitigation planning skills."
+    },
+    {
+      "slug": "forensic-science-technicians",
+      "reason": "Applies evidence collection and analytical methodology to investigations."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Utilizes project oversight, compliance, and complex systems management."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Shares specialized cybersecurity knowledge in a classroom setting."
+    },
+    {
+      "slug": "health-and-safety-engineers",
+      "reason": "Pivots from digital safety to physical system risk prevention."
+    },
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Applies data privacy and regulatory compliance to healthcare."
+    }
+  ],
+  "insurance-underwriters": [
+    {
+      "slug": "appraisers-and-assessors-of-real-estate",
+      "reason": "Evaluates risk and property value using similar analytical frameworks."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Transfers risk assessment skills to project oversight and budgeting."
+    },
+    {
+      "slug": "insurance-sales-agents",
+      "reason": "Leverages deep product knowledge to advise clients on coverage."
+    },
+    {
+      "slug": "arbitrators-mediators-and-conciliators",
+      "reason": "Uses objective evaluation and conflict resolution to settle disputes."
+    },
+    {
+      "slug": "credit-counselors",
+      "reason": "Analyzes financial data to determine risk and provide guidance."
+    },
+    {
+      "slug": "emergency-management-directors",
+      "reason": "Pivots risk mitigation expertise to public safety and planning."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Identifies workplace hazards to minimize liability and insurance risk."
+    }
+  ],
+  "mathematicians-and-statisticians": [
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Advanced math knowledge transfers to teaching university-level courses."
+    },
+    {
+      "slug": "epidemiologists",
+      "reason": "Statistical modeling skills are essential for tracking disease patterns."
+    },
+    {
+      "slug": "natural-sciences-managers",
+      "reason": "Quantitative expertise helps oversee complex scientific research projects."
+    },
+    {
+      "slug": "logisticians",
+      "reason": "Optimization and data analysis improve supply chain efficiency."
+    },
+    {
+      "slug": "civil-engineers",
+      "reason": "Calculus and physics foundations transfer to structural design."
+    },
+    {
+      "slug": "urban-and-regional-planners",
+      "reason": "Statistical analysis of demographic data informs city development."
+    },
+    {
+      "slug": "industrial-engineers",
+      "reason": "Mathematical models are used to eliminate production waste."
+    }
+  ],
+  "network-and-computer-systems-administrators": [
+    {
+      "slug": "computer-and-information-systems-managers",
+      "reason": "Leverages technical expertise for high-level infrastructure leadership."
+    },
+    {
+      "slug": "telecommunications-equipment-installers-and-repairers-except-line-installers",
+      "reason": "Applies networking knowledge to physical hardware and connectivity."
+    },
+    {
+      "slug": "broadcast-and-sound-engineering-technicians",
+      "reason": "Transfers signal routing and digital system maintenance skills."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Uses deep technical domain knowledge to educate students."
+    },
+    {
+      "slug": "emergency-management-directors",
+      "reason": "Applies disaster recovery and critical systems planning experience."
+    },
+    {
+      "slug": "industrial-production-managers",
+      "reason": "Translates complex workflow optimization to manufacturing environments."
+    },
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Manages secure data systems and operational compliance."
+    }
+  ],
+  "operations-research-analysts": [
+    {
+      "slug": "logisticians",
+      "reason": "Directly applies optimization and supply chain modeling skills."
+    },
+    {
+      "slug": "industrial-engineers",
+      "reason": "Uses mathematical models to improve production efficiency."
+    },
+    {
+      "slug": "transportation-storage-and-distribution-managers",
+      "reason": "Applies operational efficiency strategies to physical logistics."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Transfers project scheduling and resource allocation expertise."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Shares advanced mathematical and analytical knowledge with students."
+    },
+    {
+      "slug": "industrial-production-managers",
+      "reason": "Oversees complex systems using data-driven decision making."
+    },
+    {
+      "slug": "urban-and-regional-planners",
+      "reason": "Uses data to solve infrastructure and population problems."
+    },
+    {
+      "slug": "emergency-management-directors",
+      "reason": "Models disaster response scenarios and resource distribution."
+    }
+  ],
+  "paralegals-and-legal-assistants": [
+    {
+      "slug": "arbitrators-mediators-and-conciliators",
+      "reason": "Applies legal knowledge to resolve disputes outside of court."
+    },
+    {
+      "slug": "private-detectives-and-investigators",
+      "reason": "Transfers research, fact-finding, and legal documentation skills."
+    },
+    {
+      "slug": "probation-officers-and-correctional-treatment-specialists",
+      "reason": "Utilizes understanding of legal procedures and case management."
+    },
+    {
+      "slug": "labor-relations-specialists",
+      "reason": "Leverages experience with contracts, regulations, and dispute resolution."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Applies knowledge of contracts, leases, and local regulations."
+    },
+    {
+      "slug": "human-resources-specialists",
+      "reason": "Transfers expertise in regulatory compliance and detailed record-keeping."
+    }
+  ],
+  "secretaries-and-administrative-assistants": [
+    {
+      "slug": "receptionists",
+      "reason": "Directly utilizes existing communication and front-desk coordination skills."
+    },
+    {
+      "slug": "police-fire-and-ambulance-dispatchers",
+      "reason": "Transfers high-pressure communication and detailed record-keeping abilities."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Leverages organizational oversight and vendor coordination experience."
+    },
+    {
+      "slug": "lodging-managers",
+      "reason": "Applies customer service, scheduling, and facility administration skills."
+    },
+    {
+      "slug": "medical-assistants",
+      "reason": "Combines administrative proficiency with basic clinical office support."
+    },
+    {
+      "slug": "concierges",
+      "reason": "Utilizes interpersonal skills and complex task-coordination for guests."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Transfers documentation, scheduling, and client-facing support capabilities."
+    },
+    {
+      "slug": "flight-attendants",
+      "reason": "Pivots organizational and safety-protocol skills into travel service."
+    }
+  ],
+  "software-developers": [
+    {
+      "slug": "computer-and-information-systems-managers",
+      "reason": "Leverages technical expertise for leadership and project oversight"
+    },
+    {
+      "slug": "sales-engineers",
+      "reason": "Uses deep product knowledge to solve client technical problems"
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Transfers programming and logic expertise to classroom instruction"
+    },
+    {
+      "slug": "industrial-engineers",
+      "reason": "Applies systems thinking and optimization to physical workflows"
+    },
+    {
+      "slug": "medical-equipment-repairers",
+      "reason": "Utilizes troubleshooting skills and technical hardware-software integration"
+    },
+    {
+      "slug": "training-and-development-specialists",
+      "reason": "Translates complex technical concepts into accessible educational materials"
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Applies project lifecycle management and quality assurance methodology"
+    },
+    {
+      "slug": "broadcast-and-sound-engineering-technicians",
+      "reason": "Uses technical troubleshooting and digital systems configuration skills"
+    }
+  ],
+  "multimedia-artists-and-animators": [
+    {
+      "slug": "set-and-exhibit-designers",
+      "reason": "Applies 3D spatial modeling and visual storytelling to physical spaces."
+    },
+    {
+      "slug": "producers-and-directors",
+      "reason": "Leverages deep understanding of production pipelines and visual narrative."
+    },
+    {
+      "slug": "broadcast-and-sound-engineering-technicians",
+      "reason": "Transfers technical proficiency with digital media and production hardware."
+    },
+    {
+      "slug": "architects",
+      "reason": "Utilizes advanced 3D rendering, visualization, and design software skills."
+    },
+    {
+      "slug": "fashion-designers",
+      "reason": "Applies digital sketching, texture mapping, and aesthetic composition skills."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Expertise in animation software enables teaching at the college level."
+    },
+    {
+      "slug": "interior-designers",
+      "reason": "Uses digital visualization and lighting skills to design environments."
+    }
+  ],
+  "survey-researchers": [
+    {
+      "slug": "epidemiologists",
+      "reason": "Uses similar statistical modeling and population data collection methods."
+    },
+    {
+      "slug": "urban-and-regional-planners",
+      "reason": "Applies demographic research to community development and land use."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Transfers advanced subject expertise and research methodology to instruction."
+    },
+    {
+      "slug": "training-and-development-specialists",
+      "reason": "Uses needs-assessment skills to design and evaluate educational programs."
+    },
+    {
+      "slug": "anthropologists-and-archeologists",
+      "reason": "Applies qualitative research and cultural analysis to human behavior."
+    },
+    {
+      "slug": "school-and-career-counselors",
+      "reason": "Leverages interview techniques and data to guide individual outcomes."
+    },
+    {
+      "slug": "social-and-community-service-managers",
+      "reason": "Uses data-driven insights to manage and evaluate public programs."
+    }
+  ],
+  "tax-examiners-and-collectors-and-revenue-agents": [
+    {
+      "slug": "appraisers-and-assessors-of-real-estate",
+      "reason": "Applying valuation principles and tax law to property assessments."
+    },
+    {
+      "slug": "arbitrators-mediators-and-conciliators",
+      "reason": "Resolving disputes using legal knowledge and negotiation skills."
+    },
+    {
+      "slug": "probation-officers-and-correctional-treatment-specialists",
+      "reason": "Enforcing compliance through case management and detailed documentation."
+    },
+    {
+      "slug": "labor-relations-specialists",
+      "reason": "Interpreting complex contracts and ensuring regulatory compliance."
+    },
+    {
+      "slug": "private-detectives-and-investigators",
+      "reason": "Conducting financial background checks and verifying factual information."
+    },
+    {
+      "slug": "credit-counselors",
+      "reason": "Analyzing financial data to assist with debt management."
+    },
+    {
+      "slug": "construction-and-building-inspectors",
+      "reason": "Evaluating adherence to codes and maintaining detailed records."
+    }
+  ],
+  "technical-writers": [
+    {
+      "slug": "instructional-coordinators",
+      "reason": "Translating complex information into structured educational curricula and materials."
+    },
+    {
+      "slug": "training-and-development-specialists",
+      "reason": "Creating manuals and instructional content to improve employee skills."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Explaining technical concepts and specialized knowledge to diverse audiences."
+    },
+    {
+      "slug": "medical-and-health-services-managers",
+      "reason": "Organizing complex documentation and ensuring regulatory compliance in healthcare."
+    },
+    {
+      "slug": "public-relations-managers",
+      "reason": "Communicating specialized organizational information to the public effectively."
+    },
+    {
+      "slug": "broadcast-and-sound-engineering-technicians",
+      "reason": "Applying technical aptitude to operate and document media equipment."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Developing safety procedures and documenting technical regulatory standards."
+    },
+    {
+      "slug": "high-school-teachers",
+      "reason": "Breaking down complex subject matter for student comprehension."
+    }
+  ],
+  "travel-agents": [
+    {
+      "slug": "tour-and-travel-guides",
+      "reason": "Deep destination knowledge and itinerary planning skills transfer directly."
+    },
+    {
+      "slug": "concierges",
+      "reason": "Expertise in customer service and managing complex travel logistics."
+    },
+    {
+      "slug": "lodging-managers",
+      "reason": "Understanding of hospitality industry operations and guest satisfaction."
+    },
+    {
+      "slug": "flight-attendants",
+      "reason": "Extensive travel industry experience and high-level customer service."
+    },
+    {
+      "slug": "real-estate-brokers-and-sales-agents",
+      "reason": "Strong sales background and experience managing high-value transactions."
+    },
+    {
+      "slug": "police-fire-and-ambulance-dispatchers",
+      "reason": "Ability to coordinate complex logistics under time pressure."
+    },
+    {
+      "slug": "insurance-sales-agents",
+      "reason": "Proven sales ability and experience explaining complex policy details."
+    }
+  ],
+  "web-developers": [
+    {
+      "slug": "broadcast-and-sound-engineering-technicians",
+      "reason": "Technical proficiency with digital media and hardware interfaces."
+    },
+    {
+      "slug": "interior-designers",
+      "reason": "Applying spatial aesthetics and user-centric design principles."
+    },
+    {
+      "slug": "instructional-coordinators",
+      "reason": "Designing structured digital learning experiences and curricula."
+    },
+    {
+      "slug": "set-and-exhibit-designers",
+      "reason": "Translating 2D digital concepts into 3D environments."
+    },
+    {
+      "slug": "postsecondary-teachers",
+      "reason": "Teaching technical skills and design theory to students."
+    },
+    {
+      "slug": "industrial-production-managers",
+      "reason": "Managing complex workflows and technical project lifecycles."
+    },
+    {
+      "slug": "medical-equipment-repairers",
+      "reason": "Troubleshooting complex systems using technical and analytical skills."
+    },
+    {
+      "slug": "fashion-designers",
+      "reason": "Utilizing creative software and understanding visual trends."
+    }
+  ],
+  "aerospace-engineers": [
+    {
+      "slug": "airline-and-commercial-pilots",
+      "reason": "Leverages fundamental understanding of aerodynamics and flight systems."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Applies project management and structural engineering principles."
+    },
+    {
+      "slug": "health-and-safety-engineers",
+      "reason": "Utilizes rigorous risk assessment and system safety protocols."
+    }
+  ],
+  "compensation-and-benefits-managers": [
+    {
+      "slug": "administrative-services-managers",
+      "reason": "Applies operational oversight and facility-wide resource allocation skills."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Utilizes financial management and vendor contract negotiation abilities."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Pivots to project scheduling, budgeting, and personnel coordination."
+    }
+  ],
+  "information-clerks": [
+    {
+      "slug": "concierges",
+      "reason": "Transfers information dissemination and guest service expertise to hospitality."
+    },
+    {
+      "slug": "medical-assistants",
+      "reason": "Combines administrative proficiency with basic clinical support tasks."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Uses organizational skills to help clients navigate complex public resources."
+    },
+    {
+      "slug": "postal-service-workers",
+      "reason": "Leverages record-keeping and logistical accuracy in a physical environment."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Pivots information-sharing skills toward public health advocacy and outreach."
+    },
+    {
+      "slug": "flight-attendants",
+      "reason": "Translates customer service and safety communication to the aviation industry."
+    }
+  ],
+  "management-analysts": [
+    {
+      "slug": "construction-managers",
+      "reason": "Applying organizational efficiency and project oversight to building sites."
+    },
+    {
+      "slug": "administrative-services-managers",
+      "reason": "Streamlining internal operations and facility resource management."
+    }
+  ],
+  "material-recording-clerks": [
+    {
+      "slug": "postal-service-workers",
+      "reason": "Applies sorting, tracking, and material handling accuracy."
+    },
+    {
+      "slug": "quality-control-inspectors",
+      "reason": "Uses attention to detail for verifying product specifications."
+    },
+    {
+      "slug": "heavy-and-tractor-trailer-truck-drivers",
+      "reason": "Utilizes knowledge of shipping manifests and cargo loading."
+    },
+    {
+      "slug": "industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
+      "reason": "Pivots from tracking parts to maintaining industrial equipment."
+    },
+    {
+      "slug": "construction-and-building-inspectors",
+      "reason": "Applies documentation skills to verify regulatory compliance."
+    },
+    {
+      "slug": "pharmacy-technicians",
+      "reason": "Transfers precise inventory management and record-keeping abilities."
+    }
+  ],
+  "models": [
+    {
+      "slug": "flight-attendants",
+      "reason": "Transfers professional poise, grooming standards, and high-end customer service."
+    },
+    {
+      "slug": "retail-sales-workers",
+      "reason": "Utilizes persuasion, product presentation, and visual brand representation."
+    },
+    {
+      "slug": "concierges",
+      "reason": "Applies professional image and interpersonal skills in luxury environments."
+    },
+    {
+      "slug": "skincare-specialists",
+      "reason": "Capitalizes on industry knowledge regarding aesthetics and physical maintenance."
+    },
+    {
+      "slug": "fitness-trainers-and-instructors",
+      "reason": "Focuses on physical discipline, body mechanics, and motivational presence."
+    }
+  ],
+  "purchasing-managers-buyers-and-purchasing-agents": [
+    {
+      "slug": "construction-managers",
+      "reason": "Applying contract negotiation and material cost control skills."
+    },
+    {
+      "slug": "lodging-managers",
+      "reason": "Utilizing budgeting, vendor contracting, and operational oversight."
+    },
+    {
+      "slug": "property-real-estate-and-community-association-managers",
+      "reason": "Managing service contracts and purchasing for facility maintenance."
+    }
+  ],
+  "air-traffic-controllers": [
+    {
+      "slug": "aerospace-engineering-and-operations-technicians",
+      "reason": "Technical knowledge of aircraft systems and flight operations."
+    },
+    {
+      "slug": "airline-and-commercial-pilots",
+      "reason": "Expertise in aviation regulations, navigation, and radio communications."
+    },
+    {
+      "slug": "railroad-occupations",
+      "reason": "Coordinating vehicle movement and maintaining strict safety protocols."
+    },
+    {
+      "slug": "fire-inspectors-and-investigators",
+      "reason": "Applying rigorous safety standards and evaluating operational risks."
+    },
+    {
+      "slug": "calibration-technologists-and-technicians",
+      "reason": "High precision monitoring and adjustment of technical instrumentation."
+    },
+    {
+      "slug": "police-and-detectives",
+      "reason": "Maintaining public safety through situational awareness and rules."
+    },
+    {
+      "slug": "heavy-and-tractor-trailer-truck-drivers",
+      "reason": "Spatial awareness and managing logistics for transportation safety."
+    }
+  ],
+  "announcers": [
+    {
+      "slug": "tour-and-travel-guides",
+      "reason": "Transfers public speaking skills and engaging storytelling ability."
+    },
+    {
+      "slug": "recreation-workers",
+      "reason": "Applies experience in event hosting and audience entertainment."
+    },
+    {
+      "slug": "flight-attendants",
+      "reason": "Utilizes professional poise and clear vocal safety instructions."
+    },
+    {
+      "slug": "coaches-and-scouts",
+      "reason": "Leverages sports knowledge and motivational verbal communication skills."
+    },
+    {
+      "slug": "entertainment-and-recreation-managers",
+      "reason": "Transfers industry knowledge to oversee venue and talent operations."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Uses persuasive speaking to share information with public audiences."
+    }
+  ],
+  "architectural-and-engineering-managers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Directly applies technical project oversight and leadership skills."
+    },
+    {
+      "slug": "farmers-ranchers-and-other-agricultural-managers",
+      "reason": "Transfers complex operations management and resource planning expertise."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Utilizes deep knowledge of engineering standards and regulations."
+    },
+    {
+      "slug": "surveyors",
+      "reason": "Leverages technical precision and architectural project background."
+    },
+    {
+      "slug": "industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
+      "reason": "Pivots from managing systems to hands-on technical troubleshooting."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Shares professional engineering and management expertise with students."
+    }
+  ],
+  "curators-museum-technicians-and-conservators": [
+    {
+      "slug": "construction-managers",
+      "reason": "Project management and preservation of physical structures and assets."
+    },
+    {
+      "slug": "tour-and-travel-guides",
+      "reason": "Expertise in storytelling, historical context, and public engagement."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Managing environmental controls and physical risk for facilities."
+    },
+    {
+      "slug": "conservation-scientists",
+      "reason": "Applying scientific methods to preserve and manage natural resources."
+    },
+    {
+      "slug": "special-education-teachers",
+      "reason": "Adapting complex information for diverse audiences and learning needs."
+    },
+    {
+      "slug": "quality-control-inspectors",
+      "reason": "High attention to detail and adherence to strict standards."
+    }
+  ],
+  "chemists-and-materials-scientists": [
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Expertise in chemical hazards and laboratory safety protocols."
+    },
+    {
+      "slug": "environmental-science-and-protection-technicians",
+      "reason": "Applying analytical chemistry to monitor and preserve environment."
+    },
+    {
+      "slug": "quality-control-inspectors",
+      "reason": "Applying rigorous testing standards to ensure material specifications."
+    },
+    {
+      "slug": "water-and-wastewater-treatment-plant-and-system-operators",
+      "reason": "Managing chemical processes to ensure safe water standards."
+    },
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Deep understanding of chemical reactivity and safe handling."
+    },
+    {
+      "slug": "agricultural-and-food-science-technicians",
+      "reason": "Applying molecular knowledge to food composition and soil health."
+    },
+    {
+      "slug": "nuclear-technicians",
+      "reason": "Utilizing knowledge of isotopes and radiation for energy production."
+    }
+  ],
+  "civil-engineering-technicians": [
+    {
+      "slug": "construction-and-building-inspectors",
+      "reason": "Applies knowledge of structural codes and engineering plan review."
+    },
+    {
+      "slug": "environmental-engineering-technicians",
+      "reason": "Transfers technical drafting and site assessment expertise to conservation."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Leverages understanding of project scheduling and civil design documents."
+    },
+    {
+      "slug": "electro-mechanical-technicians",
+      "reason": "Applies technical troubleshooting and precision measurement to mechanical systems."
+    },
+    {
+      "slug": "calibration-technologists-and-technicians",
+      "reason": "Utilizes experience with high-precision testing and instrumentation maintenance."
+    },
+    {
+      "slug": "water-and-wastewater-treatment-plant-and-system-operators",
+      "reason": "Applies civil infrastructure knowledge to manage hydraulic systems."
+    }
+  ],
+  "environmental-engineers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Applies engineering principles to oversee large-scale infrastructure projects."
+    },
+    {
+      "slug": "water-and-wastewater-treatment-plant-and-system-operators",
+      "reason": "Direct application of water chemistry and treatment knowledge."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Transfers expertise in environmental regulations and hazard mitigation."
+    },
+    {
+      "slug": "surveyors",
+      "reason": "Leverages technical mapping and site assessment engineering skills."
+    },
+    {
+      "slug": "conservation-scientists",
+      "reason": "Applies ecological protection and natural resource management expertise."
+    },
+    {
+      "slug": "environmental-science-and-protection-technicians",
+      "reason": "Directly utilizes environmental monitoring and data collection skills."
+    },
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Practical application of waste management and safety protocols."
+    }
+  ],
+  "epidemiologists": [
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Applying disease prevention and risk assessment to workplace safety."
+    },
+    {
+      "slug": "environmental-science-and-protection-technicians",
+      "reason": "Using data collection and analysis to monitor public health."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Translating complex health data into community-level wellness initiatives."
+    },
+    {
+      "slug": "biological-technicians",
+      "reason": "Applying scientific research methods and data recording in labs."
+    }
+  ],
+  "genetic-counselors": [
+    {
+      "slug": "marriage-and-family-therapists",
+      "reason": "Expertise in counseling families through complex emotional situations."
+    },
+    {
+      "slug": "occupational-therapists",
+      "reason": "Clinical assessment skills and personalized patient care planning."
+    },
+    {
+      "slug": "rehabilitation-counselors",
+      "reason": "Supporting individuals with disabilities using specialized medical knowledge."
+    },
+    {
+      "slug": "physician-assistants",
+      "reason": "Strong foundation in medical genetics and clinical diagnostics."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Translating complex medical information for diverse patient populations."
+    },
+    {
+      "slug": "orthotists-and-prosthetists",
+      "reason": "Combining clinical evaluation with specialized patient-specific solutions."
+    },
+    {
+      "slug": "special-education-teachers",
+      "reason": "Advocating for students with genetic or developmental conditions."
+    }
+  ],
+  "interior-designers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Overseeing spatial projects and coordinating with various building trades."
+    },
+    {
+      "slug": "construction-and-building-inspectors",
+      "reason": "Applying knowledge of building codes and structural design standards."
+    },
+    {
+      "slug": "floral-designers",
+      "reason": "Utilizing aesthetic principles, color theory, and spatial arrangement."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Instructing students in specialized design and drafting skills."
+    },
+    {
+      "slug": "recreational-therapists",
+      "reason": "Designing activities and environments to improve client well-being."
+    }
+  ],
+  "labor-relations-specialists": [
+    {
+      "slug": "construction-managers",
+      "reason": "Expertise in managing contracts and resolving site-level disputes."
+    },
+    {
+      "slug": "police-and-detectives",
+      "reason": "Strong investigative skills and experience with legal compliance."
+    },
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Applying organizational leadership and staff conflict resolution skills."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Leveraging advocacy experience to assist vulnerable populations navigate systems."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Teaching specialized workplace skills and professional standards to students."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Ensuring workplace regulatory compliance and investigating safety grievances."
+    }
+  ],
+  "library-technicians-and-assistants": [
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Uses strong interpersonal skills and community resource organization."
+    },
+    {
+      "slug": "preschool-teachers",
+      "reason": "Transfers experience with educational support and literacy development."
+    },
+    {
+      "slug": "medical-assistants",
+      "reason": "Applies record-keeping precision and patient-facing service skills."
+    },
+    {
+      "slug": "pharmacy-technicians",
+      "reason": "Leverages inventory management and high attention to detail."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Utilizes information dissemination and public outreach experience."
+    },
+    {
+      "slug": "concierges",
+      "reason": "Transfers information retrieval and personalized patron service skills."
+    },
+    {
+      "slug": "occupational-therapy-assistants-and-aides",
+      "reason": "Applies instructional support and patient activity coordination."
+    }
+  ],
+  "logisticians": [
+    {
+      "slug": "construction-managers",
+      "reason": "Expertise in coordinating complex schedules and resource allocation."
+    },
+    {
+      "slug": "heavy-and-tractor-trailer-truck-drivers",
+      "reason": "Deep knowledge of transport regulations and route optimization."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Experience monitoring warehouse compliance and operational safety standards."
+    },
+    {
+      "slug": "farmers-ranchers-and-other-agricultural-managers",
+      "reason": "Managing perishable inventory and seasonal supply chain logistics."
+    }
+  ],
+  "marine-engineers-and-naval-architects": [
+    {
+      "slug": "construction-managers",
+      "reason": "Applying structural engineering and project oversight to land-based builds."
+    },
+    {
+      "slug": "water-transportation-occupations",
+      "reason": "Using deep knowledge of vessel systems for maritime operations."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Applying engineering safety standards to industrial and maritime environments."
+    },
+    {
+      "slug": "surveyors",
+      "reason": "Transferring precise measurement and mapping skills to land development."
+    },
+    {
+      "slug": "electro-mechanical-technicians",
+      "reason": "Hands-on application of complex mechanical and electrical system knowledge."
+    },
+    {
+      "slug": "geological-and-petroleum-technicians",
+      "reason": "Utilizing offshore platform and fluid dynamics expertise in extraction."
+    },
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Operating large-scale power and propulsion systems in facilities."
+    }
+  ],
+  "medical-and-health-services-managers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Transfers expertise in scheduling, budgeting, and regulatory compliance oversight."
+    },
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Applies facility management, staff supervision, and health safety standards."
+    },
+    {
+      "slug": "food-service-managers",
+      "reason": "Utilizes operational leadership, inventory control, and customer service management."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Applies knowledge of medical environments to workplace safety inspections."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Uses patient care coordination skills to assist vulnerable populations."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Connects healthcare system knowledge with direct community outreach efforts."
+    }
+  ],
+  "mining-and-geological-engineers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Expertise in large-scale site operations and safety management."
+    },
+    {
+      "slug": "surveyors",
+      "reason": "Proficiency in mapping, land measurement, and spatial data."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Experience managing complex industrial hazards and regulatory compliance."
+    },
+    {
+      "slug": "environmental-science-and-protection-technicians",
+      "reason": "Understanding of soil, water, and environmental impact mitigation."
+    },
+    {
+      "slug": "geological-and-petroleum-technicians",
+      "reason": "Technical skills in analyzing rock samples and field data."
+    }
+  ],
+  "petroleum-engineers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Overseeing complex infrastructure projects and managing technical site operations."
+    },
+    {
+      "slug": "environmental-science-and-protection-technicians",
+      "reason": "Monitoring environmental impact and ensuring regulatory compliance in field-work."
+    },
+    {
+      "slug": "geological-and-petroleum-technicians",
+      "reason": "Utilizing specialized equipment for mineral and hydrocarbon resource exploration."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Evaluating workplace hazards and designing preventative safety measures."
+    },
+    {
+      "slug": "surveyors",
+      "reason": "Determining precise locations and boundaries for resource extraction sites."
+    },
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Operating and maintaining large-scale industrial pressure and power systems."
+    }
+  ],
+  "postsecondary-teachers": [
+    {
+      "slug": "special-education-teachers",
+      "reason": "Adapting complex curriculum for diverse individual learning needs."
+    },
+    {
+      "slug": "coaches-and-scouts",
+      "reason": "Mentoring individuals and analyzing performance to improve outcomes."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Applying academic expertise to practical, hands-on vocational instruction."
+    },
+    {
+      "slug": "recreational-therapists",
+      "reason": "Designing structured programs to facilitate personal development and learning."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Leading teams, managing schedules, and explaining technical specifications."
+    },
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Overseeing educational standards and managing departmental administrative tasks."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Communicating complex information to educate and support specific populations."
+    },
+    {
+      "slug": "social-workers",
+      "reason": "Advocating for students and navigating complex institutional systems."
+    }
+  ],
+  "producers-and-directors": [
+    {
+      "slug": "construction-managers",
+      "reason": "Directly transfers complex project oversight and budget management skills."
+    },
+    {
+      "slug": "entertainment-and-recreation-managers",
+      "reason": "Applies industry knowledge to facility and operations management."
+    },
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Utilizes leadership, scheduling, and creative programming expertise."
+    },
+    {
+      "slug": "coaches-and-scouts",
+      "reason": "Transfers talent evaluation and team motivational leadership skills."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Leverages professional expertise to instruct others in media production."
+    },
+    {
+      "slug": "police-and-detectives",
+      "reason": "Utilizes investigative, interviewing, and situational management skills."
+    }
+  ],
+  "appraisers-and-assessors-of-real-estate": [
+    {
+      "slug": "construction-managers",
+      "reason": "Expertise in property structures, building costs, and site evaluation."
+    },
+    {
+      "slug": "surveyors",
+      "reason": "Experience with legal descriptions, boundaries, and land measurements."
+    },
+    {
+      "slug": "construction-and-building-inspectors",
+      "reason": "Deep knowledge of building codes and structural integrity assessment."
+    },
+    {
+      "slug": "fire-inspectors-and-investigators",
+      "reason": "Detail-oriented site examination and risk assessment skills transfer well."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Experience conducting thorough physical inspections and documenting findings."
+    },
+    {
+      "slug": "conservation-scientists",
+      "reason": "Utilizes land use analysis and environmental assessment capabilities."
+    }
+  ],
+  "real-estate-brokers-and-sales-agents": [
+    {
+      "slug": "construction-managers",
+      "reason": "Applies site knowledge and project coordination to building oversight."
+    },
+    {
+      "slug": "concierges",
+      "reason": "Leverages local area expertise and high-level client service abilities."
+    },
+    {
+      "slug": "construction-and-building-inspectors",
+      "reason": "Utilizes knowledge of building structures and local housing codes."
+    },
+    {
+      "slug": "retail-sales-workers",
+      "reason": "Transfers core persuasion, negotiation, and customer service techniques."
+    },
+    {
+      "slug": "food-service-managers",
+      "reason": "Applies business operations and client satisfaction skills to hospitality."
+    },
+    {
+      "slug": "tour-and-travel-guides",
+      "reason": "Uses sales presentation skills and deep local area knowledge."
+    }
+  ],
+  "sales-managers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Transferable leadership, budgeting, and project oversight skills."
+    },
+    {
+      "slug": "entertainment-and-recreation-managers",
+      "reason": "Applying revenue management and team coordination expertise."
+    },
+    {
+      "slug": "food-service-managers",
+      "reason": "Utilizing customer relations and operational efficiency experience."
+    },
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Leveraging administrative management and staff supervision abilities."
+    },
+    {
+      "slug": "coaches-and-scouts",
+      "reason": "Translating talent evaluation and motivational performance coaching."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Sharing professional industry expertise through structured instruction."
+    },
+    {
+      "slug": "police-and-detectives",
+      "reason": "Applying investigative logic and high-stakes negotiation skills."
+    },
+    {
+      "slug": "farmers-ranchers-and-other-agricultural-managers",
+      "reason": "Managing supply chains, production targets, and business operations."
+    }
+  ],
+  "top-executives": [
+    {
+      "slug": "construction-managers",
+      "reason": "Strategic oversight, budgeting, and high-level project leadership skills transfer."
+    },
+    {
+      "slug": "food-service-managers",
+      "reason": "Operational leadership, P&L management, and staff coordination experience."
+    },
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Organizational administration, regulatory compliance, and personnel management expertise."
+    },
+    {
+      "slug": "entertainment-and-recreation-managers",
+      "reason": "Directing large-scale operations and managing diverse professional teams."
+    },
+    {
+      "slug": "farmers-ranchers-and-other-agricultural-managers",
+      "reason": "Resource allocation, long-term planning, and business sustainability focus."
+    },
+    {
+      "slug": "coaches-and-scouts",
+      "reason": "Performance evaluation, talent development, and strategic competitive positioning."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Translating industry leadership experience into practical vocational instruction."
+    },
+    {
+      "slug": "airline-and-commercial-pilots",
+      "reason": "High-stakes decision making, risk management, and procedural discipline."
+    }
+  ],
+  "training-and-development-managers": [
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Applies management and staff development skills to educational settings."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Transfers project coordination, budgeting, and personnel supervision expertise."
+    },
+    {
+      "slug": "entertainment-and-recreation-managers",
+      "reason": "Uses experience in program planning and staff leadership."
+    },
+    {
+      "slug": "coaches-and-scouts",
+      "reason": "Pivots instructional design and performance evaluation to athletics."
+    },
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Directly applies vocational training and curriculum development skills."
+    },
+    {
+      "slug": "food-service-managers",
+      "reason": "Leverages operational oversight and employee training experience."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Utilizes interpersonal communication and community resource coordination."
+    },
+    {
+      "slug": "recreational-therapists",
+      "reason": "Adapts program facilitation and behavioral assessment to healthcare."
+    }
+  ],
+  "training-and-development-specialists": [
+    {
+      "slug": "career-and-technical-education-teachers",
+      "reason": "Directly applies curriculum design and instructional delivery skills."
+    },
+    {
+      "slug": "construction-managers",
+      "reason": "Transfers project coordination, scheduling, and personnel development expertise."
+    },
+    {
+      "slug": "preschool-and-childcare-center-directors",
+      "reason": "Leverages staff supervision, program planning, and educational leadership."
+    },
+    {
+      "slug": "special-education-teachers",
+      "reason": "Uses experience in adapting learning materials for diverse needs."
+    },
+    {
+      "slug": "coaches-and-scouts",
+      "reason": "Applies performance evaluation and individual skill development techniques."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Utilizes experience in conducting safety training and compliance workshops."
+    },
+    {
+      "slug": "recreational-therapists",
+      "reason": "Transfers skills in designing goal-oriented activities and assessing progress."
+    },
+    {
+      "slug": "social-and-human-service-assistants",
+      "reason": "Applies interpersonal communication and group facilitation for community support."
+    }
+  ],
+  "transportation-storage-and-distribution-managers": [
+    {
+      "slug": "construction-managers",
+      "reason": "Transfers expertise in logistics, scheduling, and large-scale resource coordination."
+    },
+    {
+      "slug": "food-service-managers",
+      "reason": "Applies inventory control, supply chain oversight, and staff management."
+    },
+    {
+      "slug": "heavy-and-tractor-trailer-truck-drivers",
+      "reason": "Leverages deep knowledge of transport regulations and route optimization."
+    },
+    {
+      "slug": "industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
+      "reason": "Uses technical understanding of warehouse equipment and mechanical systems."
+    },
+    {
+      "slug": "farmers-ranchers-and-other-agricultural-managers",
+      "reason": "Applies distribution planning and large-scale storage management expertise."
+    },
+    {
+      "slug": "quality-control-inspectors",
+      "reason": "Utilizes experience monitoring shipping standards and inventory accuracy protocols."
+    }
+  ],
+  "urban-and-regional-planners": [
+    {
+      "slug": "construction-managers",
+      "reason": "Overseeing site development and coordinating complex infrastructure projects."
+    },
+    {
+      "slug": "environmental-science-and-protection-technicians",
+      "reason": "Applying regulatory knowledge to monitor and protect land use."
+    },
+    {
+      "slug": "surveyors",
+      "reason": "Mapping and measuring land for legal and planning purposes."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Engaging diverse populations to improve local living conditions."
+    },
+    {
+      "slug": "conservation-scientists",
+      "reason": "Managing natural resources and evaluating land-use impacts."
+    },
+    {
+      "slug": "occupational-health-and-safety-specialists-and-technicians",
+      "reason": "Ensuring public environments meet strict regulatory and safety standards."
+    }
+  ],
+  "wholesale-and-manufacturing-sales-representatives": [
+    {
+      "slug": "construction-managers",
+      "reason": "Managing vendor relationships and coordinating complex product delivery schedules."
+    },
+    {
+      "slug": "food-service-managers",
+      "reason": "Optimizing inventory turnover and maintaining high-volume supplier relationships."
+    },
+    {
+      "slug": "heavy-and-tractor-trailer-truck-drivers",
+      "reason": "Deep knowledge of logistics, distribution routes, and product handling."
+    },
+    {
+      "slug": "retail-sales-workers",
+      "reason": "Direct application of persuasion, product knowledge, and closing techniques."
+    },
+    {
+      "slug": "community-health-workers",
+      "reason": "Using interpersonal communication to advocate for and educate clients."
+    },
+    {
+      "slug": "quality-control-inspectors",
+      "reason": "Applying manufacturing standards knowledge to ensure product specification compliance."
+    }
+  ],
+  "clinical-laboratory-technologists-and-technicians": [],
+  "craft-and-fine-artists": [
+    {
+      "slug": "floral-designers",
+      "reason": "Uses artistic composition and color theory with botanical media."
+    },
+    {
+      "slug": "woodworkers",
+      "reason": "Transfers sculptural techniques and material knowledge to furniture making."
+    },
+    {
+      "slug": "painters-construction-and-maintenance",
+      "reason": "Leverages expertise in color mixing, surfaces, and brush control."
+    },
+    {
+      "slug": "manicurists-and-pedicurists",
+      "reason": "Applies detailed painting and decorative design to a small-scale canvas."
+    },
+    {
+      "slug": "tile-and-marble-setters",
+      "reason": "Translates mosaic and pattern design skills to architectural surfaces."
+    },
+    {
+      "slug": "bakers",
+      "reason": "Applies creative sculpting and decorative finishing to edible products."
+    }
+  ],
+  "elementary-middle-and-high-school-principals": [
+    {
+      "slug": "occupational-therapists",
+      "reason": "Utilizes master's level education to support individual developmental goals."
+    },
+    {
+      "slug": "recreational-therapists",
+      "reason": "Connects student engagement experience with therapeutic program development."
+    }
+  ],
+  "forensic-science-technicians": [],
+  "probation-officers-and-correctional-treatment-specialists": [
+    {
+      "slug": "community-health-workers",
+      "reason": "Navigating complex systems to improve individual and community outcomes."
+    },
+    {
+      "slug": "recreational-therapists",
+      "reason": "Developing treatment plans and facilitating behavioral rehabilitation programs."
+    }
+  ],
+  "aerospace-engineering-and-operations-technicians": [
+    {
+      "slug": "wind-turbine-technicians",
+      "reason": "Applies mechanical aptitude and electrical troubleshooting to renewable energy."
+    },
+    {
+      "slug": "welders-cutters-solderers-and-brazers",
+      "reason": "Utilizes specialized metal fabrication skills common in aerospace manufacturing."
+    },
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Applies systems monitoring and mechanical operations to large-scale facilities."
+    }
+  ],
+  "audiologists": [
+    {
+      "slug": "dental-hygienists",
+      "reason": "Precision clinical work and patient education on sensory health."
+    }
+  ],
+  "biological-technicians": [
+    {
+      "slug": "veterinary-assistants-and-laboratory-animal-caretakers",
+      "reason": "Applies laboratory protocols and experience handling biological specimens."
+    },
+    {
+      "slug": "surgical-technologists",
+      "reason": "Transfers sterile technique and precision tool handling skills."
+    },
+    {
+      "slug": "phlebotomists",
+      "reason": "Utilizes clinical specimen collection and laboratory safety knowledge."
+    },
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Applies knowledge of containment protocols and safety equipment."
+    },
+    {
+      "slug": "agricultural-workers",
+      "reason": "Uses biological understanding for plant and animal health."
+    },
+    {
+      "slug": "pest-control-workers",
+      "reason": "Applies scientific knowledge of organisms and chemical safety."
+    },
+    {
+      "slug": "dental-assistants",
+      "reason": "Transfers meticulous record-keeping and infection control skills."
+    }
+  ],
+  "calibration-technologists-and-technicians": [
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Uses monitoring and adjustment skills for complex mechanical systems."
+    },
+    {
+      "slug": "heating-air-conditioning-and-refrigeration-mechanics-and-installers",
+      "reason": "Leverages experience with sensors, controls, and system performance verification."
+    },
+    {
+      "slug": "welders-cutters-solderers-and-brazers",
+      "reason": "Utilizes manual dexterity and strict adherence to technical blueprints."
+    },
+    {
+      "slug": "elevator-installers-and-repairers",
+      "reason": "Applies rigorous safety testing and electromechanical diagnostic proficiency."
+    }
+  ],
+  "career-and-technical-education-teachers": [],
+  "chemical-technicians": [
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Applies knowledge of chemical safety and containment protocols."
+    },
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Monitors chemical levels and mechanical systems for safety."
+    },
+    {
+      "slug": "dental-hygienists",
+      "reason": "Utilizes clinical precision and chemical compound handling skills."
+    }
+  ],
+  "construction-managers": [
+    {
+      "slug": "heavy-vehicle-and-mobile-equipment-service-technicians",
+      "reason": "Deep familiarity with heavy machinery used on job sites."
+    },
+    {
+      "slug": "general-maintenance-and-repair-workers",
+      "reason": "Hands-on knowledge of mechanical, electrical, and plumbing systems."
+    }
+  ],
+  "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians": [
+    {
+      "slug": "dental-assistants",
+      "reason": "Direct transfer of dental terminology and patient appliance knowledge."
+    },
+    {
+      "slug": "welders-cutters-solderers-and-brazers",
+      "reason": "Transferable skills in high-heat metal joining and material fabrication."
+    },
+    {
+      "slug": "automotive-body-and-glass-repairers",
+      "reason": "Experience with specialized resins, polishing, and fine detail finishing."
+    },
+    {
+      "slug": "surgical-technologists",
+      "reason": "Strong foundation in sterile environments and medical instrument handling."
+    }
+  ],
+  "electro-mechanical-technicians": [
+    {
+      "slug": "electricians",
+      "reason": "Transfers expertise in electrical circuitry, wiring, and system diagnostics."
+    },
+    {
+      "slug": "elevator-installers-and-repairers",
+      "reason": "Combines complex mechanical systems with electronic control logic."
+    },
+    {
+      "slug": "wind-turbine-technicians",
+      "reason": "Utilizes mechatronic maintenance skills on large-scale renewable energy hardware."
+    },
+    {
+      "slug": "solar-photovoltaic-installers",
+      "reason": "Applies electrical system integration and technical troubleshooting skills."
+    },
+    {
+      "slug": "heating-air-conditioning-and-refrigeration-mechanics-and-installers",
+      "reason": "Uses understanding of sensors, motors, and electronic controllers."
+    }
+  ],
+  "environmental-science-and-protection-technicians": [
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Expertise in handling environmental contaminants and safety protocols."
+    },
+    {
+      "slug": "forest-and-conservation-workers",
+      "reason": "Transfers field data collection and natural resource monitoring."
+    },
+    {
+      "slug": "pest-control-workers",
+      "reason": "Utilizes understanding of chemical applications and environmental impact."
+    },
+    {
+      "slug": "solar-photovoltaic-installers",
+      "reason": "Applies technical field skills to renewable energy projects."
+    },
+    {
+      "slug": "veterinary-assistants-and-laboratory-animal-caretakers",
+      "reason": "Transfers laboratory specimen handling and data recording abilities."
+    }
+  ],
+  "exercise-physiologists": [
+    {
+      "slug": "physical-therapist-assistants-and-aides",
+      "reason": "Applies knowledge of human anatomy and rehabilitative exercise."
+    },
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Leverages medical knowledge for urgent patient care situations."
+    },
+    {
+      "slug": "massage-therapists",
+      "reason": "Deep understanding of muscular systems and physical recovery."
+    },
+    {
+      "slug": "recreation-workers",
+      "reason": "Organizes physical activities and programs for diverse groups."
+    }
+  ],
+  "gaming-services-occupations": [
+    {
+      "slug": "bartenders",
+      "reason": "Expertise in cash handling and high-volume social interaction."
+    },
+    {
+      "slug": "recreation-workers",
+      "reason": "Organizing activities and engaging diverse groups of people."
+    },
+    {
+      "slug": "flight-attendants",
+      "reason": "Providing hospitality while ensuring safety in regulated environments."
+    },
+    {
+      "slug": "animal-care-and-service-workers",
+      "reason": "Transitioning from human service to hands-on caregiving roles."
+    }
+  ],
+  "geological-and-petroleum-technicians": [
+    {
+      "slug": "oil-and-gas-workers",
+      "reason": "Directly applies knowledge of geological formations and drilling operations."
+    },
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Uses experience with environmental sampling and safety protocols."
+    },
+    {
+      "slug": "construction-equipment-operators",
+      "reason": "Transfers field-site technical skills to heavy machinery operation."
+    },
+    {
+      "slug": "forest-and-conservation-workers",
+      "reason": "Applies outdoor data collection and natural resource monitoring skills."
+    },
+    {
+      "slug": "firefighters",
+      "reason": "Leverages physical stamina and knowledge of terrain and hydrology."
+    },
+    {
+      "slug": "water-transportation-occupations",
+      "reason": "Applies hydrologic understanding to vessel and waterway navigation."
+    }
+  ],
+  "marriage-and-family-therapists": [
+    {
+      "slug": "childcare-workers",
+      "reason": "Applies developmental knowledge and emotional support to care for children."
+    },
+    {
+      "slug": "preschool-teachers",
+      "reason": "Leverages understanding of behavioral management and social-emotional development."
+    },
+    {
+      "slug": "massage-therapists",
+      "reason": "Pivots to physical wellness while maintaining client-focused therapeutic relationships."
+    },
+    {
+      "slug": "psychiatric-technicians-and-aides",
+      "reason": "Directly applies mental health knowledge in a clinical setting."
+    }
+  ],
+  "nuclear-medicine-technologists": [
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Emergency patient care and medical equipment operation skills transfer."
+    },
+    {
+      "slug": "dental-hygienists",
+      "reason": "Clinical patient interaction and diagnostic imaging experience are relevant."
+    },
+    {
+      "slug": "surgical-technologists",
+      "reason": "Aseptic technique and specialized medical equipment handling skills transfer."
+    },
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Expertise in radiation safety and handling dangerous materials transfers."
+    },
+    {
+      "slug": "phlebotomists",
+      "reason": "Experience with injections and patient clinical preparation is direct."
+    },
+    {
+      "slug": "physical-therapist-assistants-and-aides",
+      "reason": "Direct patient mobility assistance and clinical environment familiarity transfer."
+    }
+  ],
+  "nurse-anesthetists-nurse-midwives-and-nurse-practitioners": [
+    {
+      "slug": "surgical-technologists",
+      "reason": "Mastery of sterile techniques and operating room protocols."
+    }
+  ],
+  "occupational-health-and-safety-specialists-and-technicians": [
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Expertise in safety protocols and handling dangerous substances."
+    },
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Utilizing emergency response and medical safety knowledge."
+    },
+    {
+      "slug": "pest-control-workers",
+      "reason": "Applying chemical safety and environmental risk assessment."
+    },
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Managing high-risk equipment through rigorous safety monitoring."
+    }
+  ],
+  "opticians-dispensing": [
+    {
+      "slug": "dental-assistants",
+      "reason": "Transfers patient care experience and precision handling of medical tools."
+    },
+    {
+      "slug": "automotive-body-and-glass-repairers",
+      "reason": "Applies expertise in glass properties and precise frame measurements."
+    },
+    {
+      "slug": "phlebotomists",
+      "reason": "Leverages clinical environment experience and high-level manual dexterity."
+    }
+  ],
+  "optometrists": [],
+  "orthotists-and-prosthetists": [],
+  "podiatrists": [
+    {
+      "slug": "surgical-technologists",
+      "reason": "Familiarity with sterile environments and surgical instruments for procedures."
+    },
+    {
+      "slug": "massage-therapists",
+      "reason": "Deep understanding of soft tissue manipulation and foot reflexology."
+    }
+  ],
+  "quality-control-inspectors": [
+    {
+      "slug": "welders-cutters-solderers-and-brazers",
+      "reason": "Uses visual inspection and measurement to ensure product integrity."
+    },
+    {
+      "slug": "boilermakers",
+      "reason": "Applies technical blueprint reading and defect detection skills."
+    },
+    {
+      "slug": "automotive-body-and-glass-repairers",
+      "reason": "Transfers attention to detail and surface finish evaluation."
+    },
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Monitors equipment performance and maintains strict safety standards."
+    },
+    {
+      "slug": "heavy-vehicle-and-mobile-equipment-service-technicians",
+      "reason": "Utilizes diagnostic testing and systematic troubleshooting of components."
+    },
+    {
+      "slug": "carpenters",
+      "reason": "Requires precise measurements and verification of structural specifications."
+    },
+    {
+      "slug": "butchers-and-meat-cutters",
+      "reason": "Applies quality standards and sensory inspection to products."
+    }
+  ],
+  "radiologic-technologists": [
+    {
+      "slug": "dental-hygienists",
+      "reason": "Expertise in patient positioning, safety protocols, and clinical imaging."
+    },
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Strong foundation in anatomy, patient care, and emergency response."
+    },
+    {
+      "slug": "surgical-technologists",
+      "reason": "Experience maintaining sterile environments and assisting in clinical procedures."
+    },
+    {
+      "slug": "physical-therapist-assistants-and-aides",
+      "reason": "Knowledge of musculoskeletal anatomy and direct patient physical support."
+    },
+    {
+      "slug": "firefighters",
+      "reason": "High-stakes technical operation and emergency medical service experience."
+    }
+  ],
+  "rehabilitation-counselors": [
+    {
+      "slug": "psychiatric-technicians-and-aides",
+      "reason": "Direct experience supporting individuals with mental and physical disabilities."
+    },
+    {
+      "slug": "preschool-teachers",
+      "reason": "Applies developmental psychology and patience to early childhood education."
+    },
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Crisis intervention and patient assessment skills are highly relevant."
+    },
+    {
+      "slug": "childcare-workers",
+      "reason": "Utilizes behavioral management and supportive caregiving expertise."
+    }
+  ],
+  "respiratory-therapists": [
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Critical care experience and emergency airway management skills transfer."
+    },
+    {
+      "slug": "surgical-technologists",
+      "reason": "Familiarity with sterile environments and patient monitoring is key."
+    },
+    {
+      "slug": "dental-hygienists",
+      "reason": "Clinical patient care and specialized medical tool usage transfer."
+    },
+    {
+      "slug": "heating-air-conditioning-and-refrigeration-mechanics-and-installers",
+      "reason": "Understanding of pressurized gas systems and airflow mechanics transfers."
+    },
+    {
+      "slug": "physical-therapist-assistants-and-aides",
+      "reason": "Direct patient rehabilitation and mobility assistance skills are shared."
+    }
+  ],
+  "semiconductor-processing-technicians": [
+    {
+      "slug": "welders-cutters-solderers-and-brazers",
+      "reason": "Precision soldering and material bonding skills are highly relevant."
+    },
+    {
+      "slug": "stationary-engineers-and-boiler-operators",
+      "reason": "Monitoring automated systems and pressure controls is a core competency."
+    },
+    {
+      "slug": "boilermakers",
+      "reason": "Technical manual reading and high-precision assembly skills are shared."
+    },
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Familiarity with chemical safety and protective gear protocols is essential."
+    },
+    {
+      "slug": "solar-photovoltaic-installers",
+      "reason": "Knowledge of electrical systems and silicon-based technology is beneficial."
+    }
+  ],
+  "social-workers": [
+    {
+      "slug": "preschool-teachers",
+      "reason": "Transfers child development knowledge and behavioral management expertise."
+    },
+    {
+      "slug": "psychiatric-technicians-and-aides",
+      "reason": "Utilizes crisis intervention and mental health support skills."
+    },
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Applies crisis management and high-pressure decision-making skills."
+    },
+    {
+      "slug": "firefighters",
+      "reason": "Transfers community service dedication and emergency response capabilities."
+    }
+  ],
+  "speech-language-pathologists": [
+    {
+      "slug": "preschool-teachers",
+      "reason": "Expertise in early childhood development and communication milestones."
+    },
+    {
+      "slug": "childcare-workers",
+      "reason": "Managing behavioral needs and supporting developmental growth."
+    },
+    {
+      "slug": "massage-therapists",
+      "reason": "Providing hands-on patient care and personalized treatment plans."
+    },
+    {
+      "slug": "dental-hygienists",
+      "reason": "Precise oral cavity work and patient education skills."
+    }
+  ],
+  "substance-abuse-behavioral-disorder-and-mental-health-counselors": [
+    {
+      "slug": "recreation-workers",
+      "reason": "Uses interpersonal skills to lead therapeutic group activities."
+    },
+    {
+      "slug": "preschool-teachers",
+      "reason": "Applies behavioral management and emotional development expertise."
+    },
+    {
+      "slug": "firefighters",
+      "reason": "Applies crisis intervention and high-pressure emotional stability."
+    },
+    {
+      "slug": "correctional-officers",
+      "reason": "Utilizes de-escalation techniques and behavioral monitoring skills."
+    }
+  ],
+  "surveyors": [
+    {
+      "slug": "heavy-vehicle-and-mobile-equipment-service-technicians",
+      "reason": "Mechanical aptitude from maintaining complex electronic surveying instruments."
+    },
+    {
+      "slug": "boilermakers",
+      "reason": "Strong background in reading technical drawings and spatial alignment."
+    },
+    {
+      "slug": "electricians",
+      "reason": "Precision measurement skills and ability to interpret complex schematics."
+    }
+  ],
+  "military-careers": [
+    {
+      "slug": "correctional-officers",
+      "reason": "Maintains order and security in high-stakes environments."
+    },
+    {
+      "slug": "firefighters",
+      "reason": "Emergency response, physical readiness, and teamwork under pressure."
+    },
+    {
+      "slug": "emts-and-paramedics",
+      "reason": "Field medical skills and rapid decision-making in crises."
+    },
+    {
+      "slug": "construction-equipment-operators",
+      "reason": "Experience operating heavy machinery and following strict protocols."
+    },
+    {
+      "slug": "hazardous-materials-removal-workers",
+      "reason": "Strict adherence to safety procedures and specialized equipment."
+    },
+    {
+      "slug": "heavy-vehicle-and-mobile-equipment-service-technicians",
+      "reason": "Maintenance of complex mechanical systems and fleet vehicles."
+    },
+    {
+      "slug": "water-transportation-occupations",
+      "reason": "Navigational skills and disciplined operation of maritime vessels."
+    },
+    {
+      "slug": "forest-and-conservation-workers",
+      "reason": "Outdoor endurance, land navigation, and resource protection."
+    }
   ]
 }

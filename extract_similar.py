@@ -61,6 +61,18 @@ def main():
         if d["similar"]:
             patched += 1
 
+    # Patch AI-generated career paths (kept separate from BLS data)
+    ai_patched = 0
+    if os.path.exists("ai_paths.json"):
+        with open("ai_paths.json") as f:
+            ai_paths = json.load(f)
+        for d in data:
+            paths = ai_paths.get(d["slug"], [])
+            if paths:
+                d["ai_paths"] = paths
+                ai_patched += 1
+        print(f"Patched {ai_patched}/{len(data)} occupations with AI-generated paths")
+
     with open("site/data.json", "w") as f:
         json.dump(data, f)
 

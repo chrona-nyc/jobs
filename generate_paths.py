@@ -39,7 +39,7 @@ SOURCE OCCUPATION:
 - AI Exposure: {job['exposure']}/10
 - Category: {job.get('category', '')}
 - Education: {job.get('education', '')}
-- Median Pay: ${job.get('pay', 'unknown'):,}
+- Median Pay: {('$' + f"{job['pay']:,}") if job.get('pay') else 'unknown'}
 
 RULES:
 1. Only suggest occupations from the dataset below (use exact slugs)
@@ -88,22 +88,41 @@ def main():
 
     occupation_index = build_occupation_index(data)
 
-    # Find stuck jobs: exposure >= 4, no BLS-similar with -2 gap,
-    # and no same-category with -2 gap and high enough score
-    stuck = []
+    # Find jobs that need more paths: count BLS-similar and same-category
+    # candidates with -2 gap, flag if too few for the exposure level
+    needs_paths = []
     for d in data:
-        if d.get("exposure") is None or d["exposure"] < 5:
+        if d.get("exposure") is None or d["exposure"] < 4:
             continue
         similar = set(d.get("similar", []))
-        has_bls_path = any(
-            by_slug[s]["exposure"] <= d["exposure"] - 2
-            for s in similar
+        bls_paths = [
+            s for s in similar
             if s in by_slug and by_slug[s].get("exposure") is not None
-        )
-        if not has_bls_path:
-            stuck.append(d)
+            and by_slug[s]["exposure"] <= d["exposure"] - 2
+            and by_slug[s].get("jobs") and by_slug[s]["jobs"] > 0
+        ]
+        cat_paths = [
+            o for o in data
+            if o["slug"] != d["slug"] and o.get("exposure") is not None
+            and o["exposure"] <= d["exposure"] - 2
+            and o.get("category") == d.get("category")
+            and o.get("jobs") and o["jobs"] > 0
+            and o["slug"] not in similar
+        ]
+        # Only count category paths that would score >= 10
+        cat_qualifying = [o for o in cat_paths if 3 + (d["exposure"] - o["exposure"]) * 0.5 >= 10]
+        n_paths = len(bls_paths) + len(cat_qualifying)
 
-    print(f"Found {len(stuck)} stuck occupations (exposure >= 5, no BLS path with -2 gap)")
+        # Thresholds: high exposure needs more options
+        if d["exposure"] >= 7 and n_paths <= 2:
+            needs_paths.append(d)
+        elif d["exposure"] >= 5 and n_paths <= 1:
+            needs_paths.append(d)
+        elif d["exposure"] >= 4 and n_paths == 0:
+            needs_paths.append(d)
+
+    needs_paths.sort(key=lambda d: (-d["exposure"], d["title"]))
+    print(f"Found {len(needs_paths)} occupations needing more paths")
 
     # Load existing AI paths
     ai_paths = {}
@@ -116,11 +135,11 @@ def main():
     errors = []
     valid_slugs = set(by_slug.keys())
 
-    for i, job in enumerate(stuck):
+    for i, job in enumerate(needs_paths):
         if job["slug"] in ai_paths:
             continue
 
-        print(f"  [{i+1}/{len(stuck)}] {job['title']} ({job['exposure']}/10)...", end=" ", flush=True)
+        print(f"  [{i+1}/{len(needs_paths)}] {job['title']} ({job['exposure']}/10)...", end=" ", flush=True)
 
         try:
             suggestions = generate_transitions(client, job, occupation_index)
