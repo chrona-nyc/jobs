@@ -451,6 +451,12 @@ canvas#canvas {
   padding: 2px 6px;
   margin-top: 6px;
 }
+.escape-reason {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+  margin-top: 5px;
+}
 .dp-safe-msg {
   font-size: 13px;
   line-height: 1.5;
@@ -1382,12 +1388,14 @@ function showDetail(job) {
       const payDiff = (p.pay && job.pay) ? Math.round((p.pay - job.pay) / job.pay * 100) : null;
       const payStr = payDiff != null ? (payDiff >= 0 ? "+" + payDiff : payDiff) + "% pay" : "";
 
-      let tag = "";
-      if (p._aiReason) tag = p._aiReason;
-      else if (similarSet.has(p.slug) && job.bls_reasons && job.bls_reasons[p.slug]) tag = job.bls_reasons[p.slug];
-      else if (similarSet.has(p.slug)) tag = "Related role";
-      else if (p.category === job.category) tag = "Same field";
-      else tag = "Skills transfer";
+      // Descriptive reason (long text) vs short tag
+      let reason = p._aiReason || (job.bls_reasons && job.bls_reasons[p.slug]) || "";
+      let shortTag = "";
+      if (!reason) {
+        if (similarSet.has(p.slug)) shortTag = "Related role";
+        else if (p.category === job.category) shortTag = "Same field";
+        else shortTag = "Skills transfer";
+      }
 
       pathsHTML += `
         <div class="escape-card" data-slug="${p.slug}">
@@ -1396,7 +1404,7 @@ function showDetail(job) {
             <span class="escape-score" style="color:${pColor}">${p.exposure}/10</span>
           </div>
           <div class="escape-meta">${fmtPay(p.pay)}${payStr ? ' &middot; ' + payStr : ''} &middot; ${fmtNum(p.jobs)} jobs${p.outlook ? ' &middot; ' + p.outlook + '% growth' : ''}</div>
-          <span class="escape-tag">${tag}</span>
+          ${reason ? `<div class="escape-reason">${reason}</div>` : `<span class="escape-tag">${shortTag}</span>`}
         </div>`;
     }
   } else if (score != null && score < 4) {
