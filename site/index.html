@@ -531,84 +531,111 @@ canvas#canvas {
 }
 /* ── AI-Resilient Careers ────────────────────── */
 
-.resilient-toggle {
+.resilient-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   user-select: none;
-  padding: 8px 12px;
+  padding: 10px 12px;
   background: #f7f6f2;
   border-radius: 8px;
   transition: background 0.15s;
 }
-.resilient-toggle:hover { background: #f0eee8; }
-.resilient-toggle h3 {
+.resilient-trigger:hover { background: #f0eee8; }
+.resilient-trigger h3 {
   font-size: 11px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: -0.01em;
 }
-.resilient-toggle .toggle-sub {
+.resilient-trigger .trigger-sub {
   font-size: 10px;
   color: var(--text2);
   margin-top: 1px;
 }
-.resilient-chevron {
-  font-size: 14px;
+.resilient-trigger .trigger-arrow {
+  font-size: 13px;
   color: var(--text3);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
-.resilient-chevron.open { transform: rotate(180deg); }
-.resilient-list {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+#resilient-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  backdrop-filter: blur(4px);
 }
-.resilient-list.open { max-height: 600px; }
+#resilient-modal.open { opacity: 1; pointer-events: auto; }
+#resilient-modal .modal-card {
+  max-width: 640px;
+  padding: 28px 32px;
+}
+#resilient-modal .modal-card h2 {
+  margin-bottom: 4px;
+}
+.resilient-subtitle {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.resilient-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
 .resilient-card {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 0;
+  gap: 14px;
+  padding: 12px 10px;
   border-bottom: 1px solid #f0eee8;
   cursor: pointer;
   transition: background 0.1s;
   border-radius: 6px;
-  margin: 0 -4px;
-  padding-left: 4px;
-  padding-right: 4px;
+  margin: 0 -10px;
 }
 .resilient-card:hover { background: #f7f6f2; }
 .resilient-card:last-child { border-bottom: none; }
 .rc-rank {
-  width: 20px;
-  font-size: 11px;
+  width: 24px;
+  font-size: 12px;
   color: var(--text3);
   text-align: center;
   flex-shrink: 0;
 }
 .rc-info { flex: 1; min-width: 0; }
 .rc-title {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .rc-meta {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text2);
-  margin-top: 1px;
+  margin-top: 2px;
 }
 .rc-growth {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: rgb(52, 163, 116);
   flex-shrink: 0;
   white-space: nowrap;
+}
+.rc-exposure {
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: right;
 }
 
 /* ── Sources Modal ───────────────────────────── */
@@ -807,15 +834,12 @@ canvas#canvas {
     <div class="crosstab" id="crosstabEdu"></div>
   </div>
 
-  <div>
-    <div class="resilient-toggle" id="resilientToggle">
-      <div>
-        <h3>AI-Resilient Careers</h3>
-        <div class="toggle-sub">High growth, low AI impact</div>
-      </div>
-      <span class="resilient-chevron" id="resilientChevron">&#9662;</span>
+  <div class="resilient-trigger" id="resilientTrigger">
+    <div>
+      <h3>AI-Resilient Careers</h3>
+      <div class="trigger-sub">High growth, low AI impact</div>
     </div>
-    <div class="resilient-list" id="resilientList"></div>
+    <span class="trigger-arrow">&rarr;</span>
   </div>
 
   <div style="flex:1"></div>
@@ -869,6 +893,15 @@ canvas#canvas {
     <h3>Credits</h3>
     <p>Originally created by <a href="https://karpathy.ai/" target="_blank">Andrej Karpathy</a>. Extended by <a href="https://chrona.nyc" target="_blank">Chrona</a> with career path analysis, interactive filtering, and additional analytics.</p>
     <p style="margin-top:8px">Source code: <a href="https://github.com/chrona-nyc/jobs" target="_blank">github.com/chrona-nyc/jobs</a></p>
+  </div>
+</div>
+
+<div id="resilient-modal">
+  <div class="modal-card">
+    <button class="modal-close" id="resilientClose">&times;</button>
+    <h2>AI-Resilient Careers</h2>
+    <div class="resilient-subtitle">High growth outlook and low AI exposure — jobs where human skills are in demand.</div>
+    <div class="resilient-grid" id="resilientList"></div>
   </div>
 </div>
 
@@ -1749,27 +1782,34 @@ function buildResilientList() {
     .sort((a, b) => b.outlook - a.outlook);
 
   const list = document.getElementById("resilientList");
-  list.innerHTML = sweet.slice(0, 12).map((d, i) => `
+  list.innerHTML = sweet.map((d, i) => `
     <div class="resilient-card" data-slug="${d.slug}">
       <span class="rc-rank">${i + 1}</span>
       <div class="rc-info">
-        <div class="rc-title" title="${d.title}">${d.title}</div>
-        <div class="rc-meta">${d.exposure}/10 impact · ${fmtPay(d.pay)} · ${fmtNum(d.jobs)} jobs</div>
+        <div class="rc-title">${d.title}</div>
+        <div class="rc-meta">${fmtPay(d.pay)} · ${fmtNum(d.jobs)} jobs · ${d.education || '\u2014'}</div>
       </div>
+      <span class="rc-exposure" style="color:${exposureCSS(d.exposure, 1)}">${d.exposure}/10</span>
       <span class="rc-growth">+${d.outlook}%</span>
     </div>
   `).join("");
 
   list.querySelectorAll(".resilient-card").forEach(card => {
-    card.addEventListener("click", () => selectJob(card.dataset.slug));
+    card.addEventListener("click", () => {
+      document.getElementById("resilient-modal").classList.remove("open");
+      selectJob(card.dataset.slug);
+    });
   });
 }
 
-document.getElementById("resilientToggle").addEventListener("click", () => {
-  const list = document.getElementById("resilientList");
-  const chevron = document.getElementById("resilientChevron");
-  list.classList.toggle("open");
-  chevron.classList.toggle("open");
+document.getElementById("resilientTrigger").addEventListener("click", () => {
+  document.getElementById("resilient-modal").classList.add("open");
+});
+document.getElementById("resilientClose").addEventListener("click", () => {
+  document.getElementById("resilient-modal").classList.remove("open");
+});
+document.getElementById("resilient-modal").addEventListener("click", (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
 });
 
 // ── Sources Modal ──────────────────────────────────────────────────────
@@ -1785,7 +1825,10 @@ document.getElementById("sources-modal").addEventListener("click", (e) => {
   if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
 });
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") document.getElementById("sources-modal").classList.remove("open");
+  if (e.key === "Escape") {
+    document.getElementById("sources-modal").classList.remove("open");
+    document.getElementById("resilient-modal").classList.remove("open");
+  }
 });
 
 // ── Prepare Tips ───────────────────────────────────────────────────────
