@@ -600,7 +600,7 @@ canvas#canvas {
 .rc-growth {
   font-size: 12px;
   font-weight: 600;
-  color: rgb(91, 165, 140);
+  color: rgb(52, 163, 116);
   flex-shrink: 0;
   white-space: nowrap;
 }
@@ -782,7 +782,7 @@ canvas#canvas {
     <div class="stat-section">
       <h3>Wages at stake</h3>
       <div class="stat-big" id="statExposedWages">&mdash;</div>
-      <div class="stat-label">annual, in those jobs</div>
+      <div class="stat-label">annual wages in 7+ jobs</div>
     </div>
   </div>
 
@@ -885,14 +885,14 @@ function exposureColor(score) {
   let r, g, b;
   if (t <= 0.5) {
     const s = t * 2;
-    r = Math.round(91 + s * (196 - 91));
-    g = Math.round(165 + s * (170 - 165));
-    b = Math.round(140 + s * (90 - 140));
+    r = Math.round(52 + s * (215 - 52));
+    g = Math.round(163 + s * (170 - 163));
+    b = Math.round(116 + s * (55 - 116));
   } else {
     const s = (t - 0.5) * 2;
-    r = Math.round(196 + s * (217 - 196));
-    g = Math.round(170 + s * (119 - 170));
-    b = Math.round(90 + s * (87 - 90));
+    r = Math.round(215 + s * (204 - 215));
+    g = Math.round(170 + s * (44 - 170));
+    b = Math.round(55 + s * (41 - 55));
   }
   return [r, g, b];
 }
