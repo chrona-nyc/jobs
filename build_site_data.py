@@ -40,9 +40,6 @@ def main():
             "exposure": score.get("exposure"),
             "exposure_rationale": score.get("rationale"),
             "url": row.get("url", ""),
-            "training": row.get("training", "") or None,
-            "work_experience": row.get("work_experience", "") or None,
-            "openings": int(row["employment_change"]) if row.get("employment_change") else None,
         })
 
     import os
