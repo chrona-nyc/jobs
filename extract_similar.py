@@ -73,6 +73,21 @@ def main():
                 ai_patched += 1
         print(f"Patched {ai_patched}/{len(data)} occupations with AI-generated paths")
 
+    # Patch personalized tips and BLS skill-transfer reasons
+    tips_patched = 0
+    if os.path.exists("tips_and_reasons.json"):
+        with open("tips_and_reasons.json") as f:
+            tips_data = json.load(f)
+        for d in data:
+            tr = tips_data.get(d["slug"], {})
+            if tr.get("tips"):
+                d["prepare_tips"] = tr["tips"]
+            if tr.get("bls_reasons"):
+                d["bls_reasons"] = tr["bls_reasons"]
+            if tr.get("tips") or tr.get("bls_reasons"):
+                tips_patched += 1
+        print(f"Patched {tips_patched}/{len(data)} occupations with tips/reasons")
+
     with open("site/data.json", "w") as f:
         json.dump(data, f)
 

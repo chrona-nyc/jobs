@@ -1384,6 +1384,7 @@ function showDetail(job) {
 
       let tag = "";
       if (p._aiReason) tag = p._aiReason;
+      else if (similarSet.has(p.slug) && job.bls_reasons && job.bls_reasons[p.slug]) tag = job.bls_reasons[p.slug];
       else if (similarSet.has(p.slug)) tag = "Related role";
       else if (p.category === job.category) tag = "Same field";
       else tag = "Skills transfer";
@@ -1404,8 +1405,8 @@ function showDetail(job) {
     pathsHTML = `<div class="dp-safe-msg">Most related roles have similar AI exposure. The strongest move may be to go deeper — become the expert who directs AI tools in your field rather than competes with them.</div>`;
   }
 
-  // Prepare tips
-  const tips = prepareTips(score);
+  // Prepare tips — prefer role-specific from data, fall back to generic
+  const tips = (job.prepare_tips && job.prepare_tips.length > 0) ? job.prepare_tips : prepareTips(score);
   if (tips.length > 0) {
     pathsHTML += `<div class="dp-prepare">
       <div class="dp-prepare-title">How to prepare</div>
