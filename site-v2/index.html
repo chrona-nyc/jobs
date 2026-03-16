@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI & Work — Chrona</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #1C1917;
+  --sidebar-bg: #FAFAF8;
+  --sidebar-border: #E8E5DF;
+  --text: #1a1a1a;
+  --text2: #8b8680;
+  --text3: #b5b0a8;
+  --accent: #0198ff;
+  --panel-bg: #FAFAF8;
+  --sidebar-w: 280px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hero Overlay ──────────────────────────── */
+
+#hero {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 25, 23, 0.85);
+  backdrop-filter: blur(12px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s 0s;
+}
+#hero.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0s 0.4s;
+}
+.hero-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.hero-title .ai { color: var(--accent); }
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 32px;
+  text-align: center;
+}
+#hero-search-wrap {
+  position: relative;
+  width: 460px;
+  max-width: 90vw;
+}
+#hero-search {
+  width: 100%;
+  padding: 16px 24px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  color: #fff;
+  font-size: 18px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+#hero-search:focus {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(1, 152, 255, 0.15);
+}
+#hero-search::placeholder { color: rgba(255,255,255,0.35); }
+#hero-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 14px;
+  max-height: 380px;
+  overflow-y: auto;
+  z-index: 60;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+}
+#hero-results.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.hero-result {
+  padding: 14px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  border-bottom: 1px solid #f0eee8;
+  transition: background 0.1s;
+  color: var(--text);
+}
+.hero-result:last-child { border-bottom: none; }
+.hero-result:hover, .hero-result.active { background: #f7f6f2; }
+.hero-result .sr-title { flex: 1; }
+.hero-result .sr-title b { font-weight: 600; }
+.hero-result .sr-score {
+  font-size: 13px;
+  font-weight: 600;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+.hero-browse {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 20px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.hero-browse:hover { color: rgba(255,255,255,0.6); }
+.hero-stat-row {
+  display: flex;
+  gap: 40px;
+  margin-top: 48px;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-val {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.03em;
+}
+.hero-stat-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Sidebar ─────────────────────────────────── */
+
+#sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  padding: 20px 20px;
+  z-index: 10;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#sidebar h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--text);
+}
+#sidebar h1 .ai { color: var(--accent); }
+#sidebar .subtitle {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+#sidebar .attribution {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+#sidebar .attribution a {
+  color: var(--text3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--sidebar-border);
+  transition: color 0.15s, border-color 0.15s;
+}
+#sidebar .attribution a:hover {
+  color: var(--text2);
+  border-color: var(--text2);
+}
+
+.stat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.stat-section h3 {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+}
+.stat-big {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+.stat-row {
+  display: flex;
+  gap: 24px;
+}
+.stat-row .stat-section { flex: 1; }
+
+.tier-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 4px 8px;
+  margin: 0 -8px;
+  transition: background 0.15s;
+  user-select: none;
+}
+.tier-row:hover { background: #f0eee8; }
+.tier-row.active { background: #eceae4; }
+.tier-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.tier-name {
+  flex: 1;
+  color: var(--text2);
+  font-size: 11px;
+}
+.tier-jobs {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 500;
+}
+.tier-pct {
+  text-align: right;
+  width: 32px;
+  color: var(--text3);
+  font-size: 10px;
+}
+
+/* ── Search ──────────────────────────────────── */
+
+#search-wrap {
+  position: relative;
+}
+#search-input {
+  width: 100%;
+  padding: 8px 32px 8px 12px;
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(1, 152, 255, 0.1);
+}
+#search-input::placeholder { color: var(--text3); }
+#search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  padding: 0;
+  line-height: 1;
+}
+#search-clear:hover { color: var(--text2); }
+#search-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 30;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+#search-results.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.search-result {
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  border-bottom: 1px solid #f0eee8;
+  transition: background 0.1s;
+}
+.search-result:last-child { border-bottom: none; }
+.search-result:hover, .search-result.active { background: #f7f6f2; }
+.search-result .sr-title { flex: 1; color: var(--text); }
+.search-result .sr-title b { font-weight: 600; }
+.search-result .sr-score {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Canvas ──────────────────────────────────── */
+
+canvas#canvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-w);
+  cursor: default;
+}
+
+/* ── Tooltip ─────────────────────────────────── */
+
+#tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 320px;
+  opacity: 0;
+  transition: opacity 0.12s;
+  z-index: 20;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  color: var(--text);
+}
+#tooltip.visible { opacity: 1; }
+#tooltip .tt-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+#tooltip .tt-exposure { font-size: 12px; margin-bottom: 8px; }
+#tooltip .tt-stats {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 14px;
+  font-size: 12px;
+}
+#tooltip .tt-stats .label { color: var(--text2); }
+#tooltip .tt-stats .value { color: var(--text); text-align: right; font-weight: 500; }
+#tooltip .tt-rationale {
+  font-size: 11px;
+  color: var(--text2);
+  margin-top: 8px;
+  line-height: 1.45;
+  border-top: 1px solid #f0eee8;
+  padding-top: 8px;
+}
+
+/* ── Detail Panel ────────────────────────────── */
+
+#detail-panel {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 420px;
+  max-height: calc(100vh - 32px);
+  background: var(--panel-bg);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 14px;
+  padding: 24px;
+  z-index: 25;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  opacity: 0;
+  transform: translateX(16px);
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#detail-panel.open {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+.dp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.dp-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  flex: 1;
+  margin-right: 12px;
+}
+.dp-close {
+  background: none;
+  border: none;
+  color: var(--text3);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+.dp-close:hover { color: var(--text); }
+.dp-exposure-wrap { margin-bottom: 20px; }
+.dp-exposure-score {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.dp-exposure-label {
+  font-size: 13px;
+  color: var(--text2);
+  margin-left: 4px;
+}
+.dp-exposure-bar {
+  height: 5px;
+  background: #f0eee8;
+  border-radius: 3px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.dp-exposure-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dp-context {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background: #f7f6f2;
+  border-radius: 10px;
+}
+.dp-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.dp-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text3);
+  margin-bottom: 3px;
+}
+.dp-stat-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.dp-stat-sub {
+  font-size: 10px;
+  color: var(--text3);
+  margin-top: 1px;
+}
+.dp-rationale {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.55;
+  padding: 16px 0;
+  border-top: 1px solid #f0eee8;
+  font-style: italic;
+}
+.dp-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text3);
+  margin: 20px 0 8px;
+}
+.dp-section-desc {
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+/* ── Transition Cards ────────────────────────── */
+
+.escape-card {
+  background: #fff;
+  border: 1px solid #f0eee8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.escape-card:hover {
+  border-color: #d8d5ce;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.escape-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.escape-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.escape-score {
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+.escape-meta {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+.escape-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text2);
+  background: #f0eee8;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-top: 6px;
+}
+.escape-detail {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0eee8;
+  display: none;
+}
+.escape-card.expanded .escape-detail { display: block; }
+.escape-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.escape-detail-item {}
+.escape-detail-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text3);
+  margin-bottom: 2px;
+}
+.escape-detail-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+.escape-detail-value .sub {
+  font-weight: 400;
+  color: var(--text2);
+  font-size: 11px;
+}
+.escape-pay-compare {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.escape-pay-bar {
+  flex: 1;
+  height: 20px;
+  background: #f0eee8;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.escape-pay-fill {
+  height: 100%;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+.escape-pay-label {
+  font-size: 10px;
+  color: var(--text3);
+  width: 36px;
+  flex-shrink: 0;
+}
+.escape-qualities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.escape-quality {
+  font-size: 10px;
+  color: var(--text2);
+  background: #f7f6f2;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.escape-edu-gap {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.escape-edu-gap .match { color: rgb(52, 163, 116); font-weight: 500; }
+.escape-edu-gap .upgrade { color: rgb(204, 120, 50); font-weight: 500; }
+.escape-expand-hint {
+  font-size: 10px;
+  color: var(--text3);
+  text-align: right;
+  margin-top: 4px;
+}
+.escape-card.expanded .escape-expand-hint { display: none; }
+
+/* ── Other shared styles ─────────────────────── */
+
+.dp-safe-msg {
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 14px 16px;
+  background: #f7f6f2;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+.dp-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0eee8;
+}
+.dp-btn {
+  background: #fff;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+  display: inline-block;
+}
+.dp-btn:hover {
+  background: #f7f6f2;
+  border-color: #d8d5ce;
+}
+
+/* ── Cross-tab stats ─────────────────────────── */
+
+.crosstab {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.crosstab-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+.crosstab-label {
+  width: 66px;
+  color: var(--text2);
+  flex-shrink: 0;
+  text-align: right;
+}
+.crosstab-bar-bg {
+  flex: 1;
+  height: 12px;
+  background: #f0eee8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.crosstab-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.crosstab-val {
+  width: 24px;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 10px;
+}
+
+/* ── AI-Resilient Careers ────────────────────── */
+
+.resilient-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 12px;
+  background: #f7f6f2;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.resilient-toggle:hover { background: #f0eee8; }
+.resilient-toggle h3 {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.resilient-toggle .toggle-sub {
+  font-size: 10px;
+  color: var(--text2);
+  margin-top: 1px;
+}
+.resilient-chevron {
+  font-size: 14px;
+  color: var(--text3);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+.resilient-chevron.open { transform: rotate(180deg); }
+.resilient-list {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.resilient-list.open { max-height: 600px; }
+.resilient-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0eee8;
+  cursor: pointer;
+  transition: background 0.1s;
+  border-radius: 6px;
+  margin: 0 -4px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.resilient-card:hover { background: #f7f6f2; }
+.resilient-card:last-child { border-bottom: none; }
+.rc-rank {
+  width: 20px;
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  flex-shrink: 0;
+}
+.rc-info { flex: 1; min-width: 0; }
+.rc-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rc-meta {
+  font-size: 10px;
+  color: var(--text2);
+  margin-top: 1px;
+}
+.rc-growth {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(52, 163, 116);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ── Sources Modal ───────────────────────────── */
+
+.sources-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text3);
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.15s;
+}
+.sources-btn:hover { color: var(--text2); }
+#sources-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  backdrop-filter: blur(4px);
+}
+#sources-modal.open { opacity: 1; pointer-events: auto; }
+.modal-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 520px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+  transform: translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#sources-modal.open .modal-card { transform: translateY(0); }
+.modal-card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.modal-card h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+.modal-card p, .modal-card li {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+.modal-card ul {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+.modal-card li { margin-bottom: 4px; }
+.modal-card a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.modal-card a:hover { text-decoration: underline; }
+.modal-close {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--text3);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  margin: -8px -8px 0 0;
+}
+.modal-close:hover { color: var(--text); }
+
+/* ── Prepare Section ─────────────────────────── */
+
+.dp-prepare {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f7f6f2;
+  border-radius: 10px;
+}
+.dp-prepare-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.dp-prepare ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dp-prepare li {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+.dp-prepare li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  color: var(--text3);
+}
+
+/* Scrollbar */
+#sidebar::-webkit-scrollbar,
+#detail-panel::-webkit-scrollbar,
+#search-results::-webkit-scrollbar,
+#hero-results::-webkit-scrollbar {
+  width: 6px;
+}
+#sidebar::-webkit-scrollbar-track,
+#detail-panel::-webkit-scrollbar-track,
+#search-results::-webkit-scrollbar-track,
+#hero-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+#sidebar::-webkit-scrollbar-thumb,
+#detail-panel::-webkit-scrollbar-thumb,
+#search-results::-webkit-scrollbar-thumb,
+#hero-results::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- ── Hero Overlay ───────────────────────────── -->
+<div id="hero">
+  <div class="hero-title"><span class="ai">AI</span> & Your Career</div>
+  <div class="hero-sub">See how artificial intelligence is reshaping 342 American occupations</div>
+  <div id="hero-search-wrap">
+    <input type="text" id="hero-search" placeholder="What do you do?" autocomplete="off" spellcheck="false" autofocus>
+    <div id="hero-results"></div>
+  </div>
+  <div class="hero-browse" id="heroBrowse">or browse all occupations</div>
+  <div class="hero-stat-row" id="heroStats"></div>
+</div>
+
+<!-- ── Sidebar ────────────────────────────────── -->
+<div id="sidebar">
+  <div>
+    <h1><span class="ai">AI</span> & Work</h1>
+    <div class="subtitle">How AI is reshaping the American workforce</div>
+    <div class="attribution"><a href="#" id="openSourcesLink">Bureau of Labor Statistics data</a> · scored by Gemini + Sonnet ensemble</div>
+  </div>
+
+  <div id="search-wrap">
+    <input type="text" id="search-input" placeholder="What do you do?" autocomplete="off" spellcheck="false">
+    <button id="search-clear">&times;</button>
+    <div id="search-results"></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-section">
+      <h3>Workers</h3>
+      <div class="stat-big" id="statTotalJobs">&mdash;</div>
+    </div>
+    <div class="stat-section">
+      <h3>Avg. Impact</h3>
+      <div class="stat-big" id="statAvgExposure">&mdash;</div>
+      <div class="stat-label">job-weighted, 0&ndash;10 scale</div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-section">
+      <h3>High-exposure workers</h3>
+      <div class="stat-big" id="statExposedWorkers">&mdash;</div>
+      <div class="stat-label">in jobs scoring 7+</div>
+    </div>
+    <div class="stat-section">
+      <h3>Wages at stake</h3>
+      <div class="stat-big" id="statExposedWages">&mdash;</div>
+      <div class="stat-label">annual wages in 7+ jobs</div>
+    </div>
+  </div>
+
+  <div class="stat-section">
+    <h3>By impact level</h3>
+    <div class="tier-bar" id="tierBar"></div>
+  </div>
+
+  <div class="stat-section">
+    <h3>Impact by pay</h3>
+    <div class="crosstab" id="crosstabPay"></div>
+  </div>
+
+  <div class="stat-section">
+    <h3>Impact by education</h3>
+    <div class="crosstab" id="crosstabEdu"></div>
+  </div>
+
+  <div>
+    <div class="resilient-toggle" id="resilientToggle">
+      <div>
+        <h3>AI-Resilient Careers</h3>
+        <div class="toggle-sub">High growth, low AI impact</div>
+      </div>
+      <span class="resilient-chevron" id="resilientChevron">&#9662;</span>
+    </div>
+    <div class="resilient-list" id="resilientList"></div>
+  </div>
+
+  <div style="flex:1"></div>
+  <div style="text-align:center;padding-bottom:4px;">
+    <a class="sources-btn" href="https://chrona.nyc" target="_blank">created by chrona.nyc</a>
+  </div>
+</div>
+
+<div id="detail-panel">
+  <div class="dp-header">
+    <div class="dp-title" id="dpTitle"></div>
+    <button class="dp-close" id="dpClose">&times;</button>
+  </div>
+  <div class="dp-exposure-wrap" id="dpExposure"></div>
+  <div class="dp-context" id="dpContext"></div>
+  <div class="dp-stats" id="dpStats"></div>
+  <div class="dp-rationale" id="dpRationale"></div>
+  <div id="dpPaths"></div>
+  <div class="dp-footer" id="dpFooter"></div>
+</div>
+
+<div id="sources-modal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <h2>Sources &amp; Methodology</h2>
+    <h3>Data</h3>
+    <p>Occupation data (employment, wages, education, growth outlook) comes from the <a href="https://www.bls.gov/ooh/" target="_blank">Bureau of Labor Statistics Occupational Outlook Handbook</a> (2024 edition), covering 342 occupations representing 160M+ American workers.</p>
+    <h3>AI Impact Scoring</h3>
+    <p>Each occupation is scored 0&ndash;10 for AI exposure by two independent LLMs &mdash; Gemini 3 Flash and Claude Sonnet 4.6 &mdash; then averaged. Both models analyze each job's core tasks, work environment, and required skills against the same calibrated rubric. The two models agreed within &plusmn;1 point on 91% of occupations.</p>
+    <ul>
+      <li><strong>0&ndash;2 (Low):</strong> Physical, hands-on, or deeply interpersonal work</li>
+      <li><strong>3&ndash;5 (Moderate):</strong> Mix of AI-augmentable and distinctly human tasks</li>
+      <li><strong>6&ndash;7 (High):</strong> Primarily digital work with significant AI overlap</li>
+      <li><strong>8&ndash;10 (Very high):</strong> Core tasks can already be assisted by AI</li>
+    </ul>
+    <h3>Career Adjacency</h3>
+    <p>"Paths Forward" suggestions use BLS <a href="https://www.bls.gov/ooh/" target="_blank">Similar Occupations</a> data (expert-curated relationships between jobs), weighted by education match, pay similarity, and growth outlook.</p>
+    <h3>Model Agreement</h3>
+    <p>The two models agreed within &plusmn;1 point on 91% of occupations. Where they disagree, Sonnet tends to score knowledge work lower, giving more weight to human judgment and physical presence. Gemini leans toward "if it's digital, it's exposed."</p>
+    <p style="margin-top:6px"><strong>Biggest disagreements:</strong></p>
+    <ul>
+      <li>Sports officials: Sonnet&nbsp;2, Gemini&nbsp;5 &mdash; how digital is refereeing?</li>
+      <li>Aerospace engineers: Sonnet&nbsp;6, Gemini&nbsp;8 &mdash; hardware vs. design software</li>
+      <li>Air traffic controllers: Sonnet&nbsp;5, Gemini&nbsp;7 &mdash; real-time safety judgment</li>
+      <li>Actors: Sonnet&nbsp;5, Gemini&nbsp;7 &mdash; physical performance vs. digital media</li>
+    </ul>
+    <h3>Scoring Prompt</h3>
+    <p>Both models receive the same calibrated rubric with anchor examples at each level. The full prompt and scoring pipeline are in the <a href="https://github.com/chrona-nyc/jobs/blob/master/score.py" target="_blank">source code</a>.</p>
+    <h3>Limitations</h3>
+    <p>AI impact scores reflect a single model's assessment and should be treated as directional estimates, not precise predictions. AI capabilities are evolving rapidly &mdash; scores may shift as the technology matures. Growth projections are BLS 10-year estimates (2023&ndash;2033).</p>
+    <h3>Credits</h3>
+    <p>Originally created by <a href="https://karpathy.ai/" target="_blank">Andrej Karpathy</a>. Extended by <a href="https://chrona.nyc" target="_blank">Chrona</a> with career path analysis, interactive filtering, and additional analytics.</p>
+    <p style="margin-top:8px">Source code: <a href="https://github.com/chrona-nyc/jobs" target="_blank">github.com/chrona-nyc/jobs</a></p>
+  </div>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<div id="tooltip">
+  <div class="tt-title"></div>
+  <div class="tt-exposure"></div>
+  <div class="tt-stats"></div>
+  <div class="tt-rationale"></div>
+</div>
+
+<script>
+
+// ── Data index ──────────────────────────────────────────────────────────
+
+let data = [];
+let bySlug = {};
+let rects = [];
+let hovered = null;
+let selected = null;
+let activeTier = null;
+let anim = null;
+let heroVisible = true;
+const ANIM_MS = 450;
+
+const TIERS = [
+  { name: "Low", range: [0, 2] },
+  { name: "Moderate", range: [3, 5] },
+  { name: "High", range: [6, 7] },
+  { name: "Very high", range: [8, 10] },
+];
+
+// ── Color scale: green → gold → red ────────────────────────────────────
+
+function exposureColor(score) {
+  if (score == null) return [150, 147, 140];
+  const t = Math.max(0, Math.min(10, score)) / 10;
+  let r, g, b;
+  if (t <= 0.5) {
+    const s = t * 2;
+    r = Math.round(52 + s * (215 - 52));
+    g = Math.round(163 + s * (170 - 163));
+    b = Math.round(116 + s * (55 - 116));
+  } else {
+    const s = (t - 0.5) * 2;
+    r = Math.round(215 + s * (204 - 215));
+    g = Math.round(170 + s * (44 - 170));
+    b = Math.round(55 + s * (41 - 55));
+  }
+  return [r, g, b];
+}
+
+function exposureCSS(score, alpha) {
+  const [r, g, b] = exposureColor(score);
+  return alpha < 1 ? `rgba(${r},${g},${b},${alpha})` : `rgb(${r},${g},${b})`;
+}
+
+// ── Squarified treemap ─────────────────────────────────────────────────
+
+function squarify(items, x, y, w, h) {
+  if (items.length === 0) return [];
+  if (items.length === 1) {
+    return [{ ...items[0], rx: x, ry: y, rw: w, rh: h }];
+  }
+  const total = items.reduce((s, d) => s + d.value, 0);
+  if (total === 0) return [];
+
+  const results = [];
+  let remaining = [...items];
+  let cx = x, cy = y, cw = w, ch = h;
+
+  while (remaining.length > 0) {
+    const remTotal = remaining.reduce((s, d) => s + d.value, 0);
+    const vertical = cw >= ch;
+    const side = vertical ? ch : cw;
+
+    let row = [remaining[0]];
+    let rowSum = remaining[0].value;
+
+    for (let i = 1; i < remaining.length; i++) {
+      const candidate = [...row, remaining[i]];
+      const candidateSum = rowSum + remaining[i].value;
+      if (worstAspect(candidate, candidateSum, side, remTotal, vertical ? cw : ch) <
+          worstAspect(row, rowSum, side, remTotal, vertical ? cw : ch)) {
+        row = candidate;
+        rowSum = candidateSum;
+      } else {
+        break;
+      }
+    }
+
+    const rowFraction = rowSum / remTotal;
+    const rowThickness = vertical ? cw * rowFraction : ch * rowFraction;
+
+    let offset = 0;
+    for (const item of row) {
+      const itemFraction = item.value / rowSum;
+      const itemLength = side * itemFraction;
+      if (vertical) {
+        results.push({ ...item, rx: cx, ry: cy + offset, rw: rowThickness, rh: itemLength });
+      } else {
+        results.push({ ...item, rx: cx + offset, ry: cy, rw: itemLength, rh: rowThickness });
+      }
+      offset += itemLength;
+    }
+
+    if (vertical) { cx += rowThickness; cw -= rowThickness; }
+    else { cy += rowThickness; ch -= rowThickness; }
+    remaining = remaining.slice(row.length);
+  }
+  return results;
+}
+
+function worstAspect(row, rowSum, side, totalArea, availableExtent) {
+  const rowExtent = availableExtent * (rowSum / totalArea);
+  if (rowExtent === 0) return Infinity;
+  let worst = 0;
+  for (const item of row) {
+    const itemLen = side * (item.value / rowSum);
+    if (itemLen === 0) continue;
+    const aspect = Math.max(rowExtent / itemLen, itemLen / rowExtent);
+    if (aspect > worst) worst = aspect;
+  }
+  return worst;
+}
+
+// ── Rendering ──────────────────────────────────────────────────────────
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let dpr = window.devicePixelRatio || 1;
+
+const MARGIN = 10;
+const GAP = 2;
+const RADIUS = 2;
+
+function layout() {
+  const sidebarW = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-w'));
+  const w = window.innerWidth - sidebarW;
+  const h = window.innerHeight;
+
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+
+  const filtered = activeTier != null
+    ? data.filter(d => d.exposure != null && d.exposure >= TIERS[activeTier].range[0] && d.exposure <= TIERS[activeTier].range[1])
+    : data;
+
+  const byCategory = {};
+  for (const d of filtered) {
+    if (!byCategory[d.category]) byCategory[d.category] = [];
+    byCategory[d.category].push(d);
+  }
+
+  const categories = Object.keys(byCategory).map(cat => ({
+    cat,
+    items: byCategory[cat].sort((a, b) => (b.jobs || 0) - (a.jobs || 0)),
+    value: byCategory[cat].reduce((s, d) => s + (d.jobs || 1), 0),
+  })).sort((a, b) => b.value - a.value);
+
+  const catRects = squarify(categories, MARGIN, MARGIN, w - MARGIN * 2, h - MARGIN * 2);
+
+  rects = [];
+  for (const cr of catRects) {
+    const items = cr.items.map(d => ({ ...d, value: d.jobs || 1 }));
+    const inner = squarify(items,
+      cr.rx + GAP, cr.ry + GAP,
+      cr.rw - GAP * 2, cr.rh - GAP * 2
+    );
+    for (const ir of inner) rects.push(ir);
+  }
+}
+
+function roundRect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function draw() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const w = canvas.width / dpr;
+  const h = canvas.height / dpr;
+  ctx.fillStyle = "#1C1917";
+  ctx.fillRect(0, 0, w, h);
+
+  for (const r of rects) {
+    const isHovered = r === hovered;
+    const isSelected = r === selected;
+    const isDimmed = selected && !isSelected && !isHovered;
+
+    let bx = r.rx, by = r.ry, bw = r.rw, bh = r.rh;
+    if (anim) {
+      const t = easeOut(Math.min(1, (performance.now() - anim.start) / ANIM_MS));
+      const from = anim.from[r.slug];
+      if (from) {
+        bx = from.rx + (r.rx - from.rx) * t;
+        by = from.ry + (r.ry - from.ry) * t;
+        bw = from.rw + (r.rw - from.rw) * t;
+        bh = from.rh + (r.rh - from.rh) * t;
+      } else {
+        bw = r.rw * t; bh = r.rh * t;
+        bx = r.rx + (r.rw - bw) / 2;
+        by = r.ry + (r.rh - bh) / 2;
+      }
+    }
+    const g = GAP / 2;
+    const rx = bx + g;
+    const ry = by + g;
+    const rw = bw - g * 2;
+    const rh = bh - g * 2;
+    if (rw <= 0 || rh <= 0) continue;
+
+    const alpha = isDimmed ? 0.18 : (isHovered || isSelected) ? 0.88 : 0.62;
+    ctx.fillStyle = exposureCSS(r.exposure, alpha);
+    roundRect(rx, ry, rw, rh, RADIUS);
+    ctx.fill();
+
+    if (isSelected) {
+      ctx.strokeStyle = "rgba(255,255,255,0.9)";
+      ctx.lineWidth = 2.5;
+      roundRect(rx, ry, rw, rh, RADIUS);
+      ctx.stroke();
+    } else if (isHovered && !selected) {
+      ctx.strokeStyle = "rgba(255,255,255,0.5)";
+      ctx.lineWidth = 1.5;
+      roundRect(rx, ry, rw, rh, RADIUS);
+      ctx.stroke();
+    }
+
+    const textAlpha = isDimmed ? 0.25 : (isHovered || isSelected) ? 1 : 0.88;
+    if (rw > 48 && rh > 16) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(rx + 5, ry + 3, rw - 10, rh - 6);
+      ctx.clip();
+
+      const fontSize = Math.min(13, Math.max(9, Math.min(rw / 10, rh / 3)));
+      ctx.font = `500 ${fontSize}px -apple-system, system-ui, sans-serif`;
+      ctx.fillStyle = `rgba(255,255,255,${textAlpha})`;
+      ctx.shadowColor = "rgba(0,0,0,0.35)";
+      ctx.shadowBlur = 2;
+      ctx.textBaseline = "top";
+      ctx.fillText(r.title, rx + 6, ry + 5);
+
+      if (rh > 32 && rw > 56) {
+        const info = (r.exposure != null ? r.exposure + "/10" : "") +
+                     (r.jobs ? " \u00b7 " + fmtNum(r.jobs) + " jobs" : "");
+        ctx.font = `400 ${Math.max(8, fontSize - 2)}px -apple-system, system-ui, sans-serif`;
+        ctx.fillStyle = `rgba(255,255,255,${isDimmed ? 0.12 : 0.45})`;
+        ctx.fillText(info, rx + 6, ry + 5 + fontSize + 3);
+      }
+      ctx.restore();
+    }
+  }
+
+  if (anim && anim.exiting.length > 0) {
+    const t = easeOut(Math.min(1, (performance.now() - anim.start) / ANIM_MS));
+    for (const ex of anim.exiting) {
+      const scale = 1 - t;
+      const fadeAlpha = 0.55 * scale;
+      if (fadeAlpha < 0.01) continue;
+      const cx = ex.rx + ex.rw / 2, cy = ex.ry + ex.rh / 2;
+      const ew = ex.rw * scale, eh = ex.rh * scale;
+      const erx = cx - ew / 2 + GAP / 2, ery = cy - eh / 2 + GAP / 2;
+      const erw = ew - GAP, erh = eh - GAP;
+      if (erw <= 0 || erh <= 0) continue;
+      ctx.fillStyle = exposureCSS(ex.exposure, fadeAlpha);
+      roundRect(erx, ery, erw, erh, RADIUS);
+      ctx.fill();
+    }
+  }
+}
+
+function hitTest(mx, my) {
+  const sidebarW = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-w'));
+  const cx = mx - sidebarW;
+  const cy = my;
+  for (let i = rects.length - 1; i >= 0; i--) {
+    const r = rects[i];
+    if (cx >= r.rx && cx < r.rx + r.rw && cy >= r.ry && cy < r.ry + r.rh) return r;
+  }
+  return null;
+}
+
+// ── Formatting ─────────────────────────────────────────────────────────
+
+function fmtNum(n) {
+  if (n == null) return "\u2014";
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
+  if (n >= 1000) return Math.round(n / 1000).toLocaleString() + "K";
+  return n.toLocaleString();
+}
+
+function fmtPay(n) {
+  if (n == null) return "\u2014";
+  return "$" + n.toLocaleString();
+}
+
+// ── Tooltip ────────────────────────────────────────────────────────────
+
+function showTooltip(d, mx, my) {
+  const tt = document.getElementById("tooltip");
+  tt.querySelector(".tt-title").textContent = d.title;
+
+  const score = d.exposure;
+  if (score != null) {
+    const color = exposureCSS(score, 1);
+    tt.querySelector(".tt-exposure").innerHTML =
+      `<span style="color:${color};font-weight:600;">AI Impact: ${score}/10</span>` +
+      `<div style="margin-top:4px;height:4px;background:#f0eee8;border-radius:2px;">` +
+      `<div style="height:100%;width:${score * 10}%;background:${color};border-radius:2px;"></div></div>`;
+  } else {
+    tt.querySelector(".tt-exposure").innerHTML = "";
+  }
+
+  tt.querySelector(".tt-stats").innerHTML = `
+    <span class="label">Median pay</span><span class="value">${fmtPay(d.pay)}</span>
+    <span class="label">Jobs (2024)</span><span class="value">${fmtNum(d.jobs)}</span>
+    <span class="label">Outlook</span><span class="value">${d.outlook != null ? d.outlook + '%' : '\u2014'} ${d.outlook_desc ? '(' + d.outlook_desc + ')' : ''}</span>
+    <span class="label">Education</span><span class="value">${d.education || '\u2014'}</span>
+  `;
+
+  tt.querySelector(".tt-rationale").textContent = d.exposure_rationale || "";
+
+  const pad = 16;
+  let tx = mx + pad, ty = my - pad;
+  if (tx + 320 > window.innerWidth) tx = mx - 320 - pad;
+  if (ty < 10) ty = my + pad;
+  if (ty + 200 > window.innerHeight) ty = my - 200;
+  tt.style.left = tx + "px";
+  tt.style.top = ty + "px";
+  tt.classList.add("visible");
+}
+
+function hideTooltip() {
+  document.getElementById("tooltip").classList.remove("visible");
+}
+
+// ── Search & Selection ─────────────────────────────────────────────────
+
+const EDU_ORDER = [
+  "No formal educational credential",
+  "High school diploma or equivalent",
+  "Postsecondary nondegree award",
+  "Some college, no degree",
+  "Associate's degree",
+  "Bachelor's degree",
+  "Master's degree",
+  "Doctoral or professional degree"
+];
+
+function eduLevel(edu) {
+  const idx = EDU_ORDER.indexOf(edu);
+  return idx >= 0 ? idx : -1;
+}
+
+function eduShort(edu) {
+  const map = {
+    "No formal educational credential": "None",
+    "High school diploma or equivalent": "High school",
+    "Postsecondary nondegree award": "Certificate",
+    "Some college, no degree": "Some college",
+    "Associate's degree": "Associate's",
+    "Bachelor's degree": "Bachelor's",
+    "Master's degree": "Master's",
+    "Doctoral or professional degree": "Doctoral/Prof.",
+  };
+  return map[edu] || edu || "\u2014";
+}
+
+function fuzzySearch(query) {
+  if (!query || query.length < 2) return [];
+  const q = query.toLowerCase();
+  const results = [];
+  for (const d of data) {
+    const title = d.title.toLowerCase();
+    let score = 0;
+    if (title === q) score = 100;
+    else if (title.startsWith(q)) score = 80;
+    else {
+      const words = q.split(/\s+/).filter(w => w.length > 0);
+      const matches = words.filter(w => title.includes(w)).length;
+      if (matches === words.length) score = 60;
+      else if (matches > 0) score = 20 + (matches / words.length) * 30;
+    }
+    if (score > 0) results.push({ ...d, _s: score });
+  }
+  return results.sort((a, b) => b._s - a._s).slice(0, 10);
+}
+
+function findPaths(job) {
+  if (job.exposure == null || job.exposure < 4) return [];
+
+  const similarSet = new Set(job.similar || []);
+  const aiPathSlugs = new Set((job.ai_paths || []).map(p => p.slug));
+  const aiReasons = {};
+  for (const p of (job.ai_paths || [])) aiReasons[p.slug] = p.reason;
+
+  const candidates = data.filter(d =>
+    d.slug !== job.slug &&
+    d.exposure != null &&
+    d.exposure <= job.exposure - 2 &&
+    d.jobs != null && d.jobs > 0 &&
+    (similarSet.has(d.slug) || d.category === job.category || aiPathSlugs.has(d.slug))
+  );
+
+  for (const c of candidates) {
+    let score = 0;
+    const isBLS = similarSet.has(c.slug);
+    const isAI = aiPathSlugs.has(c.slug);
+
+    if (isBLS) score += 20;
+    const cSimilar = new Set(c.similar || []);
+    if (isBLS && cSimilar.has(job.slug)) score += 5;
+    if (isAI) score += 16;
+    if (c.category === job.category) score += 3;
+    score += (job.exposure - c.exposure) * 0.5;
+
+    const jobEdu = eduLevel(job.education);
+    const cEdu = eduLevel(c.education);
+    if (jobEdu >= 0 && cEdu >= 0) {
+      const diff = Math.abs(jobEdu - cEdu);
+      if (diff === 0) score += 3;
+      else if (diff === 1) score += 2;
+    }
+    if (c.pay && job.pay) {
+      const ratio = c.pay / job.pay;
+      if (ratio >= 0.8 && ratio <= 1.3) score += 3;
+      else if (ratio >= 0.6 && ratio <= 1.6) score += 1;
+      if (ratio > 1.05) score += 1;
+    }
+
+    if (c.jobs >= 500000) score += 2;
+    else if (c.jobs >= 100000) score += 1;
+    if (c.outlook != null && c.outlook > 5) score += 1;
+
+    c._pathScore = score;
+    c._aiReason = aiReasons[c.slug] || null;
+  }
+
+  return candidates
+    .filter(c => similarSet.has(c.slug) || aiPathSlugs.has(c.slug) || c._pathScore >= 10)
+    .sort((a, b) => b._pathScore - a._pathScore)
+    .slice(0, 5);
+}
+
+function contextMessage(score) {
+  if (score <= 2) return "This role has low AI impact. The work involves physical, interpersonal, or hands-on skills that complement rather than compete with AI.";
+  if (score <= 4) return "This role has moderate AI impact. Some tasks are being enhanced by AI tools, while the core work remains distinctly human.";
+  if (score <= 6) return "This role is being meaningfully shaped by AI. Workers who embrace AI tools in this field gain significant advantages.";
+  if (score <= 8) return "This role is evolving quickly with AI. Much of the work is digital, and AI capabilities in this domain are advancing rapidly.";
+  return "This role is at the frontier of AI transformation. The work is primarily digital, and AI can already assist with most core tasks.";
+}
+
+// ── Hero ───────────────────────────────────────────────────────────────
+
+function dismissHero() {
+  if (!heroVisible) return;
+  heroVisible = false;
+  document.getElementById("hero").classList.add("hidden");
+}
+
+document.getElementById("heroBrowse").addEventListener("click", dismissHero);
+
+// Hero search
+const heroSearch = document.getElementById("hero-search");
+const heroResults = document.getElementById("hero-results");
+let heroIdx = -1;
+
+heroSearch.addEventListener("input", () => {
+  const q = heroSearch.value.trim();
+  heroIdx = -1;
+  const results = fuzzySearch(q);
+  if (results.length === 0) { heroResults.classList.remove("open"); return; }
+  heroResults.innerHTML = results.map((r, i) => {
+    const color = exposureCSS(r.exposure, 1);
+    return `<div class="hero-result" data-slug="${r.slug}" data-idx="${i}">
+      <span class="sr-title">${hlMatch(r.title, heroSearch.value)}</span>
+      <span class="sr-score" style="color:${color}">${r.exposure != null ? r.exposure + '/10' : ''}</span>
+    </div>`;
+  }).join("");
+  heroResults.classList.add("open");
+
+  heroResults.querySelectorAll(".hero-result").forEach(el => {
+    el.addEventListener("click", () => {
+      dismissHero();
+      selectJob(el.dataset.slug);
+      heroSearch.value = "";
+      heroResults.classList.remove("open");
+    });
+    el.addEventListener("mouseenter", () => {
+      heroIdx = parseInt(el.dataset.idx);
+      hlHero(heroResults.querySelectorAll(".hero-result"));
+    });
+  });
+});
+
+heroSearch.addEventListener("keydown", (e) => {
+  const items = heroResults.querySelectorAll(".hero-result");
+  if (e.key === "ArrowDown") { e.preventDefault(); heroIdx = Math.min(heroIdx + 1, items.length - 1); hlHero(items); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); heroIdx = Math.max(heroIdx - 1, 0); hlHero(items); }
+  else if (e.key === "Enter" && heroIdx >= 0 && items[heroIdx]) {
+    e.preventDefault();
+    dismissHero();
+    selectJob(items[heroIdx].dataset.slug);
+    heroSearch.value = "";
+    heroResults.classList.remove("open");
+  } else if (e.key === "Escape") {
+    heroSearch.value = "";
+    heroResults.classList.remove("open");
+  }
+});
+
+function hlHero(items) {
+  items.forEach((el, i) => el.classList.toggle("active", i === heroIdx));
+}
+
+// ── Job selection ──────────────────────────────────────────────────────
+
+function selectJob(slug) {
+  const job = data.find(d => d.slug === slug);
+  if (!job) return;
+  if (heroVisible) dismissHero();
+  selected = rects.find(r => r.slug === slug) || null;
+  showDetail(job);
+  draw();
+  const url = new URL(window.location);
+  url.searchParams.set("job", slug);
+  history.replaceState(null, "", url);
+}
+
+function clearSelection() {
+  selected = null;
+  document.getElementById("detail-panel").classList.remove("open");
+  draw();
+  const url = new URL(window.location);
+  url.searchParams.delete("job");
+  history.replaceState(null, "", url);
+}
+
+function showDetail(job) {
+  const panel = document.getElementById("detail-panel");
+  document.getElementById("dpTitle").textContent = job.title;
+
+  const score = job.exposure;
+  const color = score != null ? exposureCSS(score, 1) : "var(--text2)";
+
+  document.getElementById("dpExposure").innerHTML = score != null
+    ? `<span class="dp-exposure-score" style="color:${color}">${score}/10</span>` +
+      `<span class="dp-exposure-label">AI Impact</span>` +
+      `<div class="dp-exposure-bar"><div class="dp-exposure-fill" style="width:${score * 10}%;background:${color}"></div></div>`
+    : "";
+
+  document.getElementById("dpContext").textContent = score != null ? contextMessage(score) : "";
+
+  // Richer stats grid — 3 columns
+  const payRange = (job.pay_p10 && job.pay_p90) ? `${fmtPay(job.pay_p10)} – ${fmtPay(job.pay_p90)}` : "";
+  document.getElementById("dpStats").innerHTML = `
+    <div><div class="dp-stat-label">Median Pay</div><div class="dp-stat-value">${fmtPay(job.pay)}</div>${payRange ? `<div class="dp-stat-sub">${payRange}</div>` : ''}</div>
+    <div><div class="dp-stat-label">Jobs (2024)</div><div class="dp-stat-value">${fmtNum(job.jobs)}</div>${job.openings ? `<div class="dp-stat-sub">${fmtNum(job.openings)} openings/yr</div>` : ''}</div>
+    <div><div class="dp-stat-label">Growth</div><div class="dp-stat-value">${job.outlook != null ? job.outlook + '%' : '\u2014'}</div><div class="dp-stat-sub">${job.outlook_desc || ''}</div></div>
+    <div><div class="dp-stat-label">Education</div><div class="dp-stat-value" style="font-size:12px">${eduShort(job.education)}</div></div>
+    <div><div class="dp-stat-label">Training</div><div class="dp-stat-value" style="font-size:12px">${job.training && job.training !== "None" && job.training !== "See How to Become One" ? job.training : "None required"}</div></div>
+    <div><div class="dp-stat-label">Experience</div><div class="dp-stat-value" style="font-size:12px">${job.work_experience && job.work_experience !== "None" && job.work_experience !== "See How to Become One" ? job.work_experience : "None required"}</div></div>
+  `;
+
+  const rationale = job.exposure_rationale;
+  const rationaleEl = document.getElementById("dpRationale");
+  rationaleEl.textContent = rationale || "";
+  rationaleEl.style.display = rationale ? "block" : "none";
+
+  // Paths Forward with expanded detail
+  const paths = findPaths(job);
+  const similarSet = new Set(job.similar || []);
+  let pathsHTML = "";
+
+  if (paths.length > 0) {
+    pathsHTML = `<div class="dp-section-title">Paths Forward</div>`;
+    pathsHTML += `<div class="dp-section-desc">Career transitions where your skills transfer. Click to see transition details.</div>`;
+
+    for (const p of paths) {
+      const pColor = exposureCSS(p.exposure, 1);
+      const payDiff = (p.pay && job.pay) ? Math.round((p.pay - job.pay) / job.pay * 100) : null;
+      const payStr = payDiff != null ? (payDiff >= 0 ? "+" + payDiff : payDiff) + "% pay" : "";
+
+      let tag = "";
+      if (p._aiReason) tag = p._aiReason;
+      else if (similarSet.has(p.slug)) tag = "Related role";
+      else if (p.category === job.category) tag = "Same field";
+      else tag = "Skills transfer";
+
+      // Education gap analysis
+      const jobEdu = eduLevel(job.education);
+      const pEdu = eduLevel(p.education);
+      let eduGapHTML = "";
+      if (jobEdu >= 0 && pEdu >= 0) {
+        if (pEdu <= jobEdu) {
+          eduGapHTML = `<div class="escape-edu-gap"><span class="match">You already qualify</span> — requires ${eduShort(p.education)} or less</div>`;
+        } else if (pEdu === jobEdu + 1) {
+          eduGapHTML = `<div class="escape-edu-gap"><span class="upgrade">One step up</span> — requires ${eduShort(p.education)}</div>`;
+        } else {
+          eduGapHTML = `<div class="escape-edu-gap"><span class="upgrade">Needs ${eduShort(p.education)}</span> (you have ${eduShort(job.education)})</div>`;
+        }
+      }
+
+      // Wage comparison bars
+      let payCompareHTML = "";
+      if (job.pay && p.pay) {
+        const maxPay = Math.max(job.pay, p.pay, p.pay_p90 || 0);
+        const yourW = (job.pay / maxPay) * 100;
+        const targetW = (p.pay / maxPay) * 100;
+        const yourColor = exposureCSS(job.exposure, 0.6);
+        const targetColor = exposureCSS(p.exposure, 0.7);
+        payCompareHTML = `
+          <div class="escape-pay-compare">
+            <span class="escape-pay-label">Now</span>
+            <div class="escape-pay-bar"><div class="escape-pay-fill" style="width:${yourW}%;background:${yourColor}">${fmtPay(job.pay)}</div></div>
+          </div>
+          <div class="escape-pay-compare">
+            <span class="escape-pay-label">Target</span>
+            <div class="escape-pay-bar"><div class="escape-pay-fill" style="width:${targetW}%;background:${targetColor}">${fmtPay(p.pay)}</div></div>
+          </div>
+          ${p.pay_p10 && p.pay_p90 ? `<div style="font-size:10px;color:var(--text3);margin-bottom:8px">Range: ${fmtPay(p.pay_p10)} – ${fmtPay(p.pay_p90)}</div>` : ''}
+        `;
+      }
+
+      // Qualities
+      let qualitiesHTML = "";
+      if (p.qualities && p.qualities.length > 0) {
+        qualitiesHTML = `<div class="escape-qualities">${p.qualities.slice(0, 5).map(q => `<span class="escape-quality">${q}</span>`).join("")}</div>`;
+      }
+
+      // Training and openings
+      let extraMeta = [];
+      if (p.openings) extraMeta.push(`${fmtNum(p.openings)} openings/yr`);
+      if (p.training && p.training !== "None" && p.training !== "See How to Become One") extraMeta.push(p.training);
+
+      pathsHTML += `
+        <div class="escape-card" data-slug="${p.slug}">
+          <div class="escape-header">
+            <span class="escape-title">${p.title}</span>
+            <span class="escape-score" style="color:${pColor}">${p.exposure}/10</span>
+          </div>
+          <div class="escape-meta">${fmtPay(p.pay)}${payStr ? ' &middot; ' + payStr : ''} &middot; ${fmtNum(p.jobs)} jobs${p.outlook ? ' &middot; ' + p.outlook + '% growth' : ''}</div>
+          <span class="escape-tag">${tag}</span>
+          <div class="escape-expand-hint">click for transition details</div>
+          <div class="escape-detail">
+            ${payCompareHTML}
+            <div class="escape-detail-grid">
+              <div class="escape-detail-item">
+                <div class="escape-detail-label">Annual Openings</div>
+                <div class="escape-detail-value">${p.openings ? fmtNum(p.openings) + '/yr' : '\u2014'}</div>
+              </div>
+              <div class="escape-detail-item">
+                <div class="escape-detail-label">Growth</div>
+                <div class="escape-detail-value">${p.outlook != null ? p.outlook + '%' : '\u2014'} <span class="sub">${p.outlook_desc || ''}</span></div>
+              </div>
+              <div class="escape-detail-item">
+                <div class="escape-detail-label">Education</div>
+                <div class="escape-detail-value">${eduShort(p.education)}</div>
+              </div>
+              <div class="escape-detail-item">
+                <div class="escape-detail-label">Training</div>
+                <div class="escape-detail-value">${p.training && p.training !== "None" && p.training !== "See How to Become One" ? p.training : "None required"}</div>
+              </div>
+            </div>
+            ${eduGapHTML}
+            ${qualitiesHTML}
+          </div>
+        </div>`;
+    }
+  } else if (score != null && score < 4) {
+    pathsHTML = `<div class="dp-safe-msg">This role has low AI impact. The work is grounded in skills that complement rather than compete with artificial intelligence.</div>`;
+  } else if (paths.length === 0 && score != null && score >= 4) {
+    pathsHTML = `<div class="dp-safe-msg">Most related roles have similar AI exposure. The strongest move may be to go deeper — become the expert who directs AI tools in your field rather than competes with them.</div>`;
+  }
+
+  // Prepare tips
+  const tips = prepareTips(score);
+  if (tips.length > 0) {
+    pathsHTML += `<div class="dp-prepare">
+      <div class="dp-prepare-title">How to prepare</div>
+      <ul>${tips.map(t => `<li>${t}</li>`).join("")}</ul>
+    </div>`;
+  }
+
+  document.getElementById("dpPaths").innerHTML = pathsHTML;
+
+  document.getElementById("dpFooter").innerHTML = `
+    <button class="dp-btn" id="shareBtn">Copy link</button>
+    ${job.url ? '<a class="dp-btn" href="' + job.url + '" target="_blank">BLS page &rarr;</a>' : ''}
+  `;
+
+  panel.classList.add("open");
+
+  // Card interactions: click to expand, double-click to navigate
+  panel.querySelectorAll(".escape-card").forEach(card => {
+    card.addEventListener("click", (e) => {
+      // If already expanded, navigate to that job
+      if (card.classList.contains("expanded")) {
+        selectJob(card.dataset.slug);
+      } else {
+        // Collapse others, expand this one
+        panel.querySelectorAll(".escape-card").forEach(c => c.classList.remove("expanded"));
+        card.classList.add("expanded");
+      }
+    });
+  });
+
+  document.getElementById("shareBtn").addEventListener("click", () => {
+    const u = new URL(window.location);
+    u.searchParams.set("job", job.slug);
+    navigator.clipboard.writeText(u.toString()).then(() => {
+      document.getElementById("shareBtn").textContent = "Copied!";
+      setTimeout(() => { document.getElementById("shareBtn").textContent = "Copy link"; }, 2000);
+    });
+  });
+}
+
+// ── Sidebar stats ──────────────────────────────────────────────────────
+
+function computeStats() {
+  const totalJobs = data.reduce((s, d) => s + (d.jobs || 0), 0);
+
+  let wSum = 0, wCount = 0;
+  for (const d of data) {
+    if (d.exposure != null && d.jobs) {
+      wSum += d.exposure * d.jobs;
+      wCount += d.jobs;
+    }
+  }
+  const wAvg = wCount > 0 ? wSum / wCount : 0;
+
+  const tiers = [
+    { name: "Low", range: [0, 2], color: exposureCSS(1, 1) },
+    { name: "Moderate", range: [3, 5], color: exposureCSS(4, 1) },
+    { name: "High", range: [6, 7], color: exposureCSS(6.5, 1) },
+    { name: "Very high", range: [8, 10], color: exposureCSS(9, 1) },
+  ];
+  for (const tier of tiers) {
+    tier.jobs = 0;
+    for (const d of data) {
+      if (d.exposure != null && d.jobs &&
+          d.exposure >= tier.range[0] && d.exposure <= tier.range[1]) {
+        tier.jobs += d.jobs;
+      }
+    }
+    tier.pct = totalJobs > 0 ? (tier.jobs / totalJobs * 100) : 0;
+  }
+
+  document.getElementById("statTotalJobs").textContent = (totalJobs / 1e6).toFixed(0) + "M";
+  document.getElementById("statAvgExposure").innerHTML =
+    `<span style="color:${exposureCSS(wAvg, 1)}">${wAvg.toFixed(1)}</span><span style="font-size:14px;color:var(--text3);font-weight:400">/10</span>`;
+
+  let exposedWorkers = 0, exposedWages = 0;
+  for (const d of data) {
+    if (d.exposure != null && d.exposure >= 7 && d.jobs) {
+      exposedWorkers += d.jobs;
+      if (d.pay) exposedWages += d.pay * d.jobs;
+    }
+  }
+  document.getElementById("statExposedWorkers").textContent = (exposedWorkers / 1e6).toFixed(0) + "M";
+  document.getElementById("statExposedWages").textContent = "$" + (exposedWages / 1e12).toFixed(1) + "T";
+
+  // Hero stats
+  document.getElementById("heroStats").innerHTML = `
+    <div class="hero-stat"><div class="hero-stat-val">${(totalJobs / 1e6).toFixed(0)}M</div><div class="hero-stat-label">Workers</div></div>
+    <div class="hero-stat"><div class="hero-stat-val">342</div><div class="hero-stat-label">Occupations</div></div>
+    <div class="hero-stat"><div class="hero-stat-val" style="color:${exposureCSS(wAvg, 1)}">${wAvg.toFixed(1)}</div><div class="hero-stat-label">Avg Impact</div></div>
+    <div class="hero-stat"><div class="hero-stat-val">${(exposedWorkers / 1e6).toFixed(0)}M</div><div class="hero-stat-label">High Exposure</div></div>
+  `;
+
+  document.getElementById("tierBar").innerHTML = tiers.map((t, i) =>
+    `<div class="tier-row" data-tier="${i}">
+      <div class="tier-color" style="background:${t.color}"></div>
+      <span class="tier-name">${t.name} (${t.range[0]}\u2013${t.range[1]})</span>
+      <span class="tier-jobs">${fmtNum(t.jobs)}</span>
+      <span class="tier-pct">${t.pct.toFixed(0)}%</span>
+    </div>`
+  ).join("");
+
+  document.querySelectorAll('.tier-row').forEach(el => {
+    el.addEventListener('click', () => setTierFilter(parseInt(el.dataset.tier)));
+  });
+
+  const payBrackets = [
+    { label: "<$35K", min: 0, max: 35000 },
+    { label: "$35\u201350K", min: 35000, max: 50000 },
+    { label: "$50\u201375K", min: 50000, max: 75000 },
+    { label: "$75\u2013100K", min: 75000, max: 100000 },
+    { label: "$100K+", min: 100000, max: Infinity },
+  ];
+  const payRows = payBrackets.map(b => {
+    let wS = 0, wC = 0;
+    for (const d of data) {
+      if (d.pay != null && d.exposure != null && d.jobs && d.pay >= b.min && d.pay < b.max) {
+        wS += d.exposure * d.jobs;
+        wC += d.jobs;
+      }
+    }
+    return { label: b.label, avg: wC > 0 ? wS / wC : 0 };
+  });
+  document.getElementById("crosstabPay").innerHTML = payRows.map(r =>
+    `<div class="crosstab-row">
+      <span class="crosstab-label">${r.label}</span>
+      <div class="crosstab-bar-bg"><div class="crosstab-bar" style="width:${r.avg * 10}%;background:${exposureCSS(r.avg, 0.8)}"></div></div>
+      <span class="crosstab-val">${r.avg.toFixed(1)}</span>
+    </div>`
+  ).join("");
+
+  const eduBrackets = [
+    { label: "No degree/HS", matches: ["No formal educational credential", "High school diploma or equivalent"] },
+    { label: "Postsec/Assoc", matches: ["Postsecondary nondegree award", "Some college, no degree", "Associate's degree"] },
+    { label: "Bachelor's", matches: ["Bachelor's degree"] },
+    { label: "Master's", matches: ["Master's degree"] },
+    { label: "Doctoral/Prof", matches: ["Doctoral or professional degree"] },
+  ];
+  const eduRows = eduBrackets.map(b => {
+    let wS = 0, wC = 0;
+    for (const d of data) {
+      if (d.exposure != null && d.jobs && b.matches.includes(d.education)) {
+        wS += d.exposure * d.jobs;
+        wC += d.jobs;
+      }
+    }
+    return { label: b.label, avg: wC > 0 ? wS / wC : 0 };
+  });
+  document.getElementById("crosstabEdu").innerHTML = eduRows.map(r =>
+    `<div class="crosstab-row">
+      <span class="crosstab-label">${r.label}</span>
+      <div class="crosstab-bar-bg"><div class="crosstab-bar" style="width:${r.avg * 10}%;background:${exposureCSS(r.avg, 0.8)}"></div></div>
+      <span class="crosstab-val">${r.avg.toFixed(1)}</span>
+    </div>`
+  ).join("");
+}
+
+// ── Tier filter & animation ────────────────────────────────────────────
+
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+function setTierFilter(idx) {
+  const fromMap = {};
+  for (const r of rects) fromMap[r.slug] = { rx: r.rx, ry: r.ry, rw: r.rw, rh: r.rh };
+  const oldSlugs = rects.map(r => r.slug);
+
+  activeTier = activeTier === idx ? null : idx;
+
+  if (selected && activeTier != null) {
+    const tier = TIERS[activeTier];
+    if (selected.exposure == null || selected.exposure < tier.range[0] || selected.exposure > tier.range[1]) {
+      selected = null;
+      document.getElementById("detail-panel").classList.remove("open");
+    }
+  }
+
+  layout();
+
+  if (selected) {
+    const slug = selected.slug;
+    selected = rects.find(r => r.slug === slug) || null;
+  }
+
+  const newSlugs = new Set(rects.map(r => r.slug));
+  const exiting = [];
+  for (const slug of oldSlugs) {
+    if (!newSlugs.has(slug) && fromMap[slug]) {
+      const d = data.find(d => d.slug === slug);
+      if (d) exiting.push({ ...fromMap[slug], exposure: d.exposure, slug });
+    }
+  }
+
+  anim = { from: fromMap, exiting, start: performance.now() };
+  requestAnimationFrame(runAnim);
+  updateTierHighlight();
+}
+
+function runAnim() {
+  if (!anim) return;
+  const t = (performance.now() - anim.start) / ANIM_MS;
+  draw();
+  if (t < 1) requestAnimationFrame(runAnim);
+  else { anim = null; draw(); }
+}
+
+function updateTierHighlight() {
+  document.querySelectorAll('.tier-row').forEach((el, i) => {
+    el.classList.toggle('active', activeTier === i);
+  });
+}
+
+// ── Events ─────────────────────────────────────────────────────────────
+
+canvas.addEventListener("mousemove", (e) => {
+  if (heroVisible) return;
+  const hit = hitTest(e.clientX, e.clientY);
+  if (hit !== hovered) { hovered = hit; draw(); }
+  if (hovered) {
+    showTooltip(hovered, e.clientX, e.clientY);
+    canvas.style.cursor = "pointer";
+  } else {
+    hideTooltip();
+    canvas.style.cursor = "default";
+  }
+});
+
+canvas.addEventListener("click", (e) => {
+  if (heroVisible) { dismissHero(); return; }
+  const hit = hitTest(e.clientX, e.clientY);
+  if (hit) selectJob(hit.slug);
+  else clearSelection();
+});
+
+canvas.addEventListener("mouseleave", () => {
+  hovered = null;
+  hideTooltip();
+  draw();
+});
+
+// ── Sidebar Search ─────────────────────────────────────────────────────
+
+const searchInput = document.getElementById("search-input");
+const searchResultsEl = document.getElementById("search-results");
+const searchClear = document.getElementById("search-clear");
+let searchIdx = -1;
+
+searchInput.addEventListener("input", () => {
+  const q = searchInput.value.trim();
+  searchClear.style.display = q.length > 0 ? "block" : "none";
+  searchIdx = -1;
+  const results = fuzzySearch(q);
+  if (results.length === 0) { searchResultsEl.classList.remove("open"); return; }
+  renderSearch(results);
+  searchResultsEl.classList.add("open");
+});
+
+searchInput.addEventListener("keydown", (e) => {
+  const items = searchResultsEl.querySelectorAll(".search-result");
+  if (e.key === "ArrowDown") { e.preventDefault(); searchIdx = Math.min(searchIdx + 1, items.length - 1); hlSearch(items); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); searchIdx = Math.max(searchIdx - 1, 0); hlSearch(items); }
+  else if (e.key === "Enter" && searchIdx >= 0 && items[searchIdx]) {
+    e.preventDefault();
+    selectJob(items[searchIdx].dataset.slug);
+    searchInput.value = "";
+    searchClear.style.display = "none";
+    searchResultsEl.classList.remove("open");
+    searchInput.blur();
+  } else if (e.key === "Escape") {
+    searchInput.value = "";
+    searchClear.style.display = "none";
+    searchResultsEl.classList.remove("open");
+    searchInput.blur();
+  }
+});
+
+searchClear.addEventListener("click", () => {
+  searchInput.value = "";
+  searchClear.style.display = "none";
+  searchResultsEl.classList.remove("open");
+  searchInput.focus();
+});
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#search-wrap")) searchResultsEl.classList.remove("open");
+  if (!e.target.closest("#hero-search-wrap")) heroResults.classList.remove("open");
+});
+
+document.getElementById("dpClose").addEventListener("click", clearSelection);
+
+function renderSearch(results) {
+  searchResultsEl.innerHTML = results.map((r, i) => {
+    const color = exposureCSS(r.exposure, 1);
+    return `<div class="search-result" data-slug="${r.slug}" data-idx="${i}">
+      <span class="sr-title">${hlMatch(r.title, searchInput.value)}</span>
+      <span class="sr-score" style="color:${color}">${r.exposure != null ? r.exposure + '/10' : ''}</span>
+    </div>`;
+  }).join("");
+
+  searchResultsEl.querySelectorAll(".search-result").forEach(el => {
+    el.addEventListener("click", () => {
+      selectJob(el.dataset.slug);
+      searchInput.value = "";
+      searchClear.style.display = "none";
+      searchResultsEl.classList.remove("open");
+    });
+    el.addEventListener("mouseenter", () => {
+      searchIdx = parseInt(el.dataset.idx);
+      hlSearch(searchResultsEl.querySelectorAll(".search-result"));
+    });
+  });
+}
+
+function hlSearch(items) {
+  items.forEach((el, i) => el.classList.toggle("active", i === searchIdx));
+}
+
+function hlMatch(title, query) {
+  if (!query) return title;
+  const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+  let r = title;
+  for (const w of words) {
+    const i = r.toLowerCase().indexOf(w);
+    if (i >= 0) r = r.slice(0, i) + '<b>' + r.slice(i, i + w.length) + '</b>' + r.slice(i + w.length);
+  }
+  return r;
+}
+
+// ── Keyboard ───────────────────────────────────────────────────────────
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "/" && document.activeElement !== searchInput && document.activeElement !== heroSearch) {
+    e.preventDefault();
+    if (heroVisible) heroSearch.focus();
+    else searchInput.focus();
+  }
+  if (e.key === "Escape" && document.activeElement !== searchInput && document.activeElement !== heroSearch) {
+    if (document.getElementById("sources-modal").classList.contains("open")) {
+      document.getElementById("sources-modal").classList.remove("open");
+    } else if (selected) {
+      clearSelection();
+    } else if (activeTier != null) {
+      setTierFilter(activeTier);
+    }
+  }
+});
+
+// ── AI-Resilient Careers ────────────────────────────────────────────────
+
+function buildResilientList() {
+  const sweet = data
+    .filter(d => d.outlook != null && d.outlook >= 8 && d.exposure != null && d.exposure <= 4 && d.jobs)
+    .sort((a, b) => b.outlook - a.outlook);
+
+  const list = document.getElementById("resilientList");
+  list.innerHTML = sweet.slice(0, 12).map((d, i) => `
+    <div class="resilient-card" data-slug="${d.slug}">
+      <span class="rc-rank">${i + 1}</span>
+      <div class="rc-info">
+        <div class="rc-title" title="${d.title}">${d.title}</div>
+        <div class="rc-meta">${d.exposure}/10 impact · ${fmtPay(d.pay)} · ${fmtNum(d.jobs)} jobs</div>
+      </div>
+      <span class="rc-growth">+${d.outlook}%</span>
+    </div>
+  `).join("");
+
+  list.querySelectorAll(".resilient-card").forEach(card => {
+    card.addEventListener("click", () => selectJob(card.dataset.slug));
+  });
+}
+
+document.getElementById("resilientToggle").addEventListener("click", () => {
+  const list = document.getElementById("resilientList");
+  const chevron = document.getElementById("resilientChevron");
+  list.classList.toggle("open");
+  chevron.classList.toggle("open");
+});
+
+// ── Sources Modal ──────────────────────────────────────────────────────
+
+document.getElementById("openSourcesLink").addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("sources-modal").classList.add("open");
+});
+document.getElementById("modalClose").addEventListener("click", () => {
+  document.getElementById("sources-modal").classList.remove("open");
+});
+document.getElementById("sources-modal").addEventListener("click", (e) => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
+});
+
+// ── Prepare Tips ───────────────────────────────────────────────────────
+
+function prepareTips(score) {
+  if (score == null) return [];
+  if (score <= 2) return [
+    "Your field's hands-on nature is a strong advantage \u2014 keep deepening craft skills",
+    "Learn to use AI tools for scheduling, documentation, and admin tasks to save time",
+    "Consider certifications that formalize your expertise and widen opportunities"
+  ];
+  if (score <= 4) return [
+    "Start experimenting with AI tools relevant to your field \u2014 even 30 minutes a week",
+    "Focus on skills AI struggles with: complex judgment, relationship building, physical precision",
+    "Stay current with industry trends \u2014 attend conferences or follow trade publications"
+  ];
+  if (score <= 6) return [
+    "Become the person who knows how to use AI in your workplace \u2014 early adopters gain influence",
+    "Build skills in areas AI augments rather than replaces: strategy, client relationships, creative direction",
+    "Learn prompt engineering and AI workflow design \u2014 these are valuable transitional skills",
+    "Consider adjacent roles that combine your domain knowledge with lower-exposure work"
+  ];
+  if (score <= 8) return [
+    "Urgently learn AI tools in your domain \u2014 they're already reshaping the work",
+    "Shift toward higher-judgment aspects of your role: complex analysis, stakeholder management, novel problem-solving",
+    "Consider upskilling into AI-adjacent roles: AI training, quality review, human-in-the-loop oversight",
+    "Build a portfolio that demonstrates uniquely human contributions: creativity, empathy, ethical judgment"
+  ];
+  return [
+    "AI capabilities in your field are advancing rapidly \u2014 treat learning AI tools as a top priority",
+    "Position yourself as an AI orchestrator: someone who directs and quality-checks AI output",
+    "Explore career pivots that leverage your domain expertise in lower-exposure contexts",
+    "Develop skills in AI governance, ethics, or training \u2014 your field knowledge is valuable for building better AI",
+    "Network actively \u2014 relationships and reputation become more important as routine work gets automated"
+  ];
+}
+
+// ── Init ───────────────────────────────────────────────────────────────
+
+function resize() { dpr = window.devicePixelRatio || 1; layout(); draw(); }
+
+fetch("data.json")
+  .then(r => r.json())
+  .then(d => {
+    data = d;
+    bySlug = {};
+    for (const item of data) bySlug[item.slug] = item;
+    computeStats();
+    buildResilientList();
+    resize();
+
+    // If deep link, skip hero
+    const p = new URLSearchParams(window.location.search);
+    const job = p.get("job");
+    if (job) {
+      dismissHero();
+      selectJob(job);
+    }
+  });
+
+window.addEventListener("resize", resize);
+</script>
+</body>
+</html>
